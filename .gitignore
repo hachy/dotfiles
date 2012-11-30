@@ -1,11 +1,12 @@
 /*
 /.*
 
+!/.vim
 !/.vimrc
 !/.gvimrc
-!/.vim
 !/.gitignore
 !/.gitconfig
+!/README.md
 
 # ignore
 /.vim/bundle
