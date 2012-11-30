@@ -1,0 +1,12 @@
+/*
+/.*
+
+!/.vimrc
+!/.gvimrc
+!/.vim
+!/.gitignore
+!/.gitconfig
+
+# ignore
+/.vim/bundle
+/.vim/.netrwhist

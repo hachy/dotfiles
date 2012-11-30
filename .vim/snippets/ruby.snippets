@@ -1,0 +1,207 @@
+snippet require
+        require '${1}'
+
+snippet end
+        __END__
+
+snippet do
+        do |${1:var}|
+          ${2}
+        end
+
+snippet cla
+alias   class
+abbr    class end
+        class ${1:Class_name}
+          ${2}
+        end
+
+snippet mod
+alias   module
+abbr    module end
+        module ${1:Module_name}
+          ${2}
+        end
+
+snippet begin
+abbr    begin end
+        begin
+          ${1}
+        end
+
+#snippet     rescue
+#abbr        rescue =>
+#    rescue => ${1:variable}
+#      ${2}
+
+snippet case
+abbr    case when end
+        case ${1:object}
+        when ${2:condition}
+          ${3}
+        end
+
+snippet when
+abbr    when
+        when ${1:condition}
+          ${2}
+
+snippet unless
+abbr    unless end
+        unless ${1:condition}
+          ${2}
+        end
+
+snippet while
+abbr    while end
+        while ${1:condition}
+          ${2}
+        end
+
+snippet until
+abbr    until end
+        until ${1:condition}
+          ${2}
+        end
+
+# attr_reader
+snippet r
+        attr_reader :${1:attr_names}
+# attr_writer
+snippet w
+        attr_writer :${1:attr_names}
+# attr_accessor
+snippet rw
+        attr_accessor :${1:attr_names}
+
+# include Enumerable
+snippet Enum
+        include Enumerable
+
+        def each(&block)
+          ${1}
+        end
+
+# include Comparable
+snippet Comp
+        include Comparable
+
+        def <=>(other)
+          ${1}
+        end
+
+snippet times
+options word
+        times { |${1:n}| ${2} }
+
+snippet upto
+options word
+        upto(${1}) { |${2:n}| ${3} }
+
+snippet downto
+options word
+        downto(${1}) { |${2:n}| ${3} }
+
+snippet step
+options word
+        step(${1}) { |${2:n}| ${3} }
+
+snippet each
+options word
+        each { |${1:item}| ${2} }
+
+snippet all
+options word
+        all? { |${1:item}| ${2} }
+
+snippet any
+options word
+        any? { |${1:item}| ${2} }
+
+# collect / map
+snippet collect
+options word
+        collect { |${1:item}| ${2} }
+snippet map
+options word
+        map { |${1:item}| ${2} }
+
+snippet eawi
+alias   each_with_index
+options word
+        each_with_index { |${1:item}, ${2:idx}| ${3} }
+
+# find / detect
+snippet find
+options word
+        find { |${1:item}| ${2} }
+
+snippet detect
+options word
+        detect { |${1:item}| ${2} }
+
+# find_all / select
+snippet fina
+alias   find_all
+options word
+        find_all { |${1:item}| ${2} }
+
+snippet select
+options word
+        select { |${1:item}| ${2} }
+
+# delete_if / reject
+snippet deli
+alias   delete_if
+options word
+        delete_if { |${1:item}| ${2} }
+
+snippet reject
+options word
+        reject { |${1:item}| ${2} }
+
+snippet grep
+options word
+        grep(${1:/pattern/}) { |${2:match}| ${3} }
+
+snippet inject
+options word
+        inject(${1:init}) { |${2:memo}, ${3:item}| ${4} }
+
+snippet max
+options word
+        max { |a, b| ${1} }
+
+snippet min
+options word
+        min { |a, b| ${1} }
+
+snippet partition
+options word
+        partition { |${1:item}| ${2} }
+
+snippet sort
+options word
+        sort { |a, b| ${1} }
+
+snippet sort_by
+options word
+        sort_by { |${1:item}| ${2} }
+
+snippet zip
+options word
+        zip(${1:enums}) { |${2:row}| ${3} }
+
+snippet sub
+options word
+        sub(/${1:pattern}/) { |${2:match}| ${3} }
+
+snippet scan
+options word
+        scan(/${1:pattern}/) { |${2:match}| ${3} }
+
+snippet eos
+options word
+        <<"EOS"
+        ${1}
+        EOS

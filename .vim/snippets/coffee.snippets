@@ -1,0 +1,14 @@
+# Class
+snippet cla
+alias   class
+        class ${1:name}
+          constructor: (${2:params...}) ->
+            ${3://body...}
+
+# Funcion
+snippet f
+        ${1:function_name} = (${2:argumen}) ->
+          ${3: //body...}
+
+snippet cl
+        console.log ${0}
