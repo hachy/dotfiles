@@ -23,7 +23,6 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'tpope/vim-surround'
-" NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'skammer/vim-css-color'
 " NeoBundle 'groenewege/vim-less'
 NeoBundle 'pangloss/vim-javascript'
@@ -110,7 +109,6 @@ imap <C-Tab> <Esc>:tabnext<CR>a
 nmap <C-t> :tabnew<CR>
 imap <C-t> <Esc>:tabnew<CR>
 "}}}
-
 
 " Search"{{{
 set ignorecase
@@ -300,6 +298,7 @@ endif
 "-----------------------------------------------------------------------------
 " Unite.vim"{{{
 let g:unite_source_file_mru_limit = 200
+let g:unite_data_directory = $HOME.'/.tmp/.unite'
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
@@ -354,6 +353,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
       \ 'javascript' : expand('$HOME/.vim/dict/jquery.dict'),
       \ 'css' : expand('$HOME/.vim/dict/css3.dict'),
       \ }
+let g:neocomplcache_temporary_dir = $HOME.'/.tmp/.neocon'
 
 " Keymappings for neocomplchace (and neosnippet?)
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
@@ -387,12 +387,14 @@ let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
 " vimfiler"{{{
 let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_edit_action = 'tabopen'
+let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
 nnoremap <Space>vf :<C-u>VimFiler<CR>
 "}}}
 
 " vimshell"{{{
-nnoremap <Space>vs :VimShell<CR>
 let g:vimshell_prompt = '$ '
+let g:vimshell_temporary_directory = $HOME.'/.tmp/.vimshell'
+nnoremap <Space>vs :VimShell<CR>
 "}}}
 
 " quickrun"{{{
@@ -428,4 +430,5 @@ nnoremap <silent> <F4> :<C-u>source $MYGVIMRC<CR>
 "}}}
 
 " エンコーディングutf-8を優先する"{{{
-let &fileencodings=substitute(substitute(&fileencodings, ',\?utf-8', '', 'g'), 'cp932', 'utf-8,cp932', '')"}}}
+let &fileencodings=substitute(substitute(&fileencodings, ',\?utf-8', '', 'g'), 'cp932', 'utf-8,cp932', '')
+"}}}
