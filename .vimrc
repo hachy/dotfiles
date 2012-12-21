@@ -1,8 +1,6 @@
 set nocompatible
 
 set runtimepath+=$HOME/.vim,$HOME/.vim/after
-" set runtimepath^=$HOME/.vim
-" set runtimepath+=$HOME/.vim/after
 
 " neobundle"{{{
 filetype off
@@ -23,8 +21,8 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'skammer/vim-css-color'
-" NeoBundle 'groenewege/vim-less'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tomtom/tcomment_vim'
@@ -76,12 +74,12 @@ set nrformats=alpha,octal,hex
 " Folding
 set foldenable
 set foldmethod=marker
-set foldcolumn=1
+set foldcolumn=2
 " No backups
 set nobackup
 set noswapfile
 " Move the cursor to positions where there isn't any text
-set virtualedit=all
+set virtualedit=block
 
 set textwidth=0
 set scrolloff=5
@@ -95,7 +93,7 @@ au! FileType scss syntax cluster sassCssAttributes add=@cssColors
 colorscheme glitter
 set background=dark
 gui
-set transparency=250
+set transparency=240
 "}}}
 
 " Tabline"{{{
@@ -125,18 +123,12 @@ nnoremap # :<C-u>set hlsearch<CR>#
 
 " Statusline"{{{
 set laststatus=2
-" set statusline=%<\%F\ %y%m%r%=%{''.(&fenc!=''?&fenc:&enc).''}\ %{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
-set statusline=%<\%F\ %y%m%r%=%{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]\ %{SearchCount()}
+set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]\ %{SearchCount()}
 
 " set statusline=
-" "set statusline+=%1*\ %n\                                 "buffernr
-" set statusline+=%1*\ %<%F\                                "File+path
-" set statusline+=%2*\ %2(\%M%r\ %)                         "Modified? Readonly?
-" set statusline+=%3*\ %=%y\ %{''.(&fenc!=''?&fenc:&enc).''}\ %{(&bomb?\",BOM\":\"\")}\ %{&ff}\     "FileType/Encoding/FileFormat(dos/unix..)
-" set statusline+=%3*\ \%3p%%\                              "total (%)
-" set statusline+=%3*\ \[%4l,%3c]\                            "Rownumber, Colnr
-" set statusline+=%{SearchCount()}
-" "set statusline+=%0*\ \%w\ %P\ \                          "Top/bot.
+" set statusline+=%1*\ %<%F\
+" set statusline+=%2*\ %2(\%M%r\ %)
+" set statusline+=%1*\ %=%{fugitive#statusline()}\ %y\ %{''.(&fenc!=''?&fenc:&enc).''}\ %{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]\ %{SearchCount()}
 
 function! SearchCount()
   let pos=getpos('.')
@@ -191,7 +183,7 @@ inoremap ' ''<Left>
 
 " Yank the characters under the cursor until the end of the line
 nnoremap Y y$
-" Enter = o
+" Enter == o
 noremap <CR> o<Esc>
 " C-c == ESC
 inoremap <C-c> <Esc>
@@ -336,6 +328,19 @@ let g:user_zen_settings = {
 \              ."</body>\n"
 \              ."</html>",
 \    }
+\  },
+\  'haml': {
+\     'extends': 'html',
+\     'snippets': {
+\       'html:5': "!!! 5\n"
+\               ."%html{:lang => \"${lang}\"}\n"
+\               ."\t%head\n"
+\               ."\t\t%meta{:charset => \"${charset}\"}\n"
+\               ."\t\t%title\n"
+\               ."\t%body\n"
+\               ."\t\t${child}|\n"
+\               ."\t\t%script{:src => \"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\"}\n"
+\    }
 \  }
 \}
 "}}}
@@ -401,7 +406,17 @@ nnoremap <Space>vs :VimShell<CR>
 " let b:quickrun_config = {'outputter/buffer/into': 1}
 let g:quickrun_config = {}
 let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s'], 'into': 1}
-let g:quickrun_config['ruby'] = {'command' : 'ruby', 'into': 1}
+let g:quickrun_config['ruby'] = {'command' : 'ruby', 'into': 0}
+"}}}
+
+" fugitive"{{{
+nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gs :<C-u>Gstatus<Enter>
+nnoremap <Space>gl :<C-u>Glog<Enter>
+nnoremap <Space>ga :<C-u>Gwrite<Enter>
+nnoremap <Space>gc :<C-u>Gcommit<Enter>
+nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
+nnoremap <Space>gb :<C-u>Gblame<Enter>
 "}}}
 
 " vim-ref"{{{
@@ -415,9 +430,14 @@ autocmd FileType ref call s:initialize_ref_viewer()
 function! s:initialize_ref_viewer()
   nmap <buffer> b <Plug>(ref-back)
   nmap <buffer> f <Plug>(ref-forward)
+  nmap <buffer> <C-t>  :tabnew<CR>
   nnoremap <buffer> q <C-w>c
   setlocal nonumber
 endfunction
+"}}}
+
+" matchit.vim"{{{
+source $VIMRUNTIME/macros/matchit.vim
 "}}}
 
 "-----------------------------------------------------------------------------
