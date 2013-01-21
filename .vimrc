@@ -26,6 +26,7 @@ NeoBundle 'skammer/vim-css-color'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'glidenote/memolist.vim'
 
 " filetype plugin indent on
 filetype on
@@ -324,7 +325,7 @@ let g:user_zen_settings = {
 \              ."    <link rel=\"stylesheet\" href=\"reset.css\">\n"
 \              ."</head>\n"
 \              ."<body>\n${child}|\n"
-\              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\"></script>\n"
+\              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js\"></script>\n"
 \              ."</body>\n"
 \              ."</html>",
 \    }
@@ -339,7 +340,7 @@ let g:user_zen_settings = {
 \               ."\t\t%title\n"
 \               ."\t%body\n"
 \               ."\t\t${child}|\n"
-\               ."\t\t%script{:src => \"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\"}\n"
+\               ."\t\t%script{:src => \"http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js\"}\n"
 \    }
 \  }
 \}
@@ -440,6 +441,11 @@ endfunction
 source $VIMRUNTIME/macros/matchit.vim
 "}}}
 
+" memolist"{{{
+map ,mn  :MemoNew<CR>
+map ,ml  :MemoList<CR>
+map ,mg  :MemoGrep<CR>
+"}}}
 "-----------------------------------------------------------------------------
 " Edit .vimrc .gvimc"{{{
 nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
@@ -448,6 +454,8 @@ nnoremap <silent> <Space>eg  :<C-u>edit $MYGVIMRC<CR>
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif <CR>
 nnoremap <silent> <F4> :<C-u>source $MYGVIMRC<CR>
 "}}}
+
+let g:netrw_localcopycmd = ''
 
 " エンコーディングutf-8を優先する"{{{
 let &fileencodings=substitute(substitute(&fileencodings, ',\?utf-8', '', 'g'), 'cp932', 'utf-8,cp932', '')
