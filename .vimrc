@@ -11,22 +11,68 @@ endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc'
+
+NeoBundle 'Shougo/neocomplcache'
+call neobundle#config('neocomplcache', {
+      \ 'lazy' : 1,
+      \ 'autoload' : {
+      \   'insert' : 1,
+      \ }})
+
+NeoBundle 'Shougo/unite.vim'
+call neobundle#config('unite.vim',{
+      \ 'lazy' : 1,
+      \ 'autoload' : {
+      \   'commands' : [{ 'name' : 'Unite',
+      \                   'complete' : 'customlist,unite#complete_source'}]
+      \ }})
+
 NeoBundle 'Shougo/vimfiler'
+call neobundle#config('vimfiler', {
+      \ 'lazy' : 1,
+      \ 'depends' : 'Shougo/unite.vim',
+      \ 'autoload' : {
+      \    'commands' : [{ 'name' : 'VimFiler',
+      \                    'complete' : 'customlist,vimfiler#complete' },
+      \                    'VimFilerExplorer', 'VimFilerCreate']
+      \ }})
+
 NeoBundle 'Shougo/vimshell'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'mattn/zencoding-vim'
+call neobundle#config('vimshell', {
+      \ 'lazy' : 1,
+      \ 'autoload' : {
+      \   'commands' : [{ 'name' : 'VimShell',
+      \                   'complete' : 'customlist,vimshell#complete'}]
+      \ }})
+
+NeoBundleLazy 'thinca/vim-quickrun', { 'autoload' : {
+      \ 'mappings': '<Plug>(quickrun)'
+      \ }}
+
+NeoBundleLazy 'thinca/vim-ref', { 'autoload' : {
+      \ 'commands' : 'Ref',
+      \ 'filetypes': ['ruby']
+      \ }}
+
+NeoBundleLazy 'skammer/vim-css-color', { 'autoload' : {
+      \ 'filetypes' : ['css', 'scss']
+      \ }}
+
+NeoBundleLazy 'pangloss/vim-javascript', { 'autoload' : {
+      \ 'filetypes' : ['javascript']
+      \ }}
+
+NeoBundleLazy 'glidenote/memolist.vim', { 'autoload' : {
+      \ 'commands' : ['MemoNew', 'MemoList', 'MemoGrep']
+      \ }}
+
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'skammer/vim-css-color'
-NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'glidenote/memolist.vim'
 
 " filetype plugin indent on
 filetype on
@@ -290,24 +336,142 @@ endif
 
 "-----------------------------------------------------------------------------
 " Unite.vim"{{{
-let g:unite_source_file_mru_limit = 200
-let g:unite_data_directory = $HOME.'/.tmp/.unite'
+let s:bundle = neobundle#get("unite.vim")
+function! s:bundle.hooks.on_source(bundle)
+  let g:unite_source_file_mru_limit = 200
+  let g:unite_data_directory = $HOME.'/.tmp/.unite'
+  " Keymappings for unite.vim
+  autocmd FileType unite call s:unite_my_settings()
+  function! s:unite_my_settings()
+    " Escキーを2回押すと終了する
+    nmap <silent><buffer> <Esc><Esc> q
+    imap <silent><buffer> <Esc><Esc> <Esc>q
+  endfunction
+endfunction
+unlet s:bundle
+
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,ur :<C-u>Unite history/yank -buffer-name=register register<CR>
-" Keymappings for unite.vim
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()
-  " Escキーを2回押すと終了する
-  nmap <silent><buffer> <Esc><Esc> q
-  imap <silent><buffer> <Esc><Esc> <Esc>q
-endfunction
+"}}}
 
-" let g:unite_source_history_yank_enable = 1
-" nnoremap <silent> ,gy :<C-u>Unite history/yank<CR>
+" neocomplcache"{{{
+let g:neocomplcache_enable_at_startup = 1
+
+let s:bundle = neobundle#get("neocomplcache")
+function! s:bundle.hooks.on_source(bundle)
+  " Use underbar completion.
+  let g:neocomplcache_enable_underbar_completion = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplcache_min_syntax_length = 3
+  " Define dictionary.
+  let g:neocomplcache_dictionary_filetype_lists = {
+        \ 'default' : '',
+        \ 'ruby' : expand('$HOME/.vim/dict/ruby.dict'),
+        \ 'javascript' : expand('$HOME/.vim/dict/jquery.dict'),
+        \ 'css' : expand('$HOME/.vim/dict/css3.dict'),
+        \ }
+  let g:neocomplcache_temporary_dir = $HOME.'/.tmp/.neocon'
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+  endif
+  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+endfunction
+unlet s:bundle
+
+" Keymappings for neocomplchace (and neosnippet?)
+inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<Up>" : "\<S-Tab>"
+"}}}
+
+" neosnippet"{{{
+" Keymappings for neosnippet
+imap <C-o> <Plug>(neosnippet_expand_or_jump)
+smap <C-o> <Plug>(neosnippet_expand_or_jump)
+" Define directory
+let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
+"}}}
+
+" vimfiler"{{{
+let s:bundle = neobundle#get("vimfiler")
+function! s:bundle.hooks.on_source(bundle)
+  let g:vimfiler_safe_mode_by_default = 0
+  let g:vimfiler_as_default_explorer = 1
+  let g:vimfiler_edit_action = 'tabopen'
+  let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
+endfunction
+unlet s:bundle
+
+nnoremap <Space>vf :<C-u>VimFiler<CR>
+"}}}
+
+" vimshell"{{{
+let s:bundle = neobundle#get("vimshell")
+function! s:bundle.hooks.on_source(bundle)
+  let g:vimshell_prompt = '$ '
+  let g:vimshell_temporary_directory = $HOME.'/.tmp/.vimshell'
+endfunction
+unlet s:bundle
+
+nnoremap <Space>vs :VimShell<CR>
+"}}}
+
+" quickrun"{{{
+let s:bundle = neobundle#get("vim-quickrun")
+function! s:bundle.hooks.on_source(bundle)
+  " let b:quickrun_config = {'outputter/buffer/into': 1}
+  let g:quickrun_config = {}
+  let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s'], 'into': 1}
+  let g:quickrun_config['ruby'] = {'command' : 'ruby', 'into': 0}
+endfunction
+unlet s:bundle
+
+nmap <silent> <Leader>r <Plug>(quickrun)
+"}}}
+
+" vim-ref"{{{
+let s:bundle = neobundle#get('vim-ref')
+function! s:bundle.hooks.on_source(bundle)
+  let g:ref_refe_cmd = $HOME."/rubyref/refe-1_9_3"
+  let g:ref_refe_encoding = 'cp932'
+  let g:ref_use_vimproc = 1
+  let g:ref_open = 'vsplit'
+
+  autocmd FileType ref call s:initialize_ref_viewer()
+  function! s:initialize_ref_viewer()
+    nmap <buffer> b <Plug>(ref-back)
+    nmap <buffer> f <Plug>(ref-forward)
+    nmap <buffer> <C-t>  :tabnew<CR>
+    nnoremap <buffer> q <C-w>c
+    setlocal nonumber
+  endfunction
+endfunction
+unlet s:bundle
+
+nmap ,rr :<C-u>Ref refe<Space>
+"}}}
+
+" fugitive"{{{
+nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gs :<C-u>Gstatus<Enter>
+nnoremap <Space>gl :<C-u>Glog<Enter>
+nnoremap <Space>ga :<C-u>Gwrite<Enter>
+nnoremap <Space>gc :<C-u>Gcommit<Enter>
+nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
+nnoremap <Space>gb :<C-u>Gblame<Enter>
 "}}}
 
 " Zencoding snippets"{{{
@@ -325,7 +489,7 @@ let g:user_zen_settings = {
 \              ."    <link rel=\"stylesheet\" href=\"reset.css\">\n"
 \              ."</head>\n"
 \              ."<body>\n${child}|\n"
-\              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js\"></script>\n"
+\              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n"
 \              ."</body>\n"
 \              ."</html>",
 \    }
@@ -340,101 +504,10 @@ let g:user_zen_settings = {
 \               ."\t\t%title\n"
 \               ."\t%body\n"
 \               ."\t\t${child}|\n"
-\               ."\t\t%script{:src => \"http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js\"}\n"
+\               ."\t\t%script{:src => \"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"}\n"
 \    }
 \  }
 \}
-"}}}
-
-" neocomplcache"{{{
-let g:neocomplcache_enable_at_startup = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-      \ 'default' : '',
-      \ 'ruby' : expand('$HOME/.vim/dict/ruby.dict'),
-      \ 'javascript' : expand('$HOME/.vim/dict/jquery.dict'),
-      \ 'css' : expand('$HOME/.vim/dict/css3.dict'),
-      \ }
-let g:neocomplcache_temporary_dir = $HOME.'/.tmp/.neocon'
-
-" Keymappings for neocomplchace (and neosnippet?)
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<Up>" : "\<S-Tab>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-"}}}
-
-" neosnippet"{{{
-" Keymappings for neosnippet
-imap <C-o> <Plug>(neosnippet_expand_or_jump)
-smap <C-o> <Plug>(neosnippet_expand_or_jump)
-
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" Define directory
-let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
-"}}}
-
-" vimfiler"{{{
-let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_edit_action = 'tabopen'
-let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
-nnoremap <Space>vf :<C-u>VimFiler<CR>
-"}}}
-
-" vimshell"{{{
-let g:vimshell_prompt = '$ '
-let g:vimshell_temporary_directory = $HOME.'/.tmp/.vimshell'
-nnoremap <Space>vs :VimShell<CR>
-"}}}
-
-" quickrun"{{{
-" let b:quickrun_config = {'outputter/buffer/into': 1}
-let g:quickrun_config = {}
-let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s'], 'into': 1}
-let g:quickrun_config['ruby'] = {'command' : 'ruby', 'into': 0}
-"}}}
-
-" fugitive"{{{
-nnoremap <Space>gd :<C-u>Gdiff<Enter>
-nnoremap <Space>gs :<C-u>Gstatus<Enter>
-nnoremap <Space>gl :<C-u>Glog<Enter>
-nnoremap <Space>ga :<C-u>Gwrite<Enter>
-nnoremap <Space>gc :<C-u>Gcommit<Enter>
-nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
-nnoremap <Space>gb :<C-u>Gblame<Enter>
-"}}}
-
-" vim-ref"{{{
-let g:ref_refe_cmd = $HOME."/rubyref/refe-1_9_3"
-let g:ref_refe_encoding = 'cp932'
-let g:ref_use_vimproc = 1
-let g:ref_open = 'vsplit'
-nmap ,rr :<C-u>Ref refe<Space>
-
-autocmd FileType ref call s:initialize_ref_viewer()
-function! s:initialize_ref_viewer()
-  nmap <buffer> b <Plug>(ref-back)
-  nmap <buffer> f <Plug>(ref-forward)
-  nmap <buffer> <C-t>  :tabnew<CR>
-  nnoremap <buffer> q <C-w>c
-  setlocal nonumber
-endfunction
 "}}}
 
 " matchit.vim"{{{
