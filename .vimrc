@@ -44,7 +44,8 @@ call neobundle#config('vimshell', {
       \ 'lazy' : 1,
       \ 'autoload' : {
       \   'commands' : [{ 'name' : 'VimShell',
-      \                   'complete' : 'customlist,vimshell#complete'}]
+      \                   'complete' : 'customlist,vimshell#complete'},
+      \                   'VimShellPop']
       \ }})
 
 NeoBundleLazy 'thinca/vim-quickrun', { 'autoload' : {
@@ -60,10 +61,6 @@ NeoBundleLazy 'skammer/vim-css-color', { 'autoload' : {
       \ 'filetypes' : ['css', 'scss']
       \ }}
 
-NeoBundleLazy 'pangloss/vim-javascript', { 'autoload' : {
-      \ 'filetypes' : ['javascript']
-      \ }}
-
 NeoBundleLazy 'glidenote/memolist.vim', { 'autoload' : {
       \ 'commands' : ['MemoNew', 'MemoList', 'MemoGrep']
       \ }}
@@ -71,6 +68,7 @@ NeoBundleLazy 'glidenote/memolist.vim', { 'autoload' : {
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tomtom/tcomment_vim'
 
@@ -161,34 +159,33 @@ set smartcase
 set wrapscan
 set incsearch
 set hlsearch
+
 nnoremap <Esc><Esc> :<C-u>set nohlsearch<CR>
 nnoremap / :<C-u>set hlsearch<CR>/
 nnoremap ? :<C-u>set hlsearch<CR>?
 nnoremap * :<C-u>set hlsearch<CR>*
 nnoremap # :<C-u>set hlsearch<CR>#
+
+nmap n nzz
+nmap N Nzz
+nmap * *zz
+nmap # #zz
+nmap g* g*zz
+nmap g# g#zz
+" # == *
+nmap # *
+" count number of matches
+nmap ,c :%s///gn<CR>
 "}}}
 
 " Statusline"{{{
 set laststatus=2
-set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]\ %{SearchCount()}
+set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
 
 " set statusline=
 " set statusline+=%1*\ %<%F\
 " set statusline+=%2*\ %2(\%M%r\ %)
-" set statusline+=%1*\ %=%{fugitive#statusline()}\ %y\ %{''.(&fenc!=''?&fenc:&enc).''}\ %{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]\ %{SearchCount()}
-
-function! SearchCount()
-  let pos=getpos('.')
-  try
-    redir => subscount
-    silent %s///gne
-    redir END
-    let result=matchstr(subscount, '\d\+')
-    return result
-  finally
-    call setpos('.', pos)
-  endtry
-endfunction
+" set statusline+=%1*\ %=%{fugitive#statusline()}\ %y\ %{''.(&fenc!=''?&fenc:&enc).''}\ %{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
 "}}}
 
 " Keymappings"{{{
@@ -197,12 +194,7 @@ nnoremap <C-h> <Home>
 vnoremap <C-h> <Home>
 nnoremap <C-l> <End>
 vnoremap <C-l> <End>
-" inoremap <Space>h <Home>
-" inoremap <Space>l <End>
-" inoremap <C-h> <Left>
-" inoremap <C-j> <Down>
-" inoremap <C-k> <Up>
-" inoremap <C-l> <Right>
+
 inoremap <silent><expr><C-h> pumvisible() ? "\<C-y>\<Left>" : "\<Left>"
 inoremap <silent><expr><C-j> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
 inoremap <silent><expr><C-k> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
@@ -211,14 +203,6 @@ inoremap <C-d> <delete>
 
 nnoremap <C-Space> <PageDown>
 nnoremap <S-Space> <PageUp>
-
-" search
-nmap n nzz
-nmap N Nzz
-nmap * *zz
-nmap # #zz
-nmap g* g*zz
-nmap g# g#zz
 
 " brackets
 inoremap { {}<Left>
@@ -246,8 +230,6 @@ autocmd FileType * setlocal formatoptions-=ro
 nnoremap ZZ  <Nop>
 map q: <Nop>
 map q  <Nop>
-" # == *
-nmap # *
 " help vertical topleft
 nnoremap <Space>h :<C-u>vert to h<Space>
 " Visual mode で検索
