@@ -16,7 +16,7 @@ hi Normal           guifg=#ADADAD  guibg=#030303  gui=NONE
 hi NonText          guifg=#030303  guibg=NONE     gui=NONE
 hi Directory        guifg=#8EC1FF  guibg=NONE     gui=NONE
 hi LineNr           guifg=#333333  guibg=#090909  gui=NONE
-hi Title            guifg=#ADADAD  guibg=NONE     gui=NONE
+hi Title            guifg=#FF60AA  guibg=NONE     gui=NONE
 hi Visual           guifg=#C99EFF  guibg=#333366  gui=NONE
 "hi VisualNos
 hi SpecialKey       guifg=#333366  guibg=#090909  gui=NONE
@@ -102,14 +102,14 @@ hi link htmlTagName          Constant
 hi link htmlEndTag           Function
 hi link htmlSpecialTagName   Number
 hi link htmlArg              Function
-hi link javaScript           Title
+hi link javaScript           Normal
 "}}}
 " XML"{{{
 hi link xmlEndTag            Keyword
 "}}}
 " Javascript"{{{
 hi link javaScriptIdentifier         Type
-hi link javaScriptDOMMethods         Title
+hi link javaScriptDOMMethods         Normal
 hi link javaScriptNumber             Number
 " hi link javaScriptParens             Delimiter
 " hi link javaScriptBraces             Delimiter
@@ -130,18 +130,18 @@ hi link rubyKeyword                Number
 hi link rubySymbol                 Identifier
 hi link rubyInstanceVariable       Identifier
 " hi link rubyClassVariable          Delimiter
-hi link rubyBlockParameter         Title
+hi link rubyBlockParameter         Normal
 " hi link rubyDelimiter              Statement
 " hi link rubyInterPolationDelimiter Statement
 " hi link rubyStringDelimiter        Preproc
 " hi link rubySymbolDelimiter        Statement
 " hi link rubyClass                  Number
-" hi link rubyDefine                 Title
+" hi link rubyDefine                 Normal
 " hi link rubyModule                 Number
 " hi link rubyPredefinedVariable     Number
 " hi link rubyPredefinedConstant     Number
-hi link rubyBoolean                Title
-hi link rubyPseudoVariable         Title
+hi link rubyBoolean                Normal
+hi link rubyPseudoVariable         Normal
 " hi link rubyOperator               Delimiter
 "}}}
 " eruby"{{{
@@ -152,10 +152,10 @@ hi link pythonFunction       Preproc
 "}}}
 " CoffeeScript"{{{
 hi link coffeeObjAssign      Preproc
-hi link coffeeBlock          Title
-hi link coffeeSpecialIdent   Title
+hi link coffeeBlock          Normal
+hi link coffeeSpecialIdent   Normal
 "}}}
 " php"{{{
-hi link phpParent            Title
-" hi link phpIdentifier        Title
+hi link phpParent            Normal
+" hi link phpIdentifier        Normal
 "}}}
