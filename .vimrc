@@ -12,7 +12,14 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 NeoBundle 'Shougo/neocomplcache'
 call neobundle#config('neocomplcache', {
@@ -228,8 +235,8 @@ autocmd FileType help nnoremap <buffer> q <C-w>c
 autocmd FileType * setlocal formatoptions-=ro
 " Disable unused keys
 nnoremap ZZ  <Nop>
-map q: <Nop>
-map q  <Nop>
+noremap q: <Nop>
+noremap q  <Nop>
 " help vertical topleft
 nnoremap <Space>h :<C-u>vert to h<Space>
 " Visual mode で検索

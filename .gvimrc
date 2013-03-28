@@ -25,6 +25,10 @@ set guioptions-=T
 set guioptions-=e
 " Scrollbar is always off(left)
 set guioptions-=L
+
+set columns=100
+set lines=40
+
 " Toggle menu open if press <F2>
 nnoremap <silent> <F2> :<C-u>if &guioptions =~# 'm' <Bar>
       \set guioptions-=m <Bar>
