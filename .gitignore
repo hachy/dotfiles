@@ -6,6 +6,8 @@
 !/.gvimrc
 !/.gitignore
 !/.gitconfig
+!/.zshrc
+!/.gemrc
 !/README.md
 !/setup.sh
 
