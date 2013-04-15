@@ -3,8 +3,6 @@ set nocompatible
 set runtimepath+=$HOME/.vim,$HOME/.vim/after
 
 " neobundle"{{{
-filetype off
-
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
@@ -79,15 +77,10 @@ NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tomtom/tcomment_vim'
 
-" filetype plugin indent on
-filetype on
+filetype plugin indent on     " Required!
 
 " Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
+NeoBundleCheck
 "}}}
 
 "-----------------------------------------------------------------------------
@@ -112,7 +105,7 @@ set cmdheight=2
 " Show <TAB> and <CR>
 set list
 " Show 'invisible' characters
-set listchars=tab:>-,trail:-,extends:>,precedes:<
+set listchars=tab:»-,trail:-,extends:»,precedes:«
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 " Enable mouse in all modes
@@ -136,16 +129,22 @@ set virtualedit=block
 set textwidth=0
 set scrolloff=5
 
+" neosnippet で変なの出さない
+set completeopt-=preview
+
 " set colorcolumn=85
 
 au! FileType scss syntax cluster sassCssAttributes add=@cssColors
 "}}}
 
 " Color"{{{
+set t_Co=256
+gui
 colorscheme glitter
 set background=dark
-gui
-set transparency=240
+if has('win32')
+  set transparency=240
+endif
 "}}}
 
 " Tabline"{{{
@@ -435,7 +434,11 @@ nmap <silent> <Leader>r <Plug>(quickrun)
 let s:bundle = neobundle#get('vim-ref')
 function! s:bundle.hooks.on_source(bundle)
   let g:ref_refe_cmd = $HOME."/rubyref/refe-1_9_3"
-  let g:ref_refe_encoding = 'cp932'
+  if has('win32')
+    let g:ref_refe_encoding = 'cp932'
+  else
+    let g:ref_refe_encoding = 'utf-8'
+  endif
   let g:ref_use_vimproc = 1
   let g:ref_open = 'vsplit'
 
@@ -510,8 +513,8 @@ map ,mg  :MemoGrep<CR>
 "}}}
 "-----------------------------------------------------------------------------
 " Edit .vimrc .gvimc"{{{
-nnoremap <silent> <Space>ev  :<C-u>edit $MYVIMRC<CR>
-nnoremap <silent> <Space>eg  :<C-u>edit $MYGVIMRC<CR>
+nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/.vimrc<CR>
+nnoremap <silent> <Space>eg  :<C-u>edit $HOME/dotfiles/.gvimrc<CR>
 " Load .gvimrc after .vimrc edited at GVim.
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif <CR>
 nnoremap <silent> <F4> :<C-u>source $MYGVIMRC<CR>

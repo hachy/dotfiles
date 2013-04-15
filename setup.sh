@@ -1,14 +1,17 @@
-#!/bin/sh
+#!/bin/zsh
 
-DOT_FILES=( .gitconfig .gitignore .gvimrc .vimrc .vim .zshrc .gemrc)
+DOT_FILES=( .gitconfig .gitignore .gvimrc .vimrc .vim .zshrc .gemrc .tmux.conf)
+
+white="\033[0m"
+magenta="\033[1;35m"
+cyan="\033[1;36m"
 
 for file in ${DOT_FILES[@]}
 do
-  if [ -a $HOME/$file ]; then
-    echo "既にファイルが存在するぉ: $file"
+  if [ -L $HOME/$file ]; then
+    echo "既に${magenta} $file ${white} のシンボリックリンクが存在するょ"
   else
     ln -s $HOME/dotfiles/$file $HOME/$file
-    echo "シンボリックリンクをはったぉ"
+    echo "${cyan} $file ${white} のシンボリックリンクをはったょ"
   fi
 done
-

@@ -2,15 +2,18 @@
 /.*
 
 !/.vim
+!/.vim/colors/glitter.vim
 !/.vimrc
 !/.gvimrc
 !/.gitignore
 !/.gitconfig
 !/.zshrc
 !/.gemrc
+!/.tmux.conf
 !/README.md
 !/setup.sh
 
 # ignore
 /.vim/bundle
+/.vim/colors
 /.vim/.netrwhist

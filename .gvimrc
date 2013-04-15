@@ -26,7 +26,7 @@ set guioptions-=e
 " Scrollbar is always off(left)
 set guioptions-=L
 
-set columns=100
+set columns=130
 set lines=40
 
 " Toggle menu open if press <F2>
