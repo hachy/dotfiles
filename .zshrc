@@ -1,5 +1,6 @@
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
+export TERM="xterm-256color"
 bindkey -v
 # 補完
 autoload -U compinit

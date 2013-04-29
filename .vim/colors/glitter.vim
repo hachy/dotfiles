@@ -12,8 +12,8 @@ endif
 let g:colors_name = "glitter"
 
 " General colors"{{{
-hi Normal           guifg=#A8A8A8  guibg=#080808  gui=NONE       ctermfg=248   ctermbg=232   cterm=NONE
-hi NonText          guifg=#080808  guibg=NONE     gui=NONE       ctermfg=232   ctermbg=NONE  cterm=NONE
+hi Normal           guifg=#A8A8A8  guibg=#080808  gui=NONE       ctermfg=248   ctermbg=NONE  cterm=NONE
+hi NonText          guifg=#080808  guibg=NONE     gui=NONE       ctermfg=NONE  ctermbg=NONE  cterm=NONE
 hi Directory        guifg=#5FAFD7  guibg=NONE     gui=NONE       ctermfg=74    ctermbg=NONE  cterm=NONE
 hi LineNr           guifg=#444444  guibg=#121212  gui=NONE       ctermfg=238   ctermbg=233   cterm=NONE
 hi Title            guifg=#D75FAF  guibg=NONE     gui=NONE       ctermfg=169   ctermbg=NONE  cterm=NONE
@@ -39,7 +39,7 @@ hi StatusLineNC     guifg=#666666  guibg=NONE     gui=underline  ctermfg=242   c
 hi VertSplit        guifg=#5F5F87  guibg=NONE     gui=NONE       ctermfg=60    ctermbg=NONE  cterm=NONE
 hi WildMenu         guifg=#87FFAF  guibg=NONE     gui=NONE       ctermfg=121   ctermbg=NONE  cterm=NONE
 hi Folded           guifg=#5FAFD7  guibg=#1C1C1C  gui=NONE       ctermfg=74    ctermbg=234   cterm=NONE
-hi FoldColumn       guifg=#5FAFD7  guibg=#080808  gui=NONE       ctermfg=74    ctermbg=232   cterm=NONE
+hi FoldColumn       guifg=#5FAFD7  guibg=#080808  gui=NONE       ctermfg=74    ctermbg=NONE  cterm=NONE
 hi ColorColumn      guifg=NONE     guibg=#5F5F87  gui=NONE       ctermfg=NONE  ctermbg=60    cterm=NONE
 " hi SignColumn       guifg=#FFFFFF  guibg=#1C1C1C  gui=NONE
 hi Conceal          guifg=#87FFAF  guibg=NONE     gui=NONE       ctermfg=121   ctermbg=NONE  cterm=NONE
@@ -57,7 +57,7 @@ hi PmenuSbar        guifg=NONE     guibg=#1C1C1C  gui=NONE       ctermfg=NONE  c
 hi PmenuThumb       guifg=NONE     guibg=#5FAFD7  gui=NONE       ctermfg=NONE  ctermbg=74    cterm=NONE
 "}}}
 " Syntax highlighting"{{{
-hi Comment          guifg=#666666  guibg=NONE     gui=italic     ctermfg=242   ctermbg=NONE  cterm=italic
+hi Comment          guifg=#666666  guibg=NONE     gui=italic     ctermfg=242   ctermbg=NONE  cterm=NONE
 hi String           guifg=#87FFAF  guibg=NONE     gui=NONE       ctermfg=121   ctermbg=NONE  cterm=NONE
 hi Number           guifg=#AF005F  guibg=NONE     gui=NONE       ctermfg=125   ctermbg=NONE  cterm=NONE
 hi PreProc          guifg=#D75FAF  guibg=NONE     gui=NONE       ctermfg=169   ctermbg=NONE  cterm=NONE
