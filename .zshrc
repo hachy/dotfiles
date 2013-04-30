@@ -21,16 +21,16 @@ setopt nolistbeep
 # git
 setopt prompt_subst
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '[%b]'
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
+zstyle ':vcs_info:*' formats '(%b)'
+zstyle ':vcs_info:*' actionformats '(%b|%a)'
 zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
 precmd () { vcs_info }
 
 # prompt
 autoload -U colors
 colors
-PROMPT='%B%F{green}%n@%m%b%f%F{cyan}➜%f '
-RPROMPT='%B%F{magenta}${vcs_info_msg_0_}%b%f[%F{cyan}%~%f]'
+PROMPT='%B%F{green}%n@%m%b%f%B%F{magenta}${vcs_info_msg_0_}%b%f%F{cyan}➜%f '
+RPROMPT='[%F{cyan}%~%f]'
 
 # apt-getとかdpkgコマンドをキャッシュを使って速くする
 zstyle ':completion:*' use-cache true
