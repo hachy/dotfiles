@@ -8,7 +8,7 @@ if has('vim_starting')
 endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 
-NeoBundle 'Shougo/neobundle.vim'
+NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -68,6 +68,10 @@ NeoBundleLazy 'skammer/vim-css-color', { 'autoload' : {
 
 NeoBundleLazy 'glidenote/memolist.vim', { 'autoload' : {
       \ 'commands' : ['MemoNew', 'MemoList', 'MemoGrep']
+      \ }}
+
+NeoBundleLazy 'yuratomo/w3m.vim', { 'autoload' : {
+      \ 'commands' : ['W3m', 'W3mHistory']
       \ }}
 
 NeoBundle 'tpope/vim-surround'
@@ -139,10 +143,10 @@ au! FileType scss syntax cluster sassCssAttributes add=@cssColors
 
 " Color"{{{
 set t_Co=256
-gui
 colorscheme glitter
 set background=dark
 if has('win32')
+  gui
   set transparency=240
 endif
 "}}}
@@ -236,6 +240,10 @@ autocmd FileType * setlocal formatoptions-=ro
 nnoremap ZZ  <Nop>
 noremap q: <Nop>
 noremap q  <Nop>
+" for tmux prefix key
+nnoremap <C-z> <Nop>
+inoremap <C-z> <Nop>
+vnoremap <C-z> <Nop>
 " help vertical topleft
 nnoremap <Space>h :<C-u>vert to h<Space>
 " Visual mode で検索
@@ -324,10 +332,10 @@ endif
 
 "-----------------------------------------------------------------------------
 " Unite.vim"{{{
+let g:unite_data_directory = $HOME.'/.tmp/.unite'
 let s:bundle = neobundle#get("unite.vim")
 function! s:bundle.hooks.on_source(bundle)
   let g:unite_source_file_mru_limit = 200
-  let g:unite_data_directory = $HOME.'/.tmp/.unite'
   " Keymappings for unite.vim
   autocmd FileType unite call s:unite_my_settings()
   function! s:unite_my_settings()
@@ -348,6 +356,7 @@ nnoremap <silent> ,ur :<C-u>Unite history/yank -buffer-name=register register<CR
 
 " neocomplcache"{{{
 let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_temporary_dir = $HOME.'/.tmp/.neocon'
 
 let s:bundle = neobundle#get("neocomplcache")
 function! s:bundle.hooks.on_source(bundle)
@@ -362,7 +371,6 @@ function! s:bundle.hooks.on_source(bundle)
         \ 'javascript' : expand('$HOME/.vim/dict/jquery.dict'),
         \ 'css' : expand('$HOME/.vim/dict/css3.dict'),
         \ }
-  let g:neocomplcache_temporary_dir = $HOME.'/.tmp/.neocon'
 
   " Enable omni completion.
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -394,12 +402,12 @@ let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
 "}}}
 
 " vimfiler"{{{
+let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
 let s:bundle = neobundle#get("vimfiler")
 function! s:bundle.hooks.on_source(bundle)
   let g:vimfiler_safe_mode_by_default = 0
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_edit_action = 'tabopen'
-  let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
 endfunction
 unlet s:bundle
 
@@ -407,10 +415,10 @@ nnoremap <Space>vf :<C-u>VimFiler<CR>
 "}}}
 
 " vimshell"{{{
+let g:vimshell_temporary_directory = $HOME.'/.tmp/.vimshell'
 let s:bundle = neobundle#get("vimshell")
 function! s:bundle.hooks.on_source(bundle)
   let g:vimshell_prompt = '$ '
-  let g:vimshell_temporary_directory = $HOME.'/.tmp/.vimshell'
 endfunction
 unlet s:bundle
 
@@ -507,6 +515,13 @@ source $VIMRUNTIME/macros/matchit.vim
 "}}}
 
 " memolist"{{{
+let s:bundle = neobundle#get("memolist.vim")
+function! s:bundle.hooks.on_source(bundle)
+  let g:memolist_vimfiler = 1
+  let g:memolist_vimfiler_option = ""
+endfunction
+unlet s:bundle
+
 map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>

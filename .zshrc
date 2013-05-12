@@ -46,6 +46,10 @@ SAVEHIST=10000
 setopt hist_ignore_dups
 setopt share_history
 
+# history search
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+
 alias -g G='| grep'
 
 # man
