@@ -29,8 +29,8 @@ precmd () { vcs_info }
 # prompt
 autoload -U colors
 colors
-PROMPT='%B%F{green}%n@%m%b%f%B%F{magenta}${vcs_info_msg_0_}%b%f%F{cyan}➜%f '
-RPROMPT='[%F{cyan}%~%f]'
+PROMPT='%B%F{98}%n@%m%b%f%B%F{125}${vcs_info_msg_0_}%b%f%F{98}➜%f '
+RPROMPT='[%F{98}%~%f]'
 
 # apt-getとかdpkgコマンドをキャッシュを使って速くする
 zstyle ':completion:*' use-cache true
@@ -71,3 +71,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 alias be="bundle exec"
+
+# node
+source $HOME/nvm/nvm.sh
+nvm use v0.10.5

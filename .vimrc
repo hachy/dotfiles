@@ -74,6 +74,11 @@ NeoBundleLazy 'yuratomo/w3m.vim', { 'autoload' : {
       \ 'commands' : ['W3m', 'W3mHistory']
       \ }}
 
+NeoBundleLazy 'slim-template/vim-slim.git', { 'autoload' : {
+      \ 'filetypes' : 'slim'
+      \ }}
+
+NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mattn/zencoding-vim'
@@ -430,8 +435,9 @@ let s:bundle = neobundle#get("vim-quickrun")
 function! s:bundle.hooks.on_source(bundle)
   " let b:quickrun_config = {'outputter/buffer/into': 1}
   let g:quickrun_config = {}
-  let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s'], 'into': 1}
+  let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s'], 'into': 0}
   let g:quickrun_config['ruby'] = {'command' : 'ruby', 'into': 0}
+  let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s'], 'into': 0}
 endfunction
 unlet s:bundle
 
@@ -492,19 +498,6 @@ let g:user_zen_settings = {
 \              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n"
 \              ."</body>\n"
 \              ."</html>",
-\    }
-\  },
-\  'haml': {
-\     'extends': 'html',
-\     'snippets': {
-\       'html:5': "!!! 5\n"
-\               ."%html{:lang => \"${lang}\"}\n"
-\               ."\t%head\n"
-\               ."\t\t%meta{:charset => \"${charset}\"}\n"
-\               ."\t\t%title\n"
-\               ."\t%body\n"
-\               ."\t\t${child}|\n"
-\               ."\t\t%script{:src => \"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"}\n"
 \    }
 \  }
 \}
