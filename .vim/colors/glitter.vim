@@ -1,6 +1,7 @@
 " Vim color file
-" Name   :  glitter
-" Author :  8th
+" Name: glitter
+" Author: 8th
+" License: MIT
 
 set background=dark
 highlight clear
@@ -12,8 +13,8 @@ endif
 let g:colors_name = "glitter"
 
 " General colors"{{{
-hi Normal           guifg=#A8A8A8  guibg=#080808  gui=NONE       ctermfg=248   ctermbg=NONE  cterm=NONE
-hi NonText          guifg=#080808  guibg=NONE     gui=NONE       ctermfg=NONE  ctermbg=NONE  cterm=NONE
+hi Normal           guifg=#B2B2B2  guibg=#080808  gui=NONE       ctermfg=249   ctermbg=NONE  cterm=NONE
+hi NonText          guifg=#5F5F87  guibg=NONE     gui=NONE       ctermfg=60    ctermbg=NONE  cterm=NONE
 hi Directory        guifg=#5FAFD7  guibg=NONE     gui=NONE       ctermfg=74    ctermbg=NONE  cterm=NONE
 hi LineNr           guifg=#444444  guibg=#121212  gui=NONE       ctermfg=238   ctermbg=233   cterm=NONE
 hi Title            guifg=#D75FAF  guibg=NONE     gui=NONE       ctermfg=169   ctermbg=NONE  cterm=NONE
@@ -51,7 +52,7 @@ hi DiffAdd          guifg=#1C1C1C  guibg=#5FAFD7  gui=NONE       ctermfg=234   c
 hi DiffChange       guifg=#1C1C1C  guibg=#D75FAF  gui=NONE       ctermfg=234   ctermbg=169   cterm=NONE
 hi DiffDelete       guifg=#5F5F87  guibg=NONE     gui=NONE       ctermfg=60    ctermbg=NONE  cterm=NONE
 hi DiffText         guifg=#1C1C1C  guibg=#AF005F  gui=NONE       ctermfg=234   ctermbg=125   cterm=NONE
-hi Pmenu            guifg=#A8A8A8  guibg=#444444  gui=NONE       ctermfg=248   ctermbg=238   cterm=NONE
+hi Pmenu            guifg=#B2B2B2  guibg=#444444  gui=NONE       ctermfg=249   ctermbg=238   cterm=NONE
 hi PmenuSel         guifg=#1C1C1C  guibg=#5FAFD7  gui=NONE       ctermfg=234   ctermbg=74    cterm=NONE
 hi PmenuSbar        guifg=NONE     guibg=#1C1C1C  gui=NONE       ctermfg=NONE  ctermbg=234   cterm=NONE
 hi PmenuThumb       guifg=NONE     guibg=#5FAFD7  gui=NONE       ctermfg=NONE  ctermbg=74    cterm=NONE
@@ -102,6 +103,7 @@ hi link htmlEndTag           Function
 hi link htmlSpecialTagName   Number
 hi link htmlArg              Function
 hi link javaScript           Normal
+hi htmlItalic       ctermfg=249  ctermbg=NONE  cterm=NONE
 "}}}
 " XML"{{{
 hi link xmlEndTag            Keyword
@@ -122,7 +124,7 @@ hi link javaScriptNumber             Number
 " Ruby"{{{
 hi rubyRegexp                      guifg=#AF005F  guibg=NONE  gui=bold       ctermfg=125  ctermbg=NONE  cterm=bold
 hi rubyRegexpDelimiter             guifg=#AF005F  guibg=NONE  gui=bold       ctermfg=125  ctermbg=NONE  cterm=bold
-hi rubyIdentifier                  guifg=#A8A8A8  guibg=NONE  gui=bold       ctermfg=248  ctermbg=NONE  cterm=bold
+hi rubyIdentifier                  guifg=#B2B2B2  guibg=NONE  gui=bold       ctermfg=249  ctermbg=NONE  cterm=bold
 hi link rubyConstant               Constant
 hi link rubyFunction               Constant
 hi link rubyKeyword                Number
