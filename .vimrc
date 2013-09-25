@@ -2,6 +2,10 @@ set nocompatible
 
 set runtimepath+=$HOME/.vim,$HOME/.vim/after
 
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
 " neobundle"{{{
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -74,14 +78,10 @@ NeoBundleLazy 'yuratomo/w3m.vim', { 'autoload' : {
       \ 'commands' : ['W3m', 'W3mHistory']
       \ }}
 
-NeoBundleLazy 'slim-template/vim-slim.git', { 'autoload' : {
-      \ 'filetypes' : 'slim'
-      \ }}
-
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'mattn/emmet-vim'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tomtom/tcomment_vim'
@@ -92,7 +92,6 @@ filetype plugin indent on     " Required!
 NeoBundleCheck
 "}}}
 
-"-----------------------------------------------------------------------------
 " Basic"{{{
 if has("syntax")
   syntax on
@@ -111,6 +110,9 @@ set showmatch
 " Show command on statusline
 set showcmd
 set cmdheight=2
+set cmdwinheight=5
+set pumheight=15
+set history=200
 " Show <TAB> and <CR>
 set list
 " Show 'invisible' characters
@@ -128,7 +130,8 @@ set nrformats=alpha,octal,hex
 " Folding
 set foldenable
 set foldmethod=marker
-set foldcolumn=2
+set foldcolumn=0
+autocmd MyAutoCmd FileType vim setlocal foldcolumn=2
 " No backups
 set nobackup
 set noswapfile
@@ -142,8 +145,6 @@ set scrolloff=5
 set completeopt-=preview
 
 " set colorcolumn=85
-
-au! FileType scss syntax cluster sassCssAttributes add=@cssColors
 "}}}
 
 " Color"{{{
@@ -196,11 +197,6 @@ nmap ,c :%s///gn<CR>
 " Statusline"{{{
 set laststatus=2
 set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
-
-" set statusline=
-" set statusline+=%1*\ %<%F\
-" set statusline+=%2*\ %2(\%M%r\ %)
-" set statusline+=%1*\ %=%{fugitive#statusline()}\ %y\ %{''.(&fenc!=''?&fenc:&enc).''}\ %{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
 "}}}
 
 " Keymappings"{{{
@@ -238,13 +234,14 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 " Close help by pressing q.
-autocmd FileType help nnoremap <buffer> q <C-w>c
+autocmd MyAutoCmd FileType help nnoremap <buffer> q <C-w>c
 " コメントアウトが連続して入力されるのを禁止 :a!でも代用可
-autocmd FileType * setlocal formatoptions-=ro
+autocmd MyAutoCmd FileType * setlocal formatoptions-=ro
 " Disable unused keys
-nnoremap ZZ  <Nop>
-noremap q: <Nop>
-noremap q  <Nop>
+nnoremap ZZ <Nop>
+" Disable Ex-mode
+nnoremap Q <Nop>
+nnoremap q <Nop>
 " for tmux prefix key
 nnoremap <C-z> <Nop>
 inoremap <C-z> <Nop>
@@ -253,9 +250,6 @@ vnoremap <C-z> <Nop>
 nnoremap <Space>h :<C-u>vert to h<Space>
 " Visual mode で検索
 vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
-
-" PHP errors check
-map <C-p><C-h><C-p> :!C:\xampp\php\php -l "%"<CR>
 "}}}
 
 " Encoding"{{{
@@ -308,7 +302,7 @@ if has('autocmd')
       let &fileencoding=&encoding
     endif
   endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
+  autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
 endif
 " 改行コードの自動認識
 set fileformats=unix,dos,mac
@@ -335,14 +329,36 @@ if has('syntax')
 endif
 "}}}
 
-"-----------------------------------------------------------------------------
+" Command line"{{{
+nnoremap <SID>(command-line-enter) q:
+xnoremap <SID>(command-line-enter) q:
+nnoremap <SID>(command-line-norange) q:<C-u>
+
+nmap :  <SID>(command-line-enter)
+xmap :  <SID>(command-line-enter)
+
+autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
+function! s:init_cmdwin()
+  nnoremap <buffer> q :<C-u>quit<CR>
+  nnoremap <buffer> <TAB> :<C-u>quit<CR>
+  inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+  inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+  inoremap <buffer><expr><BS> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+
+  " Completion.
+  inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  startinsert!
+endfunction
+"}}}
+
 " Unite.vim"{{{
 let g:unite_data_directory = $HOME.'/.tmp/.unite'
 let s:bundle = neobundle#get("unite.vim")
 function! s:bundle.hooks.on_source(bundle)
   let g:unite_source_file_mru_limit = 200
   " Keymappings for unite.vim
-  autocmd FileType unite call s:unite_my_settings()
+  autocmd MyAutoCmd FileType unite call s:unite_my_settings()
   function! s:unite_my_settings()
     " Escキーを2回押すと終了する
     nmap <silent><buffer> <Esc><Esc> q
@@ -378,17 +394,17 @@ function! s:bundle.hooks.on_source(bundle)
         \ }
 
   " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  " autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  " autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
   " Enable heavy omni completion.
   if !exists('g:neocomplcache_omni_patterns')
     let g:neocomplcache_omni_patterns = {}
   endif
   let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  autocmd MyAutoCmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 endfunction
 unlet s:bundle
 
@@ -456,7 +472,7 @@ function! s:bundle.hooks.on_source(bundle)
   let g:ref_use_vimproc = 1
   let g:ref_open = 'vsplit'
 
-  autocmd FileType ref call s:initialize_ref_viewer()
+  autocmd MyAutoCmd FileType ref call s:initialize_ref_viewer()
   function! s:initialize_ref_viewer()
     nmap <buffer> b <Plug>(ref-back)
     nmap <buffer> f <Plug>(ref-forward)
@@ -480,8 +496,8 @@ nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
 "}}}
 
-" Zencoding snippets"{{{
-let g:user_zen_settings = {
+" emmet snippets"{{{
+let g:user_emmet_settings = {
 \  'indentation' : '  ',
 \  'lang' : 'ja',
 \  'charset': "utf-8",
@@ -519,7 +535,10 @@ map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
 "}}}
-"-----------------------------------------------------------------------------
+
+au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
+autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
+
 " Edit .vimrc .gvimc"{{{
 nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/.vimrc<CR>
 nnoremap <silent> <Space>eg  :<C-u>edit $HOME/dotfiles/.gvimrc<CR>
