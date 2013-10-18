@@ -1,0 +1,13 @@
+snippet scanf
+abbr    scanf("...", ...);
+	scanf("${1}", ${2});
+
+snippet switch
+abbr    switch () {}
+	switch (${1:#:var}) {
+	case ${2:#:val}:
+		${0:TARGET}
+		break;
+	default:
+		${4:#:default}
+	}

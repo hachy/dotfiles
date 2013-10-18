@@ -1,0 +1,46 @@
+snippet des
+alias   describe
+	describe "${1}" do
+		${2}
+	end
+
+snippet con
+alias   context
+	context "${1}" do
+		${2}
+	end
+
+snippet ex
+alias   expect
+	expect(${1}).to ${2}
+
+snippet exb
+	expect { ${1} }.to ${2}
+
+snippet bef
+	before { ${1} }
+
+snippet it
+	it "${1}" do
+		${2}
+	end
+
+snippet is
+	it { should ${1} }
+
+snippet its
+	its(:${1}) { should ${2} }
+
+snippet isn
+	it { should_not ${1} }
+
+snippet let
+	let(:${1:symbol}) { ${2} }
+
+snippet isb
+alias   it_should_behave_like
+abbr    it_should_behave_like
+	it_should_behave_like "${1}"
+
+snippet facc
+	FactoryGirl.create(:${1})
