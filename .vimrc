@@ -66,7 +66,7 @@ NeoBundleLazy 'thinca/vim-ref', { 'autoload' : {
       \ 'filetypes': ['ruby']
       \ }}
 
-NeoBundleLazy 'skammer/vim-css-color', { 'autoload' : {
+NeoBundleLazy 'ap/vim-css-color', { 'autoload' : {
       \ 'filetypes' : ['css', 'scss']
       \ }}
 
@@ -76,6 +76,10 @@ NeoBundleLazy 'glidenote/memolist.vim', { 'autoload' : {
 
 NeoBundleLazy 'yuratomo/w3m.vim', { 'autoload' : {
       \ 'commands' : ['W3m', 'W3mHistory']
+      \ }}
+
+NeoBundleLazy 'vim-jp/vimdoc-ja', { 'autoload' : {
+      \ 'filetype' : 'help',
       \ }}
 
 NeoBundle 'tpope/vim-markdown'
@@ -105,6 +109,7 @@ set shiftwidth=2
 set expandtab
 set smarttab
 set autoindent
+set smartindent
 " Highlight parenthesis
 set showmatch
 " Show command on statusline
@@ -144,6 +149,7 @@ set scrolloff=5
 " neosnippet で変なの出さない
 set completeopt-=preview
 
+set helpheight=30
 " set colorcolumn=85
 "}}}
 
@@ -356,7 +362,7 @@ endfunction
 let g:unite_data_directory = $HOME.'/.tmp/.unite'
 let s:bundle = neobundle#get("unite.vim")
 function! s:bundle.hooks.on_source(bundle)
-  let g:unite_source_file_mru_limit = 200
+  let g:unite_source_file_mru_limit = 300
   " Keymappings for unite.vim
   autocmd MyAutoCmd FileType unite call s:unite_my_settings()
   function! s:unite_my_settings()
@@ -526,8 +532,7 @@ source $VIMRUNTIME/macros/matchit.vim
 " memolist"{{{
 let s:bundle = neobundle#get("memolist.vim")
 function! s:bundle.hooks.on_source(bundle)
-  let g:memolist_vimfiler = 1
-  let g:memolist_vimfiler_option = ""
+  let g:memolist_unite = 1
 endfunction
 unlet s:bundle
 
@@ -536,7 +541,7 @@ map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
 "}}}
 
-au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
+" au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 
 " Edit .vimrc .gvimc"{{{
