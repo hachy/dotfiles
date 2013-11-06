@@ -425,6 +425,9 @@ imap <C-o> <Plug>(neosnippet_expand_or_jump)
 smap <C-o> <Plug>(neosnippet_expand_or_jump)
 " Define directory
 let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
+let g:neosnippet#disable_runtime_snippets = {
+      \   'c' : 1
+      \ }
 "}}}
 
 " vimfiler"{{{
