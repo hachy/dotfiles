@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-DOT_FILES=( .gitconfig .gitignore .gvimrc .vimrc .vim .zshrc .gemrc .tmux.conf)
+DOT_FILES=( .gitconfig .gitignore .gitignore_global .gvimrc .vimrc .vim .zshrc .gemrc .tmux.conf )
 
 white="\033[0m"
 magenta="\033[1;35m"

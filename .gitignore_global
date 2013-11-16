@@ -1,0 +1,10 @@
+tags
+
+*.dll
+*.exe
+*.o
+*.so
+
+*.log
+*.sql
+*.sqlite
