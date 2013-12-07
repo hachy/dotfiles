@@ -16,11 +16,11 @@ let g:colors_name = "glitter"
 hi Normal ctermfg=250 ctermbg=NONE cterm=NONE guifg=#BCBCBC guibg=#080808 gui=NONE
 hi NonText ctermfg=119 ctermbg=NONE cterm=NONE guifg=#87FF5F guibg=NONE gui=NONE
 hi Directory ctermfg=157 ctermbg=NONE cterm=NONE guifg=#AFFFAF guibg=NONE gui=NONE
-hi LineNr ctermfg=238 ctermbg=NONE cterm=NONE guifg=#444444 guibg=NONE gui=NONE
+hi LineNr ctermfg=240 ctermbg=NONE cterm=NONE guifg=#585858 guibg=NONE gui=NONE
 hi Title ctermfg=168 ctermbg=NONE cterm=NONE guifg=#D75F87 guibg=NONE gui=NONE
 hi Visual ctermfg=119 ctermbg=97 cterm=NONE guifg=#87FF5F guibg=#875FAF gui=NONE
 hi SpecialKey ctermfg=97 ctermbg=NONE cterm=NONE guifg=#875FAF guibg=NONE gui=NONE
-hi MatchParen ctermfg=15 ctermbg=238 cterm=bold guifg=#FFFFFF guibg=#444444 gui=bold
+hi MatchParen ctermfg=15 ctermbg=240 cterm=bold guifg=#FFFFFF guibg=#585858 gui=bold
 hi Cursor ctermfg=16 ctermbg=119 cterm=NONE guifg=#000000 guibg=#87FF5F gui=NONE
 hi CursorIM ctermfg=NONE ctermbg=162 cterm=NONE guifg=NONE guibg=#D70087 gui=NONE
 hi CursorLine ctermfg=NONE ctermbg=235 cterm=NONE guifg=NONE guibg=#262626 gui=NONE
@@ -111,6 +111,7 @@ hi link xmlEndTag Keyword
 hi link javaScriptIdentifier Type
 hi link javaScriptDOMMethods Normal
 hi link javaScriptNumber Number
+hi link javaScriptParens Preproc
 "}}}
 " Ruby"{{{
 hi rubyRegexp ctermfg=162 ctermbg=NONE cterm=bold guifg=#D70087 guibg=NONE gui=bold
@@ -135,9 +136,10 @@ hi link erubyDelimiter Special
 hi link pythonFunction Constant
 "}}}
 " CoffeeScript"{{{
-hi link coffeeObjAssign Preproc
-hi link coffeeBlock Normal
+hi link coffeeBlock Preproc
 hi link coffeeSpecialIdent Normal
+hi link coffeeObject Constant
+hi link coffeeSpecialIdent Number
 "}}}
 " php"{{{
 hi link phpParent Normal
