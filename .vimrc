@@ -215,7 +215,17 @@ inoremap <silent><expr><C-h> pumvisible() ? "\<C-y>\<Left>" : "\<Left>"
 inoremap <silent><expr><C-j> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
 inoremap <silent><expr><C-k> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
 inoremap <silent><expr><C-l> pumvisible() ? "\<C-y>\<Right>" : "\<Right>"
-inoremap <C-d> <delete>
+inoremap <C-d> <Del>
+inoremap <silent><C-a> <C-o>^
+
+" command-line mode
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-d> <Del>
+cnoremap <C-e> <End>
+cnoremap <C-f> <Right>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
 
 nnoremap <C-Space> <PageDown>
 nnoremap <S-Space> <PageUp>
@@ -494,7 +504,7 @@ function! s:bundle.hooks.on_source(bundle)
 endfunction
 unlet s:bundle
 
-nmap ,rr :<C-u>Ref refe<Space>
+nnoremap ,rr :<C-u>Ref refe<Space>
 "}}}
 
 " fugitive"{{{
