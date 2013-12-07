@@ -1,9 +1,9 @@
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export TERM="xterm-256color"
-bindkey -v
+bindkey -e
 # 補完
-autoload -U compinit
+autoload -Uz compinit
 compinit
 # 大小文字を区別しない
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -21,15 +21,27 @@ setopt nolistbeep
 # git
 setopt prompt_subst
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '(%b)'
+autoload -Uz add-zsh-hook
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats '(%b)%m'
 zstyle ':vcs_info:*' actionformats '(%b|%a)'
 zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
-precmd () { vcs_info }
+zstyle ':vcs_info:git*+set-message:*' hooks git-stash
+add-zsh-hook precmd () { vcs_info }
+
+function +vi-git-stash() {
+  local -a stashes
+
+  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+    stashes=$(git stash list 2>/dev/null | wc -l)
+    hook_com[misc]+="%F{197}[${stashes} stashed]%f"
+  fi
+}
 
 # prompt
-autoload -U colors
+autoload -Uz colors
 colors
-PROMPT='%B%F{98}%n@%m%b%f%B%F{125}${vcs_info_msg_0_}%b%f%F{98}➜%f '
+PROMPT='%B%F{98}%n@%m%b%f%B%F{209}${vcs_info_msg_0_}%b%f%F{98}➜%f '
 RPROMPT='[%F{98}%~%f]'
 
 # apt-getとかdpkgコマンドをキャッシュを使って速くする
@@ -73,5 +85,12 @@ eval "$(rbenv init -)"
 alias be="bundle exec"
 
 # node
-source $HOME/nvm/nvm.sh
-nvm use v0.10.5
+source ~/.nvm/nvm.sh
+nvm use v0.10.20
+
+# z
+source ~/z/z.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
