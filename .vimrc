@@ -255,6 +255,9 @@ vnoremap <C-z> <Nop>
 nnoremap <Space>h :<C-u>vert to h<Space>
 " Visual mode で検索
 vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
+
+" preview current html file
+nnoremap <Leader>W :silent !xdg-open %:p &<CR>
 "}}}
 
 " Encoding"{{{

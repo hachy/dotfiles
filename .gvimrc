@@ -35,8 +35,6 @@ nnoremap <silent> <F2> :<C-u>if &guioptions =~# 'm' <Bar>
       \else <Bar>
       \set guioptions+=m <Bar>
       \endif <CR>
-" 現在のファイルをブラウザで開く（firefox)
-noremap <Leader>W :silent :! start firefox.exe %<CR>
 
 " " Statusline - changes colors depending on insert mode"{{{
 " function! DefaultStatusline()
