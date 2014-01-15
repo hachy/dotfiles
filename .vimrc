@@ -13,8 +13,8 @@ endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimproc', {
+
+NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
       \     'cygwin' : 'make -f make_cygwin.mak',
@@ -23,71 +23,85 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 
-NeoBundle 'Shougo/neocomplcache'
-call neobundle#config('neocomplcache', {
-      \ 'lazy' : 1,
-      \ 'autoload' : {
-      \   'insert' : 1,
-      \ }})
-
-NeoBundle 'Shougo/unite.vim'
-call neobundle#config('unite.vim',{
-      \ 'lazy' : 1,
+NeoBundleLazy 'Shougo/unite.vim', {
       \ 'autoload' : {
       \   'commands' : [{ 'name' : 'Unite',
       \                   'complete' : 'customlist,unite#complete_source'}]
-      \ }})
+      \ }}
 
-NeoBundle 'Shougo/vimfiler'
-call neobundle#config('vimfiler', {
-      \ 'lazy' : 1,
+NeoBundleLazy 'Shougo/vimfiler.vim', {
       \ 'depends' : 'Shougo/unite.vim',
       \ 'autoload' : {
       \    'commands' : [{ 'name' : 'VimFiler',
       \                    'complete' : 'customlist,vimfiler#complete' },
-      \                    'VimFilerExplorer', 'VimFilerCreate']
-      \ }})
+      \                  'VimFilerExplorer'],
+      \    'mappings' : ['<Plug>(vimfiler_'],
+      \    'explorer' : 1,
+      \ }}
 
-NeoBundle 'Shougo/vimshell'
-call neobundle#config('vimshell', {
-      \ 'lazy' : 1,
+NeoBundleLazy 'Shougo/vimshell.vim',{
+      \ 'depends' : 'Shougo/vimproc.vim',
       \ 'autoload' : {
       \   'commands' : [{ 'name' : 'VimShell',
       \                   'complete' : 'customlist,vimshell#complete'},
-      \                   'VimShellPop']
-      \ }})
-
-NeoBundleLazy 'thinca/vim-quickrun', { 'autoload' : {
-      \ 'mappings': '<Plug>(quickrun)'
+      \                 'VimShellExecute', 'VimShellInteractive',
+      \                 'VimShellTerminal', 'VimShellPop'],
+      \   'mappings' : ['<Plug>(vimshell_']
       \ }}
 
-NeoBundleLazy 'thinca/vim-ref', { 'autoload' : {
+NeoBundleLazy 'Shougo/neocomplete.vim', {
+      \ 'autoload' : {
+      \   'insert' : 1
+      \ }}
+
+NeoBundleLazy 'Shougo/neosnippet.vim', {
+      \ 'autoload' : {
+      \   'insert' : 1,
+      \ }}
+
+NeoBundleLazy 'thinca/vim-quickrun', {
+      \ 'mappings' : '<Plug>(quickrun)'
+      \ }
+
+NeoBundleLazy 'thinca/vim-ref', {
       \ 'commands' : 'Ref',
-      \ 'filetypes': ['ruby']
-      \ }}
+      \ 'filetypes' : ['ruby']
+      \ }
 
-NeoBundleLazy 'ap/vim-css-color', { 'autoload' : {
+NeoBundleLazy 'h1mesuke/unite-outline', {
+      \ 'unite_sources' : 'outline',
+      \ }
+
+NeoBundleLazy 'mattn/emmet-vim', {
+      \ 'filetypes': ['html', 'eruby'],
+      \ }
+
+NeoBundleLazy 'ap/vim-css-color', {
       \ 'filetypes' : ['css', 'scss']
-      \ }}
+      \ }
 
-NeoBundleLazy 'glidenote/memolist.vim', { 'autoload' : {
+NeoBundleLazy 'pangloss/vim-javascript', {
+      \ 'filetypes' : 'javascript'
+      \ }
+
+NeoBundleLazy 'kchmck/vim-coffee-script', {
+      \ 'filetypes' : 'coffee'
+      \ }
+
+NeoBundleLazy 'glidenote/memolist.vim', {
       \ 'commands' : ['MemoNew', 'MemoList', 'MemoGrep']
-      \ }}
+      \ }
 
-NeoBundleLazy 'yuratomo/w3m.vim', { 'autoload' : {
+NeoBundleLazy 'yuratomo/w3m.vim', {
       \ 'commands' : ['W3m', 'W3mHistory']
-      \ }}
+      \ }
 
-NeoBundleLazy 'vim-jp/vimdoc-ja', { 'autoload' : {
-      \ 'filetype' : 'help',
-      \ }}
+NeoBundleLazy 'vim-jp/vimdoc-ja', {
+      \ 'filetypes' : 'help',
+      \ }
 
-NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tomtom/tcomment_vim'
 
 filetype plugin indent on     " Required!
@@ -145,6 +159,11 @@ set virtualedit=block
 
 set textwidth=0
 set scrolloff=5
+
+set splitright
+set splitbelow
+
+set clipboard=unnamedplus,autoselect
 
 " neosnippet で変なの出さない
 set completeopt-=preview
@@ -273,62 +292,62 @@ nnoremap <Leader>W :silent !xdg-open %:p &<CR>
 " Encoding"{{{
 set encoding=utf-8
 
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
-"}}}
+" if &encoding !=# 'utf-8'
+"   set encoding=japan
+"   set fileencoding=japan
+" endif
+" if has('iconv')
+"   let s:enc_euc = 'euc-jp'
+"   let s:enc_jis = 'iso-2022-jp'
+"   " iconvがeucJP-msに対応しているかをチェック
+"   if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+"     let s:enc_euc = 'eucjp-ms'
+"     let s:enc_jis = 'iso-2022-jp-3'
+"   " iconvがJISX0213に対応しているかをチェック
+"   elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+"     let s:enc_euc = 'euc-jisx0213'
+"     let s:enc_jis = 'iso-2022-jp-3'
+"   endif
+"   " fileencodingsを構築
+"   if &encoding ==# 'utf-8'
+"     let s:fileencodings_default = &fileencodings
+"     let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+"     let &fileencodings = &fileencodings .','. s:fileencodings_default
+"     unlet s:fileencodings_default
+"   else
+"     let &fileencodings = &fileencodings .','. s:enc_jis
+"     set fileencodings+=utf-8,ucs-2le,ucs-2
+"     if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+"       set fileencodings+=cp932
+"       set fileencodings-=euc-jp
+"       set fileencodings-=euc-jisx0213
+"       set fileencodings-=eucjp-ms
+"       let &encoding = s:enc_euc
+"       let &fileencoding = s:enc_euc
+"     else
+"       let &fileencodings = &fileencodings .','. s:enc_euc
+"     endif
+"   endif
+"   " 定数を処分
+"   unlet s:enc_euc
+"   unlet s:enc_jis
+" endif
+" " 日本語を含まない場合は fileencoding に encoding を使うようにする
+" if has('autocmd')
+"   function! AU_ReCheck_FENC()
+"     if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+"       let &fileencoding=&encoding
+"     endif
+"   endfunction
+"   autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
+" endif
+" " 改行コードの自動認識
+" set fileformats=unix,dos,mac
+" " □とか○の文字があってもカーソル位置がずれないようにする
+" if exists('&ambiwidth')
+"   set ambiwidth=double
+" endif
+" "}}}
 
 " 全角スペースを強調表示"{{{
 function! ZenkakuSpace()
@@ -360,7 +379,6 @@ function! s:init_cmdwin()
   nnoremap <buffer> q :<C-u>quit<CR>
   nnoremap <buffer> <TAB> :<C-u>quit<CR>
   inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-  inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
   inoremap <buffer><expr><BS> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
 
   " Completion.
@@ -374,6 +392,9 @@ endfunction
 let g:unite_data_directory = $HOME.'/.tmp/.unite'
 let s:bundle = neobundle#get("unite.vim")
 function! s:bundle.hooks.on_source(bundle)
+  let g:unite_split_rule = 'botright'
+  let g:unite_winwidth = 35
+  let g:unite_winheight = 15
   let g:unite_source_file_mru_limit = 300
   " Keymappings for unite.vim
   autocmd MyAutoCmd FileType unite call s:unite_my_settings()
@@ -389,63 +410,48 @@ nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> ,uo :<C-u>Unite outline<CR>
+nnoremap <silent> ,uo :<C-u>Unite -vertical -no-quit outline<CR>
 nnoremap <silent> ,ur :<C-u>Unite history/yank -buffer-name=register register<CR>
 "}}}
 
-" neocomplcache"{{{
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_temporary_dir = $HOME.'/.tmp/.neocon'
+" neocomplete.vim"{{{
+let g:neocomplete#enable_at_startup = 1
 
-let s:bundle = neobundle#get("neocomplcache")
+let s:bundle = neobundle#get("neocomplete.vim")
 function! s:bundle.hooks.on_source(bundle)
-  " Use underbar completion.
-  let g:neocomplcache_enable_underbar_completion = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplcache_min_syntax_length = 3
-  " Define dictionary.
-  let g:neocomplcache_dictionary_filetype_lists = {
-        \ 'default' : '',
-        \ 'ruby' : expand('$HOME/.vim/dict/ruby.dict'),
-        \ 'javascript' : expand('$HOME/.vim/dict/jquery.dict'),
-        \ 'css' : expand('$HOME/.vim/dict/css3.dict'),
-        \ }
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
 
-  " Enable omni completion.
-  autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  " autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  " autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  endfunction
 
-  " Enable heavy omni completion.
-  if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-  endif
-  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  autocmd MyAutoCmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 endfunction
 unlet s:bundle
-
-" Keymappings for neocomplchace (and neosnippet?)
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<Up>" : "\<S-Tab>"
 "}}}
 
-" neosnippet"{{{
-" Keymappings for neosnippet
-imap <C-o> <Plug>(neosnippet_expand_or_jump)
-smap <C-o> <Plug>(neosnippet_expand_or_jump)
-" Define directory
-let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
-let g:neosnippet#disable_runtime_snippets = {
-      \   'c' : 1
-      \ }
+" neosnippet.vim"{{{
+let s:bundle = neobundle#get("neosnippet.vim")
+function! s:bundle.hooks.on_source(bundle)
+  " Keymappings for neosnippet
+  imap <C-o> <Plug>(neosnippet_expand_or_jump)
+  smap <C-o> <Plug>(neosnippet_expand_or_jump)
+  " Define directory
+  let g:neosnippet#snippets_directory = $HOME.'/.vim/snippets'
+  let g:neosnippet#disable_runtime_snippets = {
+        \   'c' : 1
+        \ }
+endfunction
+unlet s:bundle
 "}}}
 
-" vimfiler"{{{
+" vimfiler.vim"{{{
 let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
-let s:bundle = neobundle#get("vimfiler")
+let s:bundle = neobundle#get("vimfiler.vim")
 function! s:bundle.hooks.on_source(bundle)
   let g:vimfiler_safe_mode_by_default = 0
   let g:vimfiler_as_default_explorer = 1
@@ -453,12 +459,12 @@ function! s:bundle.hooks.on_source(bundle)
 endfunction
 unlet s:bundle
 
-nnoremap <Space>vf :<C-u>VimFiler<CR>
+nnoremap <Space>vf :<C-u>VimFiler -status<CR>
 "}}}
 
-" vimshell"{{{
+" vimshell.vim"{{{
 let g:vimshell_temporary_directory = $HOME.'/.tmp/.vimshell'
-let s:bundle = neobundle#get("vimshell")
+let s:bundle = neobundle#get("vimshell.vim")
 function! s:bundle.hooks.on_source(bundle)
   let g:vimshell_prompt = '$ '
 endfunction
@@ -467,7 +473,7 @@ unlet s:bundle
 nnoremap <Space>vs :VimShell<CR>
 "}}}
 
-" quickrun"{{{
+" vim-quickrun"{{{
 let s:bundle = neobundle#get("vim-quickrun")
 function! s:bundle.hooks.on_source(bundle)
   " let b:quickrun_config = {'outputter/buffer/into': 1}
@@ -511,40 +517,41 @@ nnoremap ,rr :<C-u>Ref refe<Space>
 nnoremap <Space>gd :<C-u>Gdiff<Enter>
 nnoremap <Space>gs :<C-u>Gstatus<Enter>
 nnoremap <Space>gl :<C-u>Glog<Enter>
-nnoremap <Space>ga :<C-u>Gwrite<Enter>
-nnoremap <Space>gc :<C-u>Gcommit<Enter>
-nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
 "}}}
 
-" emmet snippets"{{{
-let g:user_emmet_settings = {
-\  'indentation' : '  ',
-\  'lang' : 'ja',
-\  'charset': "utf-8",
-\  'html': {
-\    'snippets': {
-\      'html:5': "<!DOCTYPE html>\n"
-\              ."<html lang=\"${lang}\">\n"
-\              ."<head>\n"
-\              ."    <meta charset=\"${charset}\">\n"
-\              ."    <title></title>\n"
-\              ."    <link rel=\"stylesheet\" href=\"reset.css\">\n"
-\              ."</head>\n"
-\              ."<body>\n${child}|\n"
-\              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n"
-\              ."</body>\n"
-\              ."</html>",
-\    }
-\  }
-\}
+" emmet-vim"{{{
+let s:bundle = neobundle#get("emmet-vim")
+function! s:bundle.hooks.on_source(bundle)
+  let g:user_emmet_settings = {
+        \  'indentation' : '  ',
+        \  'lang' : 'ja',
+        \  'charset': "utf-8",
+        \  'html': {
+        \    'snippets': {
+        \      'html:5': "<!DOCTYPE html>\n"
+        \              ."<html lang=\"${lang}\">\n"
+        \              ."<head>\n"
+        \              ."    <meta charset=\"${charset}\">\n"
+        \              ."    <title></title>\n"
+        \              ."    <link rel=\"stylesheet\" href=\"reset.css\">\n"
+        \              ."</head>\n"
+        \              ."<body>\n${child}|\n"
+        \              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n"
+        \              ."</body>\n"
+        \              ."</html>",
+        \    }
+        \  }
+        \}
+endfunction
+unlet s:bundle
 "}}}
 
 " matchit.vim"{{{
 source $VIMRUNTIME/macros/matchit.vim
 "}}}
 
-" memolist"{{{
+" memolist.vim "{{{
 let s:bundle = neobundle#get("memolist.vim")
 function! s:bundle.hooks.on_source(bundle)
   let g:memolist_unite = 1
