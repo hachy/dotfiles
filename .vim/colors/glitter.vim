@@ -1,6 +1,6 @@
 " Vim color file
 " Name: glitter
-" Author: 8th
+" Author: hachy
 " License: MIT
 
 set background=dark
