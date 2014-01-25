@@ -100,6 +100,7 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {
       \ 'filetypes' : 'help',
       \ }
 
+NeoBundle 'hachy/eva01.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tomtom/tcomment_vim'
@@ -174,8 +175,8 @@ set helpheight=30
 
 " Color"{{{
 set t_Co=256
-colorscheme glitter
 set background=dark
+colorscheme eva01
 if has('win32')
   gui
   set transparency=240

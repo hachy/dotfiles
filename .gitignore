@@ -13,9 +13,7 @@
 !/README.md
 !/setup.sh
 
-/.vim/colors/*
-!/.vim/colors/glitter.vim
-
 # ignore
 /.vim/bundle
+/.vim/colors
 /.vim/.netrwhist
