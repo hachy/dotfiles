@@ -73,7 +73,7 @@ NeoBundleLazy 'h1mesuke/unite-outline', {
       \ }
 
 NeoBundleLazy 'mattn/emmet-vim', {
-      \ 'filetypes': ['html', 'eruby'],
+      \ 'filetypes': ['html', 'haml', 'eruby'],
       \ }
 
 NeoBundleLazy 'ap/vim-css-color', {
@@ -101,6 +101,14 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {
       \ }
 
 NeoBundle 'hachy/eva01.vim'
+
+NeoBundle 'itchyny/lightline.vim'
+
+NeoBundle 'gist:hachy/8611409', {
+      \ 'name': 'lightline-eva01.vim',
+      \ 'script_type': 'plugin'
+      \ }
+
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tomtom/tcomment_vim'
@@ -112,6 +120,8 @@ NeoBundleCheck
 "}}}
 
 " Basic"{{{
+set encoding=utf-8
+
 if has("syntax")
   syntax on
 endif
@@ -119,8 +129,9 @@ set ruler
 set cursorline
 set title
 set number
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
+set softtabstop=2
 set expandtab
 set smarttab
 set autoindent
@@ -221,7 +232,7 @@ nmap ,c :%s///gn<CR>
 
 " Statusline"{{{
 set laststatus=2
-set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
+" set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
 "}}}
 
 " Keymappings"{{{
@@ -289,66 +300,6 @@ vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><C
 " preview current html file
 nnoremap <Leader>W :silent !xdg-open %:p &<CR>
 "}}}
-
-" Encoding"{{{
-set encoding=utf-8
-
-" if &encoding !=# 'utf-8'
-"   set encoding=japan
-"   set fileencoding=japan
-" endif
-" if has('iconv')
-"   let s:enc_euc = 'euc-jp'
-"   let s:enc_jis = 'iso-2022-jp'
-"   " iconvがeucJP-msに対応しているかをチェック
-"   if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-"     let s:enc_euc = 'eucjp-ms'
-"     let s:enc_jis = 'iso-2022-jp-3'
-"   " iconvがJISX0213に対応しているかをチェック
-"   elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-"     let s:enc_euc = 'euc-jisx0213'
-"     let s:enc_jis = 'iso-2022-jp-3'
-"   endif
-"   " fileencodingsを構築
-"   if &encoding ==# 'utf-8'
-"     let s:fileencodings_default = &fileencodings
-"     let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-"     let &fileencodings = &fileencodings .','. s:fileencodings_default
-"     unlet s:fileencodings_default
-"   else
-"     let &fileencodings = &fileencodings .','. s:enc_jis
-"     set fileencodings+=utf-8,ucs-2le,ucs-2
-"     if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-"       set fileencodings+=cp932
-"       set fileencodings-=euc-jp
-"       set fileencodings-=euc-jisx0213
-"       set fileencodings-=eucjp-ms
-"       let &encoding = s:enc_euc
-"       let &fileencoding = s:enc_euc
-"     else
-"       let &fileencodings = &fileencodings .','. s:enc_euc
-"     endif
-"   endif
-"   " 定数を処分
-"   unlet s:enc_euc
-"   unlet s:enc_jis
-" endif
-" " 日本語を含まない場合は fileencoding に encoding を使うようにする
-" if has('autocmd')
-"   function! AU_ReCheck_FENC()
-"     if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-"       let &fileencoding=&encoding
-"     endif
-"   endfunction
-"   autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
-" endif
-" " 改行コードの自動認識
-" set fileformats=unix,dos,mac
-" " □とか○の文字があってもカーソル位置がずれないようにする
-" if exists('&ambiwidth')
-"   set ambiwidth=double
-" endif
-" "}}}
 
 " 全角スペースを強調表示"{{{
 function! ZenkakuSpace()
@@ -426,7 +377,7 @@ function! s:bundle.hooks.on_source(bundle)
   " <CR>: close popup and save indent.
   inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
   function! s:my_cr_function()
-    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+    return neocomplete#close_popup() . "\<CR>"
   endfunction
 
   inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -564,8 +515,48 @@ map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
 "}}}
 
+" lightline.vim"{{{
+let g:lightline = {
+      \ 'colorscheme': 'eva01',
+      \ 'active': {
+      \   'left': [['mode', 'paste'], ['fugitive', 'readonly', 'filename', 'modified']]
+      \ },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+      \ }
+
+function! MyReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! MyFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? ' '._ : ''
+  endif
+  return ''
+endfunction
+"}}}
+
 " au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
+autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+
+if $GOROOT != ''
+  set rtp+=$GOROOT/misc/vim
+  exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+  " set completeopt=menu,preview
+endif
+
+autocmd MyAutoCmd BufNewFile,BufRead *.go set filetype=go
+autocmd MyAutoCmd BufWritePre *.go Fmt
 
 " Edit .vimrc .gvimc"{{{
 nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/.vimrc<CR>

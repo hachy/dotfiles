@@ -62,7 +62,11 @@ setopt share_history
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
+alias vi='vim'
 alias -g G='| grep'
+
+# https://gist.github.com/sos4nt/3187620
+export TERM=xterm-256color-italic
 
 # man
 export MANPAGER='less -R'
@@ -86,7 +90,6 @@ alias be="bundle exec"
 
 # node
 source ~/.nvm/nvm.sh
-nvm use v0.10.20
 
 # z
 source ~/z/z.sh
@@ -94,3 +97,7 @@ source ~/z/z.sh
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+# go
+export GOROOT="/usr/local/go"
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin
