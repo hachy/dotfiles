@@ -29,6 +29,8 @@ NeoBundleLazy 'Shougo/unite.vim', {
       \                   'complete' : 'customlist,unite#complete_source'}]
       \ }}
 
+NeoBundle 'Shougo/neomru.vim'
+
 NeoBundleLazy 'Shougo/vimfiler.vim', {
       \ 'depends' : 'Shougo/unite.vim',
       \ 'autoload' : {
@@ -364,6 +366,7 @@ nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,uo :<C-u>Unite -vertical -no-quit outline<CR>
 nnoremap <silent> ,ur :<C-u>Unite history/yank -buffer-name=register register<CR>
+nnoremap <silent> ,ug :<C-u>Unite -no-quit grep<CR>
 "}}}
 
 " neocomplete.vim"{{{
