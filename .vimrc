@@ -111,6 +111,7 @@ NeoBundle 'gist:hachy/8611409', {
       \ 'script_type': 'plugin'
       \ }
 
+NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tomtom/tcomment_vim'
@@ -581,6 +582,12 @@ endfunction
 function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+"}}}
+
+" syntastic"{{{
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
 "}}}
 
 " au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
