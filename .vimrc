@@ -184,6 +184,9 @@ set clipboard=unnamedplus,autoselect
 set completeopt-=preview
 
 set helpheight=30
+
+set pastetoggle=<F10>
+
 " set colorcolumn=85
 "}}}
 

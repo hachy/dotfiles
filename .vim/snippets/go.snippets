@@ -1,0 +1,48 @@
+snippet helloworld
+abbr    package main\nimport fmt...
+options head
+	package main
+
+	import (
+		"fmt"
+	)
+
+	func main() {
+		fmt.Printf("Hello, world\n")
+	}
+
+snippet package
+options head
+	package ${1:main}
+
+snippet import
+options head
+	import (
+		"${1:fmt}"
+	)
+
+snippet func
+abbr    func ...() { ... }
+options head
+	func ${1:fname}(${2}) ${3:int }{
+		${0:TARGET:return }
+	}
+
+snippet printf
+options word
+	fmt.Printf("${1}\n", ${2:})
+
+snippet println
+options word
+	fmt.Println(${0:TARGET})
+
+snippet if
+	if ${1:#:condition} {
+		${2:TARGET}
+	}
+
+snippet for
+abbr    for {}
+	for ${1} := 0; $1 < ${2}; $1++ {
+		${0:TARGET}
+	}

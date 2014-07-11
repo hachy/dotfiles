@@ -1,12 +1,12 @@
 snippet des
 alias   describe
-	describe "${1}" do
+	describe '${1}' do
 		${2}
 	end
 
 snippet con
 alias   context
-	context "${1}" do
+	context '${1}' do
 		${2}
 	end
 
@@ -21,7 +21,7 @@ snippet bef
 	before { ${1} }
 
 snippet it
-	it "${1}" do
+	it '${1}' do
 		${2}
 	end
 
@@ -40,7 +40,7 @@ snippet let
 snippet isb
 alias   it_should_behave_like
 abbr    it_should_behave_like
-	it_should_behave_like "${1}"
+	it_should_behave_like '${1}'
 
 snippet facc
 	FactoryGirl.create(:${1})

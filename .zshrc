@@ -65,9 +65,6 @@ bindkey '^N' history-beginning-search-forward
 alias vi='vim'
 alias -g G='| grep'
 
-# https://gist.github.com/sos4nt/3187620
-export TERM=xterm-256color-italic
-
 # man
 export MANPAGER='less -R'
 man() {
@@ -83,7 +80,7 @@ man() {
 }
 
 # Created by newuser for 5.0.0
-export PATH="$HOME/.rbenv/bin:$PATH"
+# export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 alias be="bundle exec"
@@ -100,4 +97,21 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # go
 export GOROOT="/usr/local/go"
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
+
+# peco
+function peco-select-history() {
+  local tac
+  if which tac > /dev/null; then
+      tac="tac"
+  else
+      tac="tail -r"
+  fi
+  BUFFER=$(history -n 1 | eval $tac | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
