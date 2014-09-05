@@ -103,14 +103,6 @@ NeoBundleLazy 'vim-jp/vimdoc-ja', {
       \ }
 
 NeoBundle 'hachy/eva01.vim'
-
-NeoBundle 'itchyny/lightline.vim'
-
-NeoBundle 'gist:hachy/8611409', {
-      \ 'name': 'lightline-eva01.vim',
-      \ 'script_type': 'plugin'
-      \ }
-
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
@@ -186,6 +178,7 @@ set completeopt-=preview
 set helpheight=30
 
 set pastetoggle=<F10>
+autocmd MyAutoCmd InsertLeave * set nopaste
 
 " set colorcolumn=85
 "}}}
@@ -238,7 +231,7 @@ nmap ,c :%s///gn<CR>
 
 " Statusline"{{{
 set laststatus=2
-" set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
+set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
 "}}}
 
 " Keymappings"{{{
@@ -514,77 +507,15 @@ source $VIMRUNTIME/macros/matchit.vim
 let s:bundle = neobundle#get("memolist.vim")
 function! s:bundle.hooks.on_source(bundle)
   let g:memolist_unite = 1
+  let g:memolist_memo_date = '%Y-%m-%d'
+  let g:memolist_memo_suffix = 'markdown'
+  let g:memolist_template_dir_path = '~/.vim/template'
 endfunction
 unlet s:bundle
 
 map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
-"}}}
-
-" lightline.vim"{{{
-let g:lightline = {
-      \ 'colorscheme': 'eva01',
-      \ 'active': {
-      \   'left': [['mode', 'paste'], ['fugitive', 'readonly', 'filename']]
-      \ },
-      \ 'component': {
-      \   'lineinfo': ' %3l:%-2v',
-      \ },
-      \ 'component_function': {
-      \   'modified': 'MyModified',
-      \   'readonly': 'MyReadonly',
-      \   'fugitive': 'MyFugitive',
-      \   'filename': 'MyFilename',
-      \   'fileformat': 'MyFileformat',
-      \   'filetype': 'MyFiletype',
-      \   'fileencoding': 'MyFileencoding',
-      \   'mode': 'MyMode',
-      \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-      \ }
-
-function! MyModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! MyReadonly()
-  return &readonly ? '' : ''
-endfunction
-
-function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
-        \  &ft == 'unite' ? unite#get_status_string() : 
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%') ? expand('%') : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-
-function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? ' '._ : ''
-  endif
-  return ''
-endfunction
-
-function! MyFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! MyFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! MyMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
 "}}}
 
 " syntastic"{{{
@@ -605,6 +536,8 @@ endif
 
 autocmd MyAutoCmd BufNewFile,BufRead *.go set filetype=go
 autocmd MyAutoCmd BufWritePre *.go Fmt
+
+let g:markdown_fenced_languages = ['ruby']
 
 " Edit .vimrc .gvimc"{{{
 nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/.vimrc<CR>
