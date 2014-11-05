@@ -79,8 +79,8 @@ man() {
     man "$@"
 }
 
-# Created by newuser for 5.0.0
-# export PATH="$HOME/.rbenv/bin:$PATH"
+# ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 alias be="bundle exec"
@@ -89,7 +89,7 @@ alias be="bundle exec"
 source ~/.nvm/nvm.sh
 
 # z
-source ~/z/z.sh
+# source ~/z/z.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

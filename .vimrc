@@ -10,7 +10,7 @@ augroup END
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -107,6 +107,8 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tomtom/tcomment_vim'
+
+call neobundle#end()
 
 filetype plugin indent on     " Required!
 
@@ -343,14 +345,14 @@ endfunction
 let g:unite_data_directory = $HOME.'/.tmp/.unite'
 let s:bundle = neobundle#get("unite.vim")
 function! s:bundle.hooks.on_source(bundle)
-  let g:unite_split_rule = 'botright'
-  let g:unite_winwidth = 35
-  let g:unite_winheight = 15
-  let g:unite_source_file_mru_limit = 300
-  " Keymappings for unite.vim
+  call unite#custom#profile('default', 'context', {
+        \ 'winwidth': 35,
+        \ 'winheight': 15,
+        \ 'direction': 'botright',
+        \ })
+
   autocmd MyAutoCmd FileType unite call s:unite_my_settings()
   function! s:unite_my_settings()
-    " Escキーを2回押すと終了する
     nmap <silent><buffer> <Esc><Esc> q
     imap <silent><buffer> <Esc><Esc> <Esc>q
   endfunction
@@ -405,9 +407,13 @@ unlet s:bundle
 let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
 let s:bundle = neobundle#get("vimfiler.vim")
 function! s:bundle.hooks.on_source(bundle)
-  let g:vimfiler_safe_mode_by_default = 0
   let g:vimfiler_as_default_explorer = 1
-  let g:vimfiler_edit_action = 'tabopen'
+  call vimfiler#custom#profile('default', 'context', {
+        \ 'safe' : 0,
+        \ 'edit_action' : 'tabopen',
+        \ })
+
+  autocmd MyAutoCmd FileType vimfiler nmap <buffer> o <Plug>(vimfiler_sync_with_current_vimfiler)
 endfunction
 unlet s:bundle
 
@@ -466,7 +472,7 @@ nnoremap ,rr :<C-u>Ref refe<Space>
 "}}}
 
 " fugitive"{{{
-nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gd :<C-u>Gvdiff<Enter>
 nnoremap <Space>gs :<C-u>Gstatus<Enter>
 nnoremap <Space>gl :<C-u>Glog<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
@@ -509,6 +515,7 @@ function! s:bundle.hooks.on_source(bundle)
   let g:memolist_unite = 1
   let g:memolist_memo_date = '%Y-%m-%d'
   let g:memolist_memo_suffix = 'markdown'
+  let g:memolist_path = 'Dropbox/memo'
   let g:memolist_template_dir_path = '~/.vim/template'
 endfunction
 unlet s:bundle
