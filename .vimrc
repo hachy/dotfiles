@@ -434,11 +434,17 @@ nnoremap <Space>vs :VimShell<CR>
 " vim-quickrun"{{{
 let s:bundle = neobundle#get("vim-quickrun")
 function! s:bundle.hooks.on_source(bundle)
-  " let b:quickrun_config = {'outputter/buffer/into': 1}
   let g:quickrun_config = {}
-  let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s'], 'into': 0}
-  let g:quickrun_config['ruby'] = {'command' : 'ruby', 'into': 0}
-  let g:quickrun_config['slim'] = {'command' : 'slimrb', 'exec' : ['%c -p %s'], 'into': 0}
+  let g:quickrun_config.coffee = {'command' : 'coffee', 'exec' : '%c -cbp %s'}
+  let g:quickrun_config.ruby = {'command' : 'ruby'}
+  let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
+  let g:quickrun_config.markdown = {
+        \ 'runner' : 'vimproc',
+        \ 'outputter' : 'null',
+        \ 'command' : 'nw',
+        \ 'args' : '~/Dev/premark.nw',
+        \ 'exec' : '%c %a %s',
+        \ }
 endfunction
 unlet s:bundle
 
@@ -515,7 +521,7 @@ function! s:bundle.hooks.on_source(bundle)
   let g:memolist_unite = 1
   let g:memolist_memo_date = '%Y-%m-%d'
   let g:memolist_memo_suffix = 'markdown'
-  let g:memolist_path = 'Dropbox/memo'
+  let g:memolist_path = $HOME.'/Dropbox/memo'
   let g:memolist_template_dir_path = '~/.vim/template'
 endfunction
 unlet s:bundle
