@@ -106,6 +106,7 @@ NeoBundle 'hachy/eva01.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'tomtom/tcomment_vim'
 
 call neobundle#end()
@@ -535,6 +536,12 @@ map ,mg  :MemoGrep<CR>
 let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
+"}}}
+
+" vim-gitgutter"{{{
+hi GitGutterAdd ctermfg=156 ctermbg=NONE cterm=bold
+hi GitGutterChange ctermfg=179 ctermbg=NONE cterm=bold
+hi GitGutterDelete ctermfg=168 ctermbg=NONE cterm=bold
 "}}}
 
 " au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
