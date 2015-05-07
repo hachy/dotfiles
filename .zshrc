@@ -41,7 +41,7 @@ function +vi-git-stash() {
 # prompt
 autoload -Uz colors
 colors
-PROMPT='%B%F{98}%n@%m%b%f%B%F{209}${vcs_info_msg_0_}%b%f%F{98}➜%f '
+PROMPT='%B%F{98}%n%b%f%B%F{209}${vcs_info_msg_0_}%b%f%F{98}➜%f '
 RPROMPT='[%F{98}%~%f]'
 
 # apt-getとかdpkgコマンドをキャッシュを使って速くする
@@ -62,7 +62,7 @@ setopt share_history
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
-alias vi='vim'
+alias vi='mvim -v'
 alias -g G='| grep'
 
 # man
@@ -86,10 +86,11 @@ eval "$(rbenv init -)"
 alias be="bundle exec"
 
 # node
-source ~/.nvm/nvm.sh
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # z
-# source ~/z/z.sh
+. `brew --prefix`/etc/profile.d/z.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

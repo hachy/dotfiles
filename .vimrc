@@ -94,10 +94,6 @@ NeoBundleLazy 'glidenote/memolist.vim', {
       \ 'commands' : ['MemoNew', 'MemoList', 'MemoGrep']
       \ }
 
-NeoBundleLazy 'yuratomo/w3m.vim', {
-      \ 'commands' : ['W3m', 'W3mHistory']
-      \ }
-
 NeoBundleLazy 'vim-jp/vimdoc-ja', {
       \ 'filetypes' : 'help',
       \ }
@@ -123,6 +119,7 @@ set encoding=utf-8
 if has("syntax")
   syntax on
 endif
+set imdisable
 set ruler
 set cursorline
 set title
