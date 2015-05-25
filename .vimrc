@@ -181,6 +181,10 @@ set pastetoggle=<F10>
 autocmd MyAutoCmd InsertLeave * set nopaste
 
 " set colorcolumn=85
+
+if has('mac')
+  let mapleader = "_"
+endif
 "}}}
 
 " Color"{{{

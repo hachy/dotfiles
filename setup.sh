@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOT_FILES=( .gitconfig .gitignore .gitignore_global .gvimrc .vimrc .vim .zshrc .gemrc .tmux.conf .pryrc )
+DOT_FILES=( .gitconfig .gitignore .gitignore_global .gvimrc .vimrc .vim .zshrc .zshrc.local .gemrc .tmux.conf .pryrc )
 
 reset="\033[0m"
 magenta="\033[1;35m"

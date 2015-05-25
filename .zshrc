@@ -93,7 +93,7 @@ source $(brew --prefix nvm)/nvm.sh
 . `brew --prefix`/etc/profile.d/z.sh
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/bin/heroku:$PATH"
 
 # go
 export GOROOT="/usr/local/go"
