@@ -8,9 +8,13 @@ export PATH=$ANDROID_SDK_ROOT:$PATH
 export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
 
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=$HOME/cocos2d-js-v3.6.1/tools/cocos2d-console/bin
+export COCOS_CONSOLE_ROOT=$HOME/MyLibrary/cocos2d-js-v3.6.1/tools/cocos2d-console/bin
 export PATH=$COCOS_CONSOLE_ROOT:$PATH
 
 # Add environment variable ANT_ROOT for cocos2d-x
 export ANT_ROOT=/usr/local/bin
 export PATH=$ANT_ROOT:$PATH
+
+# genymotion-peco
+export GENYMOTION_APP_HOME=$HOME/Applications/Genymotion.app
+source $HOME/MyLibrary/genymotion-peco/bin/genymotion_peco.sh
