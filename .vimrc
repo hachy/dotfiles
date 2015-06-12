@@ -170,7 +170,11 @@ set scrolloff=5
 set splitright
 set splitbelow
 
-set clipboard=unnamedplus,autoselect
+if has('unnamedplus')
+  set clipboard& clipboard+=unnamedplus
+else
+  set clipboard& clipboard+=unnamed
+endif
 
 " neosnippet で変なの出さない
 set completeopt-=preview
