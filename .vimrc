@@ -189,6 +189,9 @@ autocmd MyAutoCmd InsertLeave * set nopaste
 if has('mac')
   let mapleader = "_"
 endif
+
+let java_highlight_all=1
+let java_highlight_functions="style"
 "}}}
 
 " Color"{{{
