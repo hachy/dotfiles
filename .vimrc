@@ -41,16 +41,6 @@ NeoBundleLazy 'Shougo/vimfiler.vim', {
       \    'explorer' : 1,
       \ }}
 
-NeoBundleLazy 'Shougo/vimshell.vim',{
-      \ 'depends' : 'Shougo/vimproc.vim',
-      \ 'autoload' : {
-      \   'commands' : [{ 'name' : 'VimShell',
-      \                   'complete' : 'customlist,vimshell#complete'},
-      \                 'VimShellExecute', 'VimShellInteractive',
-      \                 'VimShellTerminal', 'VimShellPop'],
-      \   'mappings' : ['<Plug>(vimshell_']
-      \ }}
-
 NeoBundleLazy 'Shougo/neocomplete.vim', {
       \ 'autoload' : {
       \   'insert' : 1
@@ -63,11 +53,6 @@ NeoBundleLazy 'Shougo/neosnippet.vim', {
 
 NeoBundleLazy 'thinca/vim-quickrun', {
       \ 'mappings' : '<Plug>(quickrun)'
-      \ }
-
-NeoBundleLazy 'thinca/vim-ref', {
-      \ 'commands' : 'Ref',
-      \ 'filetypes' : ['ruby']
       \ }
 
 NeoBundleLazy 'h1mesuke/unite-outline', {
@@ -365,6 +350,16 @@ function! s:bundle.hooks.on_source(bundle)
     nmap <silent><buffer> <Esc><Esc> q
     imap <silent><buffer> <Esc><Esc> <Esc>q
   endfunction
+
+  let g:unite_source_grep_max_candidates = 200
+
+  if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+          \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+          \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
+  endif
 endfunction
 unlet s:bundle
 
@@ -375,6 +370,7 @@ nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,uo :<C-u>Unite -vertical -no-quit outline<CR>
 nnoremap <silent> ,ur :<C-u>Unite history/yank -buffer-name=register register<CR>
 nnoremap <silent> ,ug :<C-u>Unite -no-quit grep<CR>
+nnoremap <silent> ,cg :<C-u>UniteWithCursorWord -no-quit grep<CR>
 "}}}
 
 " neocomplete.vim"{{{
@@ -429,17 +425,6 @@ unlet s:bundle
 nnoremap <Space>vf :<C-u>VimFiler -status<CR>
 "}}}
 
-" vimshell.vim"{{{
-let g:vimshell_temporary_directory = $HOME.'/.tmp/.vimshell'
-let s:bundle = neobundle#get("vimshell.vim")
-function! s:bundle.hooks.on_source(bundle)
-  let g:vimshell_prompt = '$ '
-endfunction
-unlet s:bundle
-
-nnoremap <Space>vs :VimShell<CR>
-"}}}
-
 " vim-quickrun"{{{
 let s:bundle = neobundle#get("vim-quickrun")
 function! s:bundle.hooks.on_source(bundle)
@@ -458,32 +443,6 @@ endfunction
 unlet s:bundle
 
 nmap <silent> <Leader>r <Plug>(quickrun)
-"}}}
-
-" vim-ref"{{{
-let s:bundle = neobundle#get('vim-ref')
-function! s:bundle.hooks.on_source(bundle)
-  let g:ref_refe_cmd = $HOME."/rubyref/refe-1_9_3"
-  if has('win32')
-    let g:ref_refe_encoding = 'cp932'
-  else
-    let g:ref_refe_encoding = 'utf-8'
-  endif
-  let g:ref_use_vimproc = 1
-  let g:ref_open = 'vsplit'
-
-  autocmd MyAutoCmd FileType ref call s:initialize_ref_viewer()
-  function! s:initialize_ref_viewer()
-    nmap <buffer> b <Plug>(ref-back)
-    nmap <buffer> f <Plug>(ref-forward)
-    nmap <buffer> <C-t>  :tabnew<CR>
-    nnoremap <buffer> q <C-w>c
-    setlocal nonumber
-  endfunction
-endfunction
-unlet s:bundle
-
-nnoremap ,rr :<C-u>Ref refe<Space>
 "}}}
 
 " fugitive"{{{
