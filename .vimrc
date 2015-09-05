@@ -429,6 +429,9 @@ nnoremap <Space>vf :<C-u>VimFiler -status<CR>
 let s:bundle = neobundle#get("vim-quickrun")
 function! s:bundle.hooks.on_source(bundle)
   let g:quickrun_config = {}
+  let g:quickrun_config._ = {
+        \ 'split' : '%{winwidth(0) * 2 < winheight(0) * 5 ? "botright 8" : "vertical 80"}'
+        \ }
   let g:quickrun_config.coffee = {'command' : 'coffee', 'exec' : '%c -cbp %s'}
   let g:quickrun_config.ruby = {'command' : 'ruby'}
   let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
