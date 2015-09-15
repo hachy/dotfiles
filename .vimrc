@@ -441,9 +441,10 @@ function! s:bundle.hooks.on_source(bundle)
   let g:quickrun_config.markdown = {
         \ 'runner' : 'vimproc',
         \ 'outputter' : 'null',
-        \ 'command' : 'nw',
-        \ 'args' : '~/Dev/premark.nw',
-        \ 'exec' : '%c %a %s',
+        \ 'command' : 'open',
+        \ 'cmdopt' : '-a',
+        \ 'args' : '"Premark" --args',
+        \ 'exec' : '%c %o %a %s',
         \ }
 endfunction
 unlet s:bundle
