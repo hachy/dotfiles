@@ -7,6 +7,32 @@ env:
 
 extends: 'eslint:recommended'
 
+ecmaFeatures:
+  arrowFunctions: true
+  binaryLiterals: true
+  blockBindings: true
+  classes: true
+  defaultParams: true
+  destructuring: true
+  forOf: true
+  generators: true
+  modules: true
+  objectLiteralComputedProperties: true
+  objectLiteralDuplicateProperties: true
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  octalLiterals: true
+  regexUFlag: true
+  regexYFlag: true
+  restParams: true
+  spread: true
+  superInFunctions: true
+  templateStrings: true
+  unicodeCodePointEscapes: true
+  globalReturn: true
+  jsx: true
+  experimentalObjectRestSpread: true
+
 rules:
   # Possible Errors
   comma-dangle: [2, 'never']
@@ -152,7 +178,7 @@ rules:
   quote-props: [2, 'as-needed']
   quotes: [2, 'single']
   semi-spacing: [2, {before: false, after: true}]
-  semi: [2, 'always']
+  semi: [2, 'never']
   sort-vars: 0
   space-after-keywords: [2, 'always']
   space-before-blocks: [2, 'always']
@@ -163,3 +189,21 @@ rules:
   space-unary-ops: 2
   spaced-comment: [2, 'always']
   wrap-regex: 0
+
+  # ECMAScript 6
+  arrow-parens: 2
+  arrow-spacing: [2, {before: true, after: true}]
+  constructor-super: 2
+  generator-star-spacing: [2, {before: false, after: true}]
+  no-class-assign: 2
+  no-const-assign: 2
+  no-dupe-class-members: 2
+  no-this-before-super: 2
+  no-var: 2
+  object-shorthand: 2
+  prefer-arrow-callback: 2
+  prefer-const: 2
+  prefer-spread: 2
+  prefer-reflect: 2
+  prefer-template: 2
+  require-yield: 2
