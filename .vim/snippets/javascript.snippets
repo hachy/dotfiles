@@ -41,3 +41,23 @@ snippet jq
 	$(function() {
 		${1}
 	});
+
+# node
+snippet require
+	var ${1} = require('${2:module_name}');
+
+# es6
+snippet import
+	import ${1} from '${2}'
+
+snippet =>
+	(${1}) => {
+		${2}
+	}
+
+snippet class
+	class ${1:Name} {
+		constructor(${2:arg}) {
+			${0}
+		}
+	}
