@@ -177,6 +177,14 @@ endif
 
 let java_highlight_all=1
 let java_highlight_functions="style"
+
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 "}}}
 
 " Color"{{{
@@ -231,7 +239,6 @@ set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&e
 "}}}
 
 " Keymappings"{{{
-" move
 nnoremap <C-h> <Home>
 vnoremap <C-h> <Home>
 nnoremap <C-l> <End>
@@ -241,10 +248,15 @@ inoremap <silent><expr><C-h> pumvisible() ? "\<C-y>\<Left>" : "\<Left>"
 inoremap <silent><expr><C-j> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
 inoremap <silent><expr><C-k> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
 inoremap <silent><expr><C-l> pumvisible() ? "\<C-y>\<Right>" : "\<Right>"
-inoremap <C-d> <Del>
-inoremap <silent><C-a> <C-o>^
 
-" command-line mode
+inoremap <C-a> <Home>
+inoremap <C-b> <Left>
+inoremap <C-d> <Del>
+inoremap <C-e> <End>
+inoremap <C-f> <Right>
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
+
 cnoremap <C-a> <Home>
 cnoremap <C-b> <Left>
 cnoremap <C-d> <Del>
@@ -253,10 +265,6 @@ cnoremap <C-f> <Right>
 cnoremap <C-n> <Down>
 cnoremap <C-p> <Up>
 
-nnoremap <C-Space> <PageDown>
-nnoremap <S-Space> <PageUp>
-
-" brackets
 inoremap { {}<Left>
 inoremap [ []<Left>
 inoremap ( ()<Left>
