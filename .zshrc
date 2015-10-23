@@ -41,7 +41,8 @@ function +vi-git-stash() {
 # prompt
 autoload -Uz colors
 colors
-PROMPT='%B%F{98}%n%b%f%B%F{209}${vcs_info_msg_0_}%b%f%F{98}➜%f '
+ICON=$'\U2601 '
+PROMPT='%B%F{147}${ICON}%b%f%B%F{209}${vcs_info_msg_0_}%b%f '
 RPROMPT='[%F{98}%~%f]'
 
 # apt-getとかdpkgコマンドをキャッシュを使って速くする
@@ -96,7 +97,7 @@ source $(brew --prefix nvm)/nvm.sh
 export PATH="/usr/local/bin/heroku:$PATH"
 
 # go
-export GOROOT="/usr/local/go"
+# export GOROOT="/usr/local/go"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
