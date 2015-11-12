@@ -33,7 +33,7 @@ function +vi-git-stash() {
   local -a stashes
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
-    stashes=$(git stash list 2>/dev/null | wc -l)
+    stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
     hook_com[misc]+="%F{197}[${stashes} stashed]%f"
   fi
 }
