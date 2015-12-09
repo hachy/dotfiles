@@ -1,6 +1,7 @@
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export TERM="xterm-256color"
+export XDG_CONFIG_HOME='~/.config'
 bindkey -e
 # 補完
 autoload -Uz compinit
@@ -63,7 +64,7 @@ setopt share_history
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
-alias vi='mvim -v'
+alias vi=nvim
 alias -g G='| grep'
 
 # man
