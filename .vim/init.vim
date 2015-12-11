@@ -511,6 +511,7 @@ hi GitGutterDelete ctermfg=168 ctermbg=NONE cterm=bold
 " au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+autocmd MyAutoCmd BufNewFile,BufRead *.{ruby,jbuilder} set filetype=ruby
 
 if $GOROOT != ''
   set rtp+=$GOROOT/misc/vim
