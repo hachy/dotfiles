@@ -20,5 +20,4 @@ export ANT_ROOT=/usr/local/bin
 export PATH=$ANT_ROOT:$PATH
 
 # genymotion-peco
-export GENYMOTION_APP_HOME=$HOME/Applications/Genymotion.app
 source $HOME/MyLibrary/genymotion-peco/bin/genymotion_peco.sh
