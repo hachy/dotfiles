@@ -4,97 +4,38 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-" neobundle"{{{
+" vim-plug"{{{
 if has('vim_starting')
-  set runtimepath+=$XDG_CONFIG_HOME/nvim/bundle/neobundle.vim/
+  set runtimepath+=~/.config/nvim/bundle/vim-plug
 endif
-call neobundle#begin(expand('$XDG_CONFIG_HOME/nvim/bundle/'))
 
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-NeoBundleLazy 'Shougo/unite.vim', {
-      \ 'autoload' : {
-      \   'commands' : [{ 'name' : 'Unite',
-      \                   'complete' : 'customlist,unite#complete_source'}]
-      \ }}
-
-NeoBundle 'Shougo/neomru.vim'
-
-NeoBundleLazy 'Shougo/vimfiler.vim', {
-      \ 'depends' : 'Shougo/unite.vim',
-      \ 'autoload' : {
-      \    'commands' : [{ 'name' : 'VimFiler',
-      \                    'complete' : 'customlist,vimfiler#complete' },
-      \                  'VimFilerExplorer'],
-      \    'mappings' : ['<Plug>(vimfiler_'],
-      \    'explorer' : 1,
-      \ }}
-
-NeoBundleLazy 'Shougo/deoplete.nvim', {
-      \ 'autoload' : {
-      \   'insert' : 1
-      \ }}
-
-NeoBundleLazy 'Shougo/neosnippet.vim', {
-      \ 'autoload' : {
-      \   'insert' : 1,
-      \ }}
-
-NeoBundleLazy 'thinca/vim-quickrun', {
-      \ 'mappings' : '<Plug>(quickrun)'
-      \ }
-
-NeoBundleLazy 'h1mesuke/unite-outline', {
-      \ 'unite_sources' : 'outline',
-      \ }
-
-NeoBundleLazy 'mattn/emmet-vim', {
-      \ 'filetypes': ['html', 'haml', 'eruby'],
-      \ }
-
-NeoBundleLazy 'ap/vim-css-color', {
-      \ 'filetypes' : ['css', 'scss']
-      \ }
-
-NeoBundleLazy 'pangloss/vim-javascript', {
-      \ 'filetypes' : 'javascript'
-      \ }
-
-NeoBundleLazy 'kchmck/vim-coffee-script', {
-      \ 'filetypes' : 'coffee'
-      \ }
-
-NeoBundleLazy 'glidenote/memolist.vim', {
-      \ 'commands' : ['MemoNew', 'MemoList', 'MemoGrep']
-      \ }
-
-NeoBundleLazy 'vim-jp/vimdoc-ja', {
-      \ 'filetypes' : 'help',
-      \ }
-
-NeoBundle 'hachy/eva01.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'tomtom/tcomment_vim'
-
-call neobundle#end()
-
-filetype plugin indent on     " Required!
-
-" Installation check.
-NeoBundleCheck
+call plug#begin('~/.config/nvim/bundle')
+Plug 'junegunn/vim-plug',
+      \ {'dir': '~/.config/nvim/bundle/vim-plug/autoload'}
+Plug 'hachy/eva01.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/unite-outline'
+Plug 'thinca/vim-quickrun'
+Plug 'mattn/emmet-vim'
+Plug 'ap/vim-css-color'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'glidenote/memolist.vim'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tomtom/tcomment_vim'
+Plug 'vim-jp/vimdoc-ja'
+call plug#end()
 "}}}
+
+filetype plugin indent on
 
 " Basic"{{{
 if has("syntax")
@@ -326,31 +267,27 @@ endfunction
 
 " Unite.vim"{{{
 let g:unite_data_directory = $HOME.'/.tmp/.unite'
-let s:bundle = neobundle#get("unite.vim")
-function! s:bundle.hooks.on_source(bundle)
-  call unite#custom#profile('default', 'context', {
-        \ 'winwidth': 35,
-        \ 'winheight': 15,
-        \ 'direction': 'botright',
-        \ })
+call unite#custom#profile('default', 'context', {
+      \ 'winwidth': 35,
+      \ 'winheight': 15,
+      \ 'direction': 'botright',
+      \ })
 
-  autocmd MyAutoCmd FileType unite call s:unite_my_settings()
-  function! s:unite_my_settings()
-    nmap <silent><buffer> <Esc><Esc> q
-    imap <silent><buffer> <Esc><Esc> <Esc>q
-  endfunction
-
-  let g:unite_source_grep_max_candidates = 200
-
-  if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts =
-          \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-          \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-    let g:unite_source_grep_recursive_opt = ''
-  endif
+autocmd MyAutoCmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  nmap <silent><buffer> <Esc><Esc> q
+  imap <silent><buffer> <Esc><Esc> <Esc>q
 endfunction
-unlet s:bundle
+
+let g:unite_source_grep_max_candidates = 200
+
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+        \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
@@ -362,80 +299,62 @@ nnoremap <silent> ,ug :<C-u>Unite -no-quit grep<CR>
 nnoremap <silent> ,cg :<C-u>UniteWithCursorWord -no-quit grep<CR>
 "}}}
 
-" deoplete.vim"{{{
+" deoplete.nvim"{{{
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 
-let s:bundle = neobundle#get("deoplete.nvim")
-function! s:bundle.hooks.on_source(bundle)
-  let g:deoplete#enable_smart_case = 1
-
-  " <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return deoplete#mappings#close_popup() . "\<CR>"
-  endfunction
-
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return deoplete#mappings#close_popup() . "\<CR>"
 endfunction
-unlet s:bundle
+
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "}}}
 
 " neosnippet.vim"{{{
-let s:bundle = neobundle#get("neosnippet.vim")
-function! s:bundle.hooks.on_source(bundle)
-  " Keymappings for neosnippet
-  imap <C-o> <Plug>(neosnippet_expand_or_jump)
-  smap <C-o> <Plug>(neosnippet_expand_or_jump)
-  " Define directory
-  let g:neosnippet#snippets_directory = $HOME.'/dotfiles/.vim/snippets'
-  let g:neosnippet#disable_runtime_snippets = {
-        \   'c' : 1
-        \ }
-endfunction
-unlet s:bundle
+imap <C-o> <Plug>(neosnippet_expand_or_jump)
+smap <C-o> <Plug>(neosnippet_expand_or_jump)
+" Define directory
+let g:neosnippet#snippets_directory = $HOME.'/dotfiles/.vim/snippets'
+let g:neosnippet#disable_runtime_snippets = {
+      \   'c' : 1
+      \ }
 "}}}
 
 " vimfiler.vim"{{{
 let g:vimfiler_data_directory= $HOME.'/.tmp/.vimfiler'
-let s:bundle = neobundle#get("vimfiler.vim")
-function! s:bundle.hooks.on_source(bundle)
-  let g:vimfiler_as_default_explorer = 1
-  call vimfiler#custom#profile('default', 'context', {
-        \ 'safe' : 0,
-        \ 'edit_action' : 'tabopen',
-        \ })
+let g:vimfiler_as_default_explorer = 1
+call vimfiler#custom#profile('default', 'context', {
+      \ 'safe' : 0,
+      \ 'edit_action' : 'tabopen',
+      \ })
 
-  autocmd MyAutoCmd FileType vimfiler nmap <buffer> o <Plug>(vimfiler_sync_with_current_vimfiler)
-endfunction
-unlet s:bundle
+autocmd MyAutoCmd FileType vimfiler nmap <buffer> o <Plug>(vimfiler_sync_with_current_vimfiler)
 
 nnoremap <Space>vf :<C-u>VimFiler -status<CR>
 "}}}
 
 " vim-quickrun"{{{
-let s:bundle = neobundle#get("vim-quickrun")
-function! s:bundle.hooks.on_source(bundle)
-  let g:quickrun_config = {}
-  let g:quickrun_config._ = {
-        \ 'split' : '%{winwidth(0) * 2 < winheight(0) * 5 ? "botright 8" : "vertical 80"}',
-        \ 'runner' : 'vimproc',
-        \ "runner/vimproc/updatetime" : 10
-        \ }
-  let g:quickrun_config.coffee = {'command' : 'coffee', 'exec' : '%c -cbp %s'}
-  let g:quickrun_config.ruby = {'command' : 'ruby'}
-  let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
-  let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
-  let g:quickrun_config.markdown = {
-        \ 'runner' : 'vimproc',
-        \ 'outputter' : 'null',
-        \ 'command' : 'open',
-        \ 'cmdopt' : '-a',
-        \ 'args' : '"Premark" --args',
-        \ 'exec' : '%c %o %a %s',
-        \ }
-endfunction
-unlet s:bundle
+let g:quickrun_config = {}
+let g:quickrun_config._ = {
+      \ 'split' : '%{winwidth(0) * 2 < winheight(0) * 5 ? "botright 8" : "vertical 80"}',
+      \ 'runner' : 'vimproc',
+      \ "runner/vimproc/updatetime" : 10
+      \ }
+let g:quickrun_config.coffee = {'command' : 'coffee', 'exec' : '%c -cbp %s'}
+let g:quickrun_config.ruby = {'command' : 'ruby'}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
+let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
+let g:quickrun_config.markdown = {
+      \ 'runner' : 'vimproc',
+      \ 'outputter' : 'null',
+      \ 'command' : 'open',
+      \ 'cmdopt' : '-a',
+      \ 'args' : '"Premark" --args',
+      \ 'exec' : '%c %o %a %s',
+      \ }
 
 nmap <silent> <Leader>r <Plug>(quickrun)
 "}}}
@@ -448,30 +367,26 @@ nnoremap <Space>gb :<C-u>Gblame<Enter>
 "}}}
 
 " emmet-vim"{{{
-let s:bundle = neobundle#get("emmet-vim")
-function! s:bundle.hooks.on_source(bundle)
-  let g:user_emmet_settings = {
-        \  'indentation' : '  ',
-        \  'lang' : 'ja',
-        \  'charset': "utf-8",
-        \  'html': {
-        \    'snippets': {
-        \      'html:5': "<!DOCTYPE html>\n"
-        \              ."<html lang=\"${lang}\">\n"
-        \              ."<head>\n"
-        \              ."    <meta charset=\"${charset}\">\n"
-        \              ."    <title></title>\n"
-        \              ."    <link rel=\"stylesheet\" href=\"reset.css\">\n"
-        \              ."</head>\n"
-        \              ."<body>\n${child}|\n"
-        \              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n"
-        \              ."</body>\n"
-        \              ."</html>",
-        \    }
-        \  }
-        \}
-endfunction
-unlet s:bundle
+let g:user_emmet_settings = {
+      \  'indentation' : '  ',
+      \  'lang' : 'ja',
+      \  'charset': "utf-8",
+      \  'html': {
+      \    'snippets': {
+      \      'html:5': "<!DOCTYPE html>\n"
+      \              ."<html lang=\"${lang}\">\n"
+      \              ."<head>\n"
+      \              ."    <meta charset=\"${charset}\">\n"
+      \              ."    <title></title>\n"
+      \              ."    <link rel=\"stylesheet\" href=\"reset.css\">\n"
+      \              ."</head>\n"
+      \              ."<body>\n${child}|\n"
+      \              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n"
+      \              ."</body>\n"
+      \              ."</html>",
+      \    }
+      \  }
+      \}
 "}}}
 
 " matchit.vim"{{{
@@ -479,15 +394,11 @@ source $VIMRUNTIME/macros/matchit.vim
 "}}}
 
 " memolist.vim "{{{
-let s:bundle = neobundle#get("memolist.vim")
-function! s:bundle.hooks.on_source(bundle)
-  let g:memolist_unite = 1
-  let g:memolist_memo_date = '%Y-%m-%d'
-  let g:memolist_memo_suffix = 'markdown'
-  let g:memolist_path = $HOME.'/Dropbox/memo'
-  let g:memolist_template_dir_path = '~/.vim/template'
-endfunction
-unlet s:bundle
+let g:memolist_unite = 1
+let g:memolist_memo_date = '%Y-%m-%d'
+let g:memolist_memo_suffix = 'markdown'
+let g:memolist_path = $HOME.'/Dropbox/memo'
+let g:memolist_template_dir_path = '~/.vim/template'
 
 map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
