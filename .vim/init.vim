@@ -21,17 +21,17 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/unite-outline'
 Plug 'thinca/vim-quickrun'
-Plug 'mattn/emmet-vim'
-Plug 'ap/vim-css-color'
-Plug 'pangloss/vim-javascript'
-Plug 'kchmck/vim-coffee-script'
+Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
+Plug 'ap/vim-css-color', { 'for': ['css', 'scss'] }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'glidenote/memolist.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
-Plug 'vim-jp/vimdoc-ja'
+Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
 call plug#end()
 "}}}
 
