@@ -366,31 +366,10 @@ nnoremap <Space>gl :<C-u>Glog<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
 "}}}
 
-" emmet-vim"{{{
-let g:user_emmet_settings = {
-      \  'indentation' : '  ',
-      \  'lang' : 'ja',
-      \  'charset': "utf-8",
-      \  'html': {
-      \    'snippets': {
-      \      'html:5': "<!DOCTYPE html>\n"
-      \              ."<html lang=\"${lang}\">\n"
-      \              ."<head>\n"
-      \              ."    <meta charset=\"${charset}\">\n"
-      \              ."    <title></title>\n"
-      \              ."    <link rel=\"stylesheet\" href=\"reset.css\">\n"
-      \              ."</head>\n"
-      \              ."<body>\n${child}|\n"
-      \              ."<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n"
-      \              ."</body>\n"
-      \              ."</html>",
-      \    }
-      \  }
-      \}
-"}}}
-
 " matchit.vim"{{{
-source $VIMRUNTIME/macros/matchit.vim
+if !exists('g:loaded_matchit')
+  runtime macros/matchit.vim
+endif
 "}}}
 
 " memolist.vim "{{{
