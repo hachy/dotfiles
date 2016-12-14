@@ -13,18 +13,16 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'junegunn/vim-plug',
       \ {'dir': '~/.config/nvim/bundle/vim-plug/autoload'}
 Plug 'hachy/eva01.vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/unite-outline'
 Plug 'thinca/vim-quickrun'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss'] }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'glidenote/memolist.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
@@ -53,6 +51,7 @@ set expandtab
 set smarttab
 set autoindent
 set smartindent
+set breakindent
 " Highlight parenthesis
 set showmatch
 " Show command on statusline
@@ -265,38 +264,40 @@ function! s:init_cmdwin()
 endfunction
 "}}}
 
-" Unite.vim"{{{
-let g:unite_data_directory = $HOME.'/.tmp/.unite'
-call unite#custom#profile('default', 'context', {
-      \ 'winwidth': 35,
-      \ 'winheight': 15,
-      \ 'direction': 'botright',
-      \ })
+" Denite.nvim"{{{
+call denite#custom#option('default', 'prompt', '>')
+call denite#custom#option('default', 'winheight', 15)
+call denite#custom#var('file_rec', 'command',
+      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-j>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-k>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-f>',
+      \ '<denite:scroll_page_forwards>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-b>',
+      \ '<denite:scroll_page_backwards>',
+      \ 'noremap'
+      \)
 
-autocmd MyAutoCmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()
-  nmap <silent><buffer> <Esc><Esc> q
-  imap <silent><buffer> <Esc><Esc> <Esc>q
-endfunction
-
-let g:unite_source_grep_max_candidates = 200
-
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts =
-        \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-nnoremap <silent> ,uf :<C-u>Unite file<CR>
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> ,uo :<C-u>Unite -vertical -no-quit outline<CR>
-nnoremap <silent> ,ur :<C-u>Unite history/yank -buffer-name=register register<CR>
-nnoremap <silent> ,ug :<C-u>Unite -no-quit grep<CR>
-nnoremap <silent> ,cg :<C-u>UniteWithCursorWord -no-quit grep<CR>
+nnoremap [denite] <Nop>
+nmap ,d [denite]
+nnoremap <silent> [denite]m :<C-u>Denite file_mru<CR>
+nnoremap <silent> [denite]r :<C-u>Denite file_rec<CR>
 "}}}
 
 " deoplete.nvim"{{{
@@ -373,7 +374,7 @@ endif
 "}}}
 
 " memolist.vim "{{{
-let g:memolist_unite = 1
+let g:memolist_denite = 1
 let g:memolist_memo_date = '%Y-%m-%d'
 let g:memolist_memo_suffix = 'markdown'
 let g:memolist_path = $HOME.'/Dropbox/memo'
