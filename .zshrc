@@ -42,7 +42,7 @@ function +vi-git-stash() {
 # prompt
 autoload -Uz colors
 colors
-ICON=$'\U2601 '
+ICON=$'➤ '
 PROMPT='%B%F{147}${ICON}%b%f%B%F{209}${vcs_info_msg_0_}%b%f '
 RPROMPT='[%F{98}%~%f]'
 
