@@ -13,8 +13,8 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'junegunn/vim-plug',
       \ {'dir': '~/.config/nvim/bundle/vim-plug/autoload'}
 Plug 'hachy/eva01.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/deoplete.nvim'
@@ -264,40 +264,19 @@ function! s:init_cmdwin()
 endfunction
 "}}}
 
-" Denite.nvim"{{{
-call denite#custom#option('default', 'prompt', '>')
-call denite#custom#option('default', 'winheight', 15)
-call denite#custom#var('file_rec', 'command',
-      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-j>',
-      \ '<denite:move_to_next_line>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-k>',
-      \ '<denite:move_to_previous_line>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-f>',
-      \ '<denite:scroll_page_forwards>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-b>',
-      \ '<denite:scroll_page_backwards>',
-      \ 'noremap'
-      \)
+" ctrlp"{{{
+let g:ctrlp_types = ['mru', 'fil']
+let g:ctrlp_show_hidden = 1
 
-nnoremap [denite] <Nop>
-nmap ,d [denite]
-nnoremap <silent> [denite]m :<C-u>Denite file_mru<CR>
-nnoremap <silent> [denite]r :<C-u>Denite file_rec<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
 "}}}
 
 " deoplete.nvim"{{{
@@ -374,7 +353,7 @@ endif
 "}}}
 
 " memolist.vim "{{{
-let g:memolist_denite = 1
+let g:memolist_ex_cmd = 'CtrlP'
 let g:memolist_memo_date = '%Y-%m-%d'
 let g:memolist_memo_suffix = 'markdown'
 let g:memolist_path = $HOME.'/Dropbox/memo'
