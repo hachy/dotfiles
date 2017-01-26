@@ -319,9 +319,7 @@ nnoremap <Space>vf :<C-u>VimFiler -status<CR>
 " vim-quickrun"{{{
 let g:quickrun_config = {}
 let g:quickrun_config._ = {
-      \ 'split' : '%{winwidth(0) * 2 < winheight(0) * 5 ? "botright 8" : "vertical 80"}',
-      \ 'runner' : 'vimproc',
-      \ "runner/vimproc/updatetime" : 10
+      \ 'split' : '%{winwidth(0) * 2 < winheight(0) * 5 ? "botright 8" : "vertical 80"}'
       \ }
 let g:quickrun_config.coffee = {'command' : 'coffee', 'exec' : '%c -cbp %s'}
 let g:quickrun_config.ruby = {'command' : 'ruby'}
