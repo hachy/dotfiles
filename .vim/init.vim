@@ -20,6 +20,7 @@ Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'thinca/vim-quickrun'
+Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss'] }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -375,19 +376,22 @@ hi GitGutterChange ctermfg=179 ctermbg=NONE cterm=bold
 hi GitGutterDelete ctermfg=168 ctermbg=NONE cterm=bold
 "}}}
 
+" vim-go"{{{
+let g:go_snippet_engine = "neosnippet"
+let g:go_fmt_command = "goimports"
+let g:go_def_mapping_enabled = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+"}}}
+
 " au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.{ruby,jbuilder} set filetype=ruby
-
-if $GOROOT != ''
-  set rtp+=$GOROOT/misc/vim
-  exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-  " set completeopt=menu,preview
-endif
-
-autocmd MyAutoCmd BufNewFile,BufRead *.go set filetype=go
-autocmd MyAutoCmd BufWritePre *.go Fmt
 
 let g:markdown_fenced_languages = ['ruby']
 
