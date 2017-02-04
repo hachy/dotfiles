@@ -17,7 +17,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'thinca/vim-quickrun'
 Plug 'fatih/vim-go'
@@ -116,7 +116,8 @@ let java_highlight_functions="style"
 
 " Color"{{{
 set background=dark
-colorscheme eva01
+set termguicolors
+colorscheme eva01-LCL
 "}}}
 
 " Tabline"{{{
@@ -368,12 +369,6 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': ['ruby', 'javascript']}
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
-"}}}
-
-" vim-gitgutter"{{{
-hi GitGutterAdd ctermfg=156 ctermbg=NONE cterm=bold
-hi GitGutterChange ctermfg=179 ctermbg=NONE cterm=bold
-hi GitGutterDelete ctermfg=168 ctermbg=NONE cterm=bold
 "}}}
 
 " vim-go"{{{
