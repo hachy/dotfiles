@@ -87,9 +87,8 @@ eval "$(rbenv init -)"
 
 alias be="bundle exec"
 
-# node
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+# yarn
+export PATH="$PATH:`yarn global bin`"
 
 # z
 . `brew --prefix`/etc/profile.d/z.sh
@@ -98,7 +97,6 @@ source $(brew --prefix nvm)/nvm.sh
 export PATH="/usr/local/bin/heroku:$PATH"
 
 # go
-# export GOROOT="/usr/local/go"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
