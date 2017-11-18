@@ -30,6 +30,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
+Plug 'posva/vim-vue'
 Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
 call plug#end()
 "}}}
@@ -369,6 +370,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': ['ruby', 'javascript']}
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_html_checkers = ['']
 "}}}
 
 " vim-go"{{{
@@ -387,6 +389,7 @@ let g:go_highlight_build_constraints = 1
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.{ruby,jbuilder} set filetype=ruby
+autocmd MyAutoCmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
 
 let g:markdown_fenced_languages = ['ruby']
 
