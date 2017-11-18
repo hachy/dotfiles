@@ -115,4 +115,6 @@ function peco-select-history() {
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
+export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
