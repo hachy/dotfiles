@@ -31,6 +31,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
 Plug 'posva/vim-vue'
+Plug 'udalov/kotlin-vim'
 Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
 call plug#end()
 "}}}
