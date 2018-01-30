@@ -25,7 +25,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss'] }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'glidenote/memolist.vim'
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -365,12 +365,14 @@ map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
 "}}}
 
-" syntastic"{{{
-let g:syntastic_mode_map = { 'mode': 'passive',
-                           \ 'active_filetypes': ['ruby', 'javascript']}
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_html_checkers = ['']
+" ale{{{
+let g:ale_linters = {
+      \ 'html': [''],
+      \ 'javascript': ['eslint'],
+      \ 'ruby': ['rubocop'],
+      \}
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 "}}}
 
 " vim-go"{{{
