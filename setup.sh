@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOT_FILES=( .gitconfig .gitignore .gitignore_global .gvimrc .vimrc .vim .zshrc .zshrc.local .gemrc .tmux.conf .pryrc )
+DOT_FILES=( .gitconfig .gitignore .gitignore_global .zshrc .zshrc.local .gemrc .tmux.conf .pryrc )
 
 reset="\033[0m"
 magenta="\033[1;35m"
@@ -15,3 +15,10 @@ do
     echo -e "${cyan} $file ${reset} のシンボリックリンクをはったょ"
   fi
 done
+
+if [ -L ~/.config/nvim ]; then
+  echo -e "既に${magenta} .config/nvim ${reset} のシンボリックリンクが存在するょ"
+else
+  ln -s ~/dotfiles/.vim ~/.config/nvim
+  echo -e "${cyan} .config/nvim ${reset} のシンボリックリンクをはったょ"
+fi
