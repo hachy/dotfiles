@@ -1,0 +1,47 @@
+[color]
+  ui = true
+[color "status"]
+  changed = 74
+  added = 121
+  untracked = 169
+  branch = 169
+[color "branch"]
+  current = white bold
+  local = white
+  remote = 169
+[color "diff"]
+  meta = 140
+  frag = 125 bold
+  old = 169 reverse
+  new = 121 reverse
+  commit = 74
+  whitespace = white reverse
+[user]
+  name = hachy
+  email = 1613863+hachy@users.noreply.github.com
+[include]
+  path = ~/.gitconfig_local
+[core]
+  editor = nvim
+  autocrlf = input
+  excludesfile = ~/.gitignore_global
+[alias]
+  co = checkout
+  s = status
+  cm = commit -m
+  b = branch
+  br = branch -av
+  d = diff
+  dc = diff --cached
+  l = log --graph --date=short --pretty='format:%C(60)%h%C(169)%d%Creset %s %C(74)%an %C(60)%cd(%ar)%Creset'
+  ls = log --stat
+  lp = log --oneline -p
+  ignore = update-index --assume-unchanged
+  unignore = update-index --no-assume-unchanged
+  ignored = !git ls-files -v | grep "^[a-z]"
+[push]
+  default = simple
+[merge]
+  ff = false
+[diff]
+  compactionHeuristic = true
