@@ -30,6 +30,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
+Plug 'ruby-formatter/rufo-vim'
 Plug 'posva/vim-vue'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
@@ -386,6 +387,10 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+"}}}
+
+" rufo-vim{{{
+let g:rufo_auto_formatting = 1
 "}}}
 
 " au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
