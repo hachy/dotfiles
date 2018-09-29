@@ -90,6 +90,9 @@ alias be="bundle exec"
 # yarn
 export PATH="$PATH:`yarn global bin`"
 
+# postgresql
+export PGDATA="/usr/local/var/postgres"
+
 # z
 . `brew --prefix`/etc/profile.d/z.sh
 
