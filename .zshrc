@@ -120,4 +120,7 @@ bindkey '^r' peco-select-history
 
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
