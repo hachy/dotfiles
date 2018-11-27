@@ -327,18 +327,9 @@ let g:quickrun_config = {}
 let g:quickrun_config._ = {
       \ 'split' : '%{winwidth(0) * 2 < winheight(0) * 5 ? "botright 8" : "vertical 80"}'
       \ }
-let g:quickrun_config.coffee = {'command' : 'coffee', 'exec' : '%c -cbp %s'}
 let g:quickrun_config.ruby = {'command' : 'ruby'}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
 let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
-let g:quickrun_config.markdown = {
-      \ 'runner' : 'vimproc',
-      \ 'outputter' : 'null',
-      \ 'command' : 'open',
-      \ 'cmdopt' : '-a',
-      \ 'args' : '"Premark" --args',
-      \ 'exec' : '%c %o %a %s',
-      \ }
 
 nmap <silent> <Leader>r <Plug>(quickrun)
 "}}}
