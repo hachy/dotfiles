@@ -19,6 +19,10 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
 Plug 'thinca/vim-quickrun'
 Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
@@ -289,6 +293,10 @@ let g:ctrlp_custom_ignore = {
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
+      \})
+
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
@@ -332,6 +340,12 @@ let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec 
 let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
 
 nmap <silent> <Leader>r <Plug>(quickrun)
+"}}}
+
+" LanguageClient-neovim{{{
+let g:LanguageClient_serverCommands = {
+      \ 'ruby': ['solargraph', 'stdio'],
+      \}
 "}}}
 
 " fugitive"{{{
