@@ -317,9 +317,9 @@ function! s:defx_my_settings() abort
         \                'mark:filename:type:size:time')
   nnoremap <silent><buffer><expr> S
         \ defx#do_action('toggle_sort', 'time')
-  nnoremap <silent><buffer><expr> d
+  nnoremap <silent><buffer><expr> D
         \ defx#do_action('remove')
-  nnoremap <silent><buffer><expr> r
+  nnoremap <silent><buffer><expr> R
         \ defx#do_action('rename')
   nnoremap <silent><buffer><expr> !
         \ defx#do_action('execute_command')
@@ -364,6 +364,10 @@ call defx#custom#column('mark', {
       \ 'readonly_icon': '✗',
       \ 'selected_icon': '✓',
       \ })
+call defx#custom#option('_', {
+      \ 'columns': 'mark:indent:icon:filename:type:size:time',
+      \ })
+
 nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
 nnoremap <silent><Space>f :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr()`<CR>
 "}}}
