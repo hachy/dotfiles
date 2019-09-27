@@ -374,7 +374,7 @@ nnoremap <silent><Space>f :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr(
 
 " deoplete.nvim"{{{
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option('smart_case', v:true)
 
 call deoplete#custom#var('omni', 'input_patterns', {
       \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
@@ -382,8 +382,8 @@ call deoplete#custom#var('omni', 'input_patterns', {
 
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return deoplete#mappings#close_popup() . "\<CR>"
+function! s:my_cr_function() abort
+  return deoplete#close_popup() . "\<CR>"
 endfunction
 
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
