@@ -66,6 +66,7 @@ set showcmd
 set cmdheight=2
 set cmdwinheight=5
 set pumheight=15
+set pumblend=10
 set history=200
 " Show <TAB> and <CR>
 set list
