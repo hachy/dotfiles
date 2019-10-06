@@ -212,8 +212,6 @@ inoremap <C-c> <Esc>
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
-" Close help by pressing q.
-autocmd MyAutoCmd FileType help nnoremap <buffer> q <C-w>c
 " コメントアウトが連続して入力されるのを禁止 :a!でも代用可
 autocmd MyAutoCmd FileType * setlocal formatoptions-=ro
 " Disable unused keys
@@ -225,8 +223,6 @@ nnoremap q <Nop>
 nnoremap <C-z> <Nop>
 inoremap <C-z> <Nop>
 vnoremap <C-z> <Nop>
-" help vertical topleft
-nnoremap <Space>h :<C-u>vert to h<Space>
 " Visual mode で検索
 vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
 
@@ -486,6 +482,13 @@ let g:markdown_fenced_languages = ['ruby']
 " Edit init.vim"{{{
 nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/.vim/init.vim<CR>
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif <CR>
+"}}}
+
+" help{{{
+autocmd MyAutoCmd CmdwinEnter * noreabbrev h tab help
+autocmd MyAutoCmd CmdwinLeave * unabbrev h
+" Close help by pressing q.
+autocmd MyAutoCmd FileType help nnoremap <buffer> q <C-w>c
 "}}}
 
 let g:netrw_localcopycmd = ''
