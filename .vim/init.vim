@@ -469,7 +469,7 @@ let g:go_highlight_build_constraints = 1
 
 " vim-prettier{{{
 let g:prettier#autoformat = 0
-autocmd MyAutoCmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd MyAutoCmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html PrettierAsync
 "}}}
 
 " au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
