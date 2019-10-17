@@ -32,7 +32,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
-Plug 'ruby-formatter/rufo-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'posva/vim-vue'
 Plug 'udalov/kotlin-vim'
@@ -444,15 +443,16 @@ map ,mg  :MemoGrep<CR>
 let g:ale_linters = {
       \ 'html': [''],
       \ 'javascript': ['eslint'],
-      \ 'ruby': ['rubocop'],
       \}
 let g:ale_fixers = {
       \ 'css': ['stylelint'],
       \ 'scss': ['stylelint'],
+      \ 'ruby': ['rubocop'],
       \}
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
 "}}}
 
 " vim-go"{{{
@@ -465,10 +465,6 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-"}}}
-
-" rufo-vim{{{
-let g:rufo_auto_formatting = 1
 "}}}
 
 " vim-prettier{{{
