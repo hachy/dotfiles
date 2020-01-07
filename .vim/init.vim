@@ -63,7 +63,7 @@ set showmatch
 " Show command on statusline
 set showcmd
 set cmdheight=2
-set cmdwinheight=5
+set cmdwinheight=8
 set pumheight=15
 set pumblend=10
 set history=200
@@ -271,6 +271,7 @@ endfunction
 " ctrlp"{{{
 let g:ctrlp_types = ['mru', 'fil']
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
@@ -281,6 +282,9 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'some_bad_symbolic_links',
       \ }
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 "}}}
 
 " defx.nvim{{{
