@@ -103,20 +103,22 @@ export PATH="/usr/local/bin/heroku:$PATH"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-# peco
-function peco-select-history() {
+# fzf
+export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
+
+function fzf-select-history() {
   local tac
   if which tac > /dev/null; then
       tac="tac"
   else
       tac="tail -r"
   fi
-  BUFFER=$(history -n 1 | eval $tac | peco --query "$LBUFFER")
+  BUFFER=$(history -n 1 | eval $tac | fzf --query "$LBUFFER")
   CURSOR=$#BUFFER
   zle clear-screen
 }
-zle -N peco-select-history
-bindkey '^r' peco-select-history
+zle -N fzf-select-history
+bindkey '^r' fzf-select-history
 
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 
