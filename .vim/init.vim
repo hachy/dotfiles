@@ -21,6 +21,7 @@ Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
+Plug 'Shougo/neosnippet-snippets'
 Plug 'thinca/vim-quickrun'
 Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
