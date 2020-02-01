@@ -15,18 +15,12 @@ Plug 'junegunn/vim-plug',
 Plug 'hachy/eva01.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
 Plug 'Shougo/neosnippet-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'thinca/vim-quickrun'
-Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss'] }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'glidenote/memolist.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
@@ -34,8 +28,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'posva/vim-vue'
-Plug 'udalov/kotlin-vim'
 Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
 call plug#end()
 "}}}
@@ -46,9 +38,9 @@ filetype plugin indent on
 if has("syntax")
   syntax on
 endif
+set hidden
 set imdisable
 set ruler
-set cursorline
 set title
 set number
 set tabstop=4
@@ -59,28 +51,19 @@ set smarttab
 set autoindent
 set smartindent
 set breakindent
-" Highlight parenthesis
 set showmatch
-" Show command on statusline
 set showcmd
 set cmdheight=2
 set cmdwinheight=8
 set pumheight=15
 set pumblend=10
 set history=200
-" Show <TAB> and <CR>
 set list
-" Show 'invisible' characters
 set listchars=tab:»-,trail:-,extends:»,precedes:«
-" Allow backspace in insert mode
 set backspace=indent,eol,start
-" Enable mouse in all modes
 set mouse=a
-" Do not display greetings message
 set shortmess=aTI
-" Enable multibyte format.
 set formatoptions+=mM
-" Increment/Decrement the alphabet by pressing <C-a>/<C-x>
 set nrformats=alpha,octal,hex
 " Folding
 set foldenable
@@ -89,15 +72,16 @@ set foldcolumn=0
 autocmd MyAutoCmd FileType vim setlocal foldcolumn=2
 " No backups
 set nobackup
+set nowritebackup
 set noswapfile
 " Move the cursor to positions where there isn't any text
 set virtualedit=block
-
 set textwidth=0
 set scrolloff=5
-
 set splitright
 set splitbelow
+set updatetime=300
+set signcolumn=yes
 
 if has('unnamedplus')
   set clipboard& clipboard+=unnamedplus
@@ -105,9 +89,7 @@ else
   set clipboard& clipboard+=unnamed
 endif
 
-" neosnippet で変なの出さない
 set completeopt-=preview
-
 set helpheight=30
 
 set pastetoggle=<F10>
@@ -116,9 +98,6 @@ autocmd MyAutoCmd InsertLeave * set nopaste
 if has('mac')
   let mapleader = "_"
 endif
-
-let java_highlight_all=1
-let java_highlight_functions="style"
 "}}}
 
 " Color"{{{
@@ -228,6 +207,9 @@ vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><C
 
 " preview current html file
 nnoremap <Leader>W :silent !xdg-open %:p &<CR>
+
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "}}}
 
 " 全角スペースを強調表示"{{{
@@ -373,24 +355,6 @@ nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
 nnoremap <silent><Space>f :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr()`<CR>
 "}}}
 
-" deoplete.nvim"{{{
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('smart_case', v:true)
-
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-      \})
-
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
-
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-"}}}
-
 " neosnippet.vim"{{{
 imap <C-o> <Plug>(neosnippet_expand_or_jump)
 smap <C-o> <Plug>(neosnippet_expand_or_jump)
@@ -411,12 +375,6 @@ let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec 
 let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
 
 nmap <silent> <Leader>r <Plug>(quickrun)
-"}}}
-
-" LanguageClient-neovim{{{
-let g:LanguageClient_serverCommands = {
-      \ 'ruby': ['solargraph', 'stdio'],
-      \}
 "}}}
 
 " fugitive"{{{
@@ -460,24 +418,11 @@ let g:ale_lint_on_enter = 0
 command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
 "}}}
 
-" vim-go"{{{
-let g:go_snippet_engine = "neosnippet"
-let g:go_fmt_command = "goimports"
-let g:go_def_mapping_enabled = 0
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-"}}}
-
 " vim-prettier{{{
 let g:prettier#autoformat = 0
 autocmd MyAutoCmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html PrettierAsync
 "}}}
 
-" au! MyAutoCmd FileType scss syntax cluster sassCssAttributes add=@cssColors
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
 autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufRead *.{ruby,jbuilder} set filetype=ruby
