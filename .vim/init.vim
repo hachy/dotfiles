@@ -384,6 +384,10 @@ nnoremap <Space>gl :<C-u>Glog<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
 "}}}
 
+" vim-gitgutter{{{
+autocmd MyAutoCmd BufWritePost * GitGutter
+"}}}
+
 " matchit.vim"{{{
 if !exists('g:loaded_matchit')
   runtime macros/matchit.vim
