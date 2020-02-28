@@ -1,0 +1,14 @@
+{
+  "diagnostic.errorSign": "✘",
+  "diagnostic.refreshAfterSave": true,
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "json", "typescriptreact", "javascriptreact"],
+  "eslint.nodePath": "~/node_modules/",
+  "eslint.options": { "configFile": "~/.eslintrc.js" },
+  "eslint.enable": true,
+  "eslint.run": "onSave",
+  "eslint.packageManager": "npm",
+  "eslint.autoFix": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
+  "typescript.showUnused": false
+}
