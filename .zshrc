@@ -104,7 +104,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # fzf
-export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
+export FZF_DEFAULT_OPTS="--layout=reverse --height 60% --inline-info"
 
 function fzf-select-history() {
   local tac
@@ -115,7 +115,7 @@ function fzf-select-history() {
   fi
   BUFFER=$(history -n 1 | eval $tac | fzf --query "$LBUFFER")
   CURSOR=$#BUFFER
-  zle clear-screen
+  zle reset-prompt
 }
 zle -N fzf-select-history
 bindkey '^r' fzf-select-history
