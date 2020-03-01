@@ -13,7 +13,8 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'junegunn/vim-plug',
       \ {'dir': '~/.config/nvim/bundle/vim-plug/autoload'}
 Plug 'hachy/eva01.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -251,23 +252,12 @@ function! s:init_cmdwin()
 endfunction
 "}}}
 
-" ctrlp"{{{
-let g:ctrlp_types = ['mru', 'fil']
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
+" fzf{{{
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'down': '~40%' }
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+nnoremap <silent> <C-p> :Files<CR>
 "}}}
 
 " defx.nvim{{{
@@ -395,7 +385,7 @@ endif
 "}}}
 
 " memolist.vim "{{{
-let g:memolist_ex_cmd = 'CtrlP'
+let g:memolist_fzf = 1
 let g:memolist_memo_date = '%Y-%m-%d'
 let g:memolist_memo_suffix = 'markdown'
 let g:memolist_path = $HOME.'/Dropbox/memo'
