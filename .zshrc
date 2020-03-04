@@ -113,7 +113,7 @@ function fzf-select-history() {
   else
       tac="tail -r"
   fi
-  BUFFER=$(history -n 1 | eval $tac | fzf --query "$LBUFFER")
+  BUFFER=$(history -n 1 | eval $tac | fzf --no-sort --query "$LBUFFER")
   CURSOR=$#BUFFER
   zle reset-prompt
 }
