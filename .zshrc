@@ -43,8 +43,8 @@ function +vi-git-stash() {
 autoload -Uz colors
 colors
 ICON=$'➤ '
-PROMPT='%B%F{147}${ICON}%b%f%B%F{209}${vcs_info_msg_0_}%b%f '
-RPROMPT='[%F{98}%~%f]'
+PROMPT='%B%F{119}${ICON}%b%f%B%F{209}${vcs_info_msg_0_}%b%f '
+RPROMPT='[%F{119}%~%f]'
 
 # apt-getとかdpkgコマンドをキャッシュを使って速くする
 zstyle ':completion:*' use-cache true
