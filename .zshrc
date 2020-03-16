@@ -127,3 +127,8 @@ export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 # github access token
 export HOMEBREW_GITHUB_API_TOKEN=$HOME/.homebrew_github_api_token
+
+# python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

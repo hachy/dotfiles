@@ -1,7 +1,7 @@
 {
   "diagnostic.errorSign": "✘",
   "diagnostic.refreshAfterSave": true,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "json", "typescriptreact", "javascriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "json", "typescriptreact", "javascriptreact", "python"],
   "eslint.nodePath": "~/node_modules/",
   "eslint.options": { "configFile": "~/.eslintrc.js" },
   "eslint.enable": true,
@@ -10,5 +10,7 @@
   "eslint.autoFix": true,
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
-  "typescript.showUnused": false
+  "typescript.showUnused": false,
+  "python.jediEnabled": false,
+  "python.formatting.provider": "black"
 }
