@@ -95,10 +95,6 @@ set helpheight=30
 
 set pastetoggle=<F10>
 autocmd MyAutoCmd InsertLeave * set nopaste
-
-if has('mac')
-  let mapleader = "_"
-endif
 "}}}
 
 " Color"{{{
@@ -205,9 +201,6 @@ inoremap <C-z> <Nop>
 vnoremap <C-z> <Nop>
 " Visual mode で検索
 vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
-
-" preview current html file
-nnoremap <Leader>W :silent !xdg-open %:p &<CR>
 
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -362,7 +355,6 @@ let g:quickrun_config._ = {
       \ }
 let g:quickrun_config.ruby = {'command' : 'ruby'}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
-let g:quickrun_config.slim = {'command' : 'slimrb', 'exec' : '%c -p %s'}
 
 nmap <silent> <Leader>r <Plug>(quickrun)
 "}}}
