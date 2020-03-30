@@ -120,6 +120,18 @@ function fzf-select-history() {
 zle -N fzf-select-history
 bindkey '^r' fzf-select-history
 
+# ghq + fzf
+function ghq-fzf() {
+  local repo=$(ghq list | fzf --preview "ls $(ghq root)/{}" --query "$LBUFFER")
+  if [ -n "$repo" ]; then
+    BUFFER="cd $(ghq root)/$repo"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N ghq-fzf
+bindkey '^]' ghq-fzf
+
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
