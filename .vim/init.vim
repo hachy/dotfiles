@@ -248,7 +248,7 @@ endfunction
 " fzf{{{
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
 let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 nnoremap <silent> <C-p> :Files<CR>
 "}}}
