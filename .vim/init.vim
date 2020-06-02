@@ -21,7 +21,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'thinca/vim-quickrun'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
-Plug 'ap/vim-css-color', { 'for': ['css', 'scss'] }
 Plug 'glidenote/memolist.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
