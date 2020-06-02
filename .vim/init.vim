@@ -252,6 +252,8 @@ let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <SPACE>b :Buffers<CR>
+nnoremap <silent> <SPACE>h :History<CR>
 "}}}
 
 " defx.nvim{{{
