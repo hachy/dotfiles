@@ -352,7 +352,7 @@ let g:neosnippet#disable_runtime_snippets = {
 " vim-quickrun"{{{
 let g:quickrun_config = {}
 let g:quickrun_config._ = {
-      \ 'split' : '%{winwidth(0) * 2 < winheight(0) * 5 ? "botright 8" : "vertical 80"}'
+      \ 'split' : '%{winwidth(0) * 1.5 < winheight(0) * 5 ? "botright 8" : "vertical 80"}'
       \ }
 let g:quickrun_config.ruby = {'command' : 'ruby'}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
