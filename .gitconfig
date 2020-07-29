@@ -19,6 +19,8 @@
 [user]
   name = hachy
   email = 1613863+hachy@users.noreply.github.com
+[init]
+  defaultBranch = main
 [include]
   path = ~/.gitconfig_local
 [core]
