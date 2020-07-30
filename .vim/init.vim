@@ -240,10 +240,10 @@ function! s:init_cmdwin()
   nnoremap <buffer> <TAB> :<C-u>quit<CR>
   inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
   inoremap <buffer><expr><BS> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
-
-  " Completion.
   inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
+  setl nonumber
+  setl signcolumn=no
   startinsert!
 endfunction
 "}}}
