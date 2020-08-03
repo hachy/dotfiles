@@ -27,6 +27,7 @@
   editor = nvim
   autocrlf = input
   excludesfile = ~/.gitignore_global
+  pager = delta
 [alias]
   co = checkout
   s = status
@@ -47,3 +48,16 @@
   ff = false
 [diff]
   compactionHeuristic = true
+[delta]
+  commit-style = "#90b1fd"
+  commit-decoration-style = "ol bold #90b1fd"
+  file-style = "bold #bc74fa"
+  file-decoration-style = "bold box #bc74fa"
+  hunk-header-style = "omit"
+  minus-style = "#ef5350"
+  minus-emph-style = "black #D787AF"
+  minus-empty-line-marker-style = "black #D787AF"
+  zero-style = "#d7d1dc"
+  plus-style = "#76ff03"
+  plus-emph-style = "black #aeea00"
+  plus-empty-line-marker-style = "black #aeea00"
