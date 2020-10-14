@@ -90,7 +90,7 @@ else
   set clipboard& clipboard+=unnamed
 endif
 
-set completeopt-=preview
+set completeopt=menu,noselect
 set helpheight=30
 
 set pastetoggle=<F10>
@@ -204,8 +204,6 @@ vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><C
 
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-inoremap <expr><CR> pumvisible() ? "<C-y>" : "<CR>"
 
 xnoremap p "_dP
 "}}}
