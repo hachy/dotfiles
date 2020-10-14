@@ -396,12 +396,14 @@ map ,mg  :MemoGrep<CR>
 
 " ale{{{
 let g:ale_linters = {
-      \ 'html': [''],
       \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint', 'tsserver'],
       \}
 let g:ale_fixers = {
       \ 'css': ['stylelint'],
       \ 'scss': ['stylelint'],
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint'],
       \ 'ruby': ['rubocop'],
       \}
 let g:ale_fix_on_save = 1
@@ -412,7 +414,7 @@ command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_sav
 
 " vim-prettier{{{
 let g:prettier#autoformat = 0
-autocmd MyAutoCmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html PrettierAsync
+autocmd MyAutoCmd BufWritePre *.css,*.scss,*.graphql,*.vue,*.yaml,*.html PrettierAsync
 "}}}
 
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
