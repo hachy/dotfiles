@@ -22,17 +22,18 @@ options head
 	)
 
 snippet func
-abbr    func ...() { ... }
-options head
-	func ${1:fname}(${2}) ${3:int }{
-		${0:TARGET:return }
+options word
+	func ${1:#:fname}(${2}) ${3:int} {
+		${0:TARGET}
 	}
 
 snippet printf
+alias   pf
 options word
 	fmt.Printf("${1}\n", ${2:})
 
 snippet println
+alias   pl
 options word
 	fmt.Println(${0:TARGET})
 
@@ -42,7 +43,14 @@ snippet if
 	}
 
 snippet for
-abbr    for {}
+options head
 	for ${1} := 0; $1 < ${2}; $1++ {
+		${0:TARGET}
+	}
+
+snippet iferr
+alias   ife
+options head
+	if err != nil {
 		${0:TARGET}
 	}
