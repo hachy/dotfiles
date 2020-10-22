@@ -1,4 +1,9 @@
 {
+  "suggest.keepCompleteopt": true,
+  "suggest.floatEnable": false,
+  "diagnostic.messageTarget": "echo",
+  "signature.target": "echo",
+  "coc.preferences.hoverTarget": "echo",
   "diagnostic.errorSign": "✘",
   "diagnostic.refreshAfterSave": true,
   "coc.preferences.formatOnSaveFiletypes": [
