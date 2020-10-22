@@ -361,7 +361,7 @@ let g:quickrun_config.ruby = {'command' : 'ruby'}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
 let g:quickrun_config.cpp = { 'cmdopt': '-std=c++11' }
 
-nmap <silent> <Leader>r <Plug>(quickrun)
+nnoremap <silent> <Leader>q :<C-u>bw! \[quickrun\ output\]<CR>
 autocmd MyAutoCmd FileType quickrun nnoremap <silent><buffer>q :quit<CR>
 "}}}
 
