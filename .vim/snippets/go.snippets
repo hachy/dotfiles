@@ -1,14 +1,8 @@
-snippet helloworld
-abbr    package main\nimport fmt...
+snippet main
+abbr func main() { ... }
 options head
-	package main
-
-	import (
-		"fmt"
-	)
-
 	func main() {
-		fmt.Printf("Hello, world\n")
+		${0:TARGET}
 	}
 
 snippet package
@@ -50,7 +44,7 @@ options head
 
 snippet iferr
 alias   ife
-options head
+options word
 	if err != nil {
 		${0:TARGET}
 	}

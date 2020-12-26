@@ -1,0 +1,27 @@
+snippet p
+abbr    print()
+options word
+	print(${0})
+
+snippet if
+abbr    if ...: ...
+options head
+	if ${1:#:condition}:
+		${0:TARGET}
+
+snippet int(input())-atcorder
+options head
+	n = int(input())
+
+snippet map(int,input().split())-atcorder
+options head
+	a, b = map(int, input().split())
+
+snippet list(map(int,input().split())-atcorder
+options head
+	a = list(map(int, input().split()))
+
+snippet flatten
+abbr    sum(2d-list,[])
+options word
+	sum(${0}, [])
