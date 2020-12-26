@@ -106,14 +106,12 @@ colorscheme eva01-LCL
 
 " Tabline"{{{
 set showtabline=2
-nmap <C-S-Tab> :tabprevious<CR>
-nmap <C-Tab> :tabnext<CR>
-map <C-S-Tab> :tabprevious<CR>
-map <C-Tab> :tabnext<CR>
-imap <C-S-Tab> <Esc>:tabprevious<CR>a
-imap <C-Tab> <Esc>:tabnext<CR>a
-nmap <C-t> :tabnew<CR>
-imap <C-t> <Esc>:tabnew<CR>
+nnoremap <C-Tab>   :<C-u>tabnext<CR>
+inoremap <C-Tab>   <Esc>:tabnext<CR>
+nnoremap <C-S-Tab> :<C-u>tabprevious<CR>
+inoremap <C-S-Tab> <Esc>:tabprevious<CR>
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
 "}}}
 
 " Search"{{{
