@@ -28,6 +28,8 @@
   autocrlf = input
   excludesfile = ~/.gitignore_global
   pager = delta
+[credential]
+  helper = osxkeychain
 [alias]
   co = checkout
   s = status
