@@ -203,6 +203,15 @@ inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "}}}
 
+" terminal{{{
+nnoremap <silent><expr> <SPACE>t winwidth(0) >= 100 ? (':vsplit term://'.$SHELL.'<CR>') : (':split term://'.$SHELL.'<CR>')
+autocmd MyAutoCmd TermOpen * setl nonumber
+autocmd MyAutoCmd BufEnter * if &buftype ==# 'terminal' | startinsert! | endif
+autocmd MyAutoCmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
+tnoremap <C-w> <C-\><C-n><C-w>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+"}}}
+
 " 全角スペースを強調表示"{{{
 function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
