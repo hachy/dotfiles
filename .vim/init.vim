@@ -173,7 +173,7 @@ cnoremap <C-p> <Up>
 " Yank the characters under the cursor until the end of the line
 nnoremap Y y$
 " Enter == o
-noremap <CR> o<Esc>
+nnoremap <CR> o<Esc>
 " C-c == ESC
 inoremap <C-c> <Esc>
 " F1 == ESC
