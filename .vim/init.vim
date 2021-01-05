@@ -91,7 +91,6 @@ else
   set clipboard& clipboard+=unnamed
 endif
 
-set completeopt=menu,noselect
 set helpheight=30
 
 set pastetoggle=<F10>
@@ -151,8 +150,8 @@ vnoremap <C-l> <End>
 
 inoremap <silent><expr><C-h> pumvisible() ? "\<C-y>\<Left>" : "\<Left>"
 inoremap <silent><expr><C-j> pumvisible() ? "\<C-y>\<Down>" : "\<Down>"
-inoremap <silent><expr><C-k> pumvisible() ? "\<C-y>\<Up>" : "\<Up>"
-inoremap <silent><expr><C-l> pumvisible() ? "\<C-y>\<Right>" : "\<Right>"
+inoremap <silent><expr><C-k> pumvisible() ? "\<C-y>"        : "\<Up>"
+inoremap <silent><expr><C-l> pumvisible() ? "\<C-y>"        : "\<Right>"
 
 inoremap <C-a> <Home>
 inoremap <C-b> <Left>
@@ -194,10 +193,14 @@ vnoremap <C-z> <Nop>
 " Visual mode で検索
 vnoremap <silent> # "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
 
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
 xnoremap p "_dP
+"}}}
+
+" complement{{{
+set completeopt=menuone,noinsert
+inoremap <expr><CR>    pumvisible() ? "<C-y>"   : "<CR>"
+inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "}}}
 
 " 全角スペースを強調表示"{{{
@@ -235,6 +238,7 @@ function! s:init_cmdwin()
 
   setl nonumber
   setl signcolumn=no
+  setl completeopt=menu,noselect
   startinsert!
 endfunction
 "}}}
