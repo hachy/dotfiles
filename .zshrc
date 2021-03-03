@@ -103,6 +103,9 @@ export PATH="/usr/local/bin/heroku:$PATH"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# rust
+source $HOME/.cargo/env
+
 # fzf
 export FZF_DEFAULT_OPTS="--layout=reverse --height 60% --inline-info"
 

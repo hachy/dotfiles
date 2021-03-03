@@ -6,6 +6,7 @@
   "signature.target": "echo",
   "coc.preferences.hoverTarget": "echo",
   "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": ["rust"],
   "typescript.showUnused": false,
   "languageserver": {
     "golang": {

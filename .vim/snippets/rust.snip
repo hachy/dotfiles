@@ -1,0 +1,21 @@
+snippet     pln
+abbr        println!
+    println!("{}", ${0:TARGET});
+
+snippet fn
+abbr    fn () {}
+options word
+    fn ${1:#:func_name}(${2:#:args}) {
+        ${0:TARGET}
+    }
+
+snippet for
+abbr    forin  {}
+    for ${1} in ${2} {
+        ${0:TARGET}
+    }
+
+snippet match
+    match ${1:TARGET} {
+        ${2:#:pattern} => ${3:#expr},
+    }
