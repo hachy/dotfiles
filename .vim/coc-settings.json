@@ -5,9 +5,6 @@
   "diagnostic.messageTarget": "echo",
   "signature.target": "echo",
   "coc.preferences.hoverTarget": "echo",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "json",
-  ],
   "coc.preferences.formatOnType": true,
   "typescript.showUnused": false,
   "languageserver": {

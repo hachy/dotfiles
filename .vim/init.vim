@@ -427,7 +427,8 @@ command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_sav
 
 " vim-prettier{{{
 let g:prettier#autoformat = 0
-autocmd MyAutoCmd BufWritePre *.css,*.scss,*.graphql,*.vue,*.yaml,*.html PrettierAsync
+autocmd MyAutoCmd BufWritePre *.css,*.scss,*.graphql,*.vue,*.yaml,*.html,*json PrettierAsync
+"}}}
 "}}}
 
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
