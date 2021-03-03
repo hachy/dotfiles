@@ -415,6 +415,7 @@ let g:ale_fixers = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
       \ 'ruby': ['rubocop'],
+      \ 'python': ['black'],
       \}
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
