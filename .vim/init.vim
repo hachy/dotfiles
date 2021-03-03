@@ -357,6 +357,11 @@ let g:neosnippet#disable_runtime_snippets = {
       \ }
 "}}}
 
+" coc.nvim{{{
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+"}}}
+
 " vim-quickrun"{{{
 let g:quickrun_config = {}
 let g:quickrun_config._ = {
