@@ -61,7 +61,7 @@ set pumheight=15
 set pumblend=10
 set history=200
 set list
-set listchars=tab:»-,trail:-,extends:»,precedes:«
+set listchars=tab:»·,trail:·,extends:→,precedes:←
 set backspace=indent,eol,start
 set mouse=a
 set shortmess=aTI
