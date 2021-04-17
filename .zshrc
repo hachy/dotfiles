@@ -1,6 +1,5 @@
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
-export TERM="xterm-256color"
 export XDG_CONFIG_HOME="$HOME/.config"
 bindkey -e
 # 補完
