@@ -30,6 +30,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'mattn/vim-goimports'
+Plug 'rust-lang/rust.vim'
 Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
 call plug#end()
 "}}}

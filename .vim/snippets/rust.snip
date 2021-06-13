@@ -5,7 +5,26 @@ abbr        println!
 snippet fn
 abbr    fn () {}
 options word
-    fn ${1:#:func_name}(${2:#:args}) {
+    fn ${1:#:func_name}(${2}) {
+        ${0:TARGET}
+    }
+
+snippet     if
+abbr        if {}
+options word
+    if ${1:#:condition} {
+        ${0:TARGET}
+    }
+
+snippet else
+options word
+    else {
+        ${0:TARGET}
+    }
+
+snippet elseif
+options word
+    else if ${1:#:condition} {
         ${0:TARGET}
     }
 
@@ -18,4 +37,16 @@ abbr    forin  {}
 snippet match
     match ${1:TARGET} {
         ${2:#:pattern} => ${3:#expr},
+    }
+
+snippet enum
+options word
+    enum ${1} {
+        ${0:TARGET}
+    }
+
+snippet struct
+options word
+    struct ${1} {
+        ${0:TARGET}
     }

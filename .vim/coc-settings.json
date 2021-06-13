@@ -9,6 +9,8 @@
   "coc.source.buffer.firstMatch": false,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": ["rust"],
+  "rust-analyzer.checkOnSave.enable": true,
+  "rust-analyzer.completion.autoimport.enable": true,
   "typescript.showUnused": false,
   "languageserver": {
     "golang": {
