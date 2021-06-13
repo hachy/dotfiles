@@ -375,15 +375,15 @@ endfunction
 
 " vim-quickrun"{{{
 let g:quickrun_config = {}
-let g:quickrun_config._ = {
-      \ 'split' : '%{winwidth(0) * 1.5 < winheight(0) * 5 ? "botright 8" : "vertical 80"}'
-      \ }
+let g:quickrun_config._ = {}
+let g:quickrun_config._['outputter/buffer/opener'] ='%{winwidth(0) >= 100 ? "vnew" : "15new"}'
 let g:quickrun_config.ruby = {'command' : 'ruby'}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
 let g:quickrun_config.cpp = { 'cmdopt': '-std=c++11' }
 
-nnoremap <silent> <Leader>q :<C-u>bw! \[quickrun\ output\]<CR>
+nnoremap <silent> <Leader>q :<C-u>bw! quickrun://output<CR>
 autocmd MyAutoCmd FileType quickrun nnoremap <silent><buffer>q :quit<CR>
+nmap <silent> <Leader>r <Plug>(quickrun)
 "}}}
 
 " fugitive"{{{
