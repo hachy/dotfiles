@@ -37,7 +37,7 @@ call plug#end()
 filetype plugin indent on
 
 " Basic"{{{
-if has("syntax")
+if has('syntax')
   syntax on
 endif
 set hidden
@@ -58,7 +58,7 @@ set showcmd
 set cmdheight=2
 set cmdwinheight=8
 set pumheight=15
-set pumblend=10
+set pumblend=20
 set history=200
 set list
 set listchars=tab:»·,trail:·,extends:→,precedes:←
@@ -197,7 +197,7 @@ xnoremap p "_dP
 "}}}
 
 " complement{{{
-set completeopt=menuone,noinsert
+set completeopt=menuone,noinsert,noselect
 inoremap <expr><CR>    pumvisible() ? "<C-y>"   : "<CR>"
 inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -420,6 +420,7 @@ map ,mg  :MemoGrep<CR>
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint', 'tsserver'],
+      \ 'vim': ['vint'],
       \}
 let g:ale_fixers = {
       \ 'css': ['stylelint'],
@@ -464,7 +465,3 @@ autocmd MyAutoCmd FileType help nnoremap <buffer> q <C-w>c
 "}}}
 
 let g:netrw_localcopycmd = ''
-
-" エンコーディングutf-8を優先する"{{{
-let &fileencodings=substitute(substitute(&fileencodings, ',\?utf-8', '', 'g'), 'cp932', 'utf-8,cp932', '')
-"}}}
