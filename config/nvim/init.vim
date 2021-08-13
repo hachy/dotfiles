@@ -352,7 +352,7 @@ nnoremap <silent><Space>f :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr(
 imap <C-o> <Plug>(neosnippet_expand_or_jump)
 smap <C-o> <Plug>(neosnippet_expand_or_jump)
 " Define directory
-let g:neosnippet#snippets_directory = $HOME.'/dotfiles/.vim/snippets'
+let g:neosnippet#snippets_directory = $HOME.'/dotfiles/config/nvim/snippets'
 let g:neosnippet#disable_runtime_snippets = {
       \   'c' : 1
       \ }
@@ -410,7 +410,7 @@ let g:memolist_fzf = 1
 let g:memolist_memo_date = '%Y-%m-%d'
 let g:memolist_memo_suffix = 'markdown'
 let g:memolist_path = $HOME.'/Dropbox/memo'
-let g:memolist_template_dir_path = '~/.vim/template'
+let g:memolist_template_dir_path = '~/config/nvim/template'
 
 map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
@@ -454,7 +454,7 @@ autocmd MyAutoCmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript
 let g:markdown_fenced_languages = ['ruby']
 
 " Edit init.vim"{{{
-nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/.vim/init.vim<CR>
+nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/config/nvim/init.vim<CR>
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif <CR>
 "}}}
 

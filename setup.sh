@@ -19,7 +19,7 @@ done
 if [ -L $HOME/.config/nvim ]; then
   echo -e "${magenta}.config/nvim${reset} already exists."
 else
-  ln -s $PWD/.vim $HOME/.config/nvim
+  ln -s $PWD/config/nvim $HOME/.config/nvim
   echo -e "Create symlink for ${cyan}.config/nvim${reset}"
 fi
 

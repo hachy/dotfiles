@@ -1,5 +1,2 @@
-~/
-/.vim/bundle
-/.vim/colors
-/.vim/.netrwhist
-/.vim/.init.vim-rplugin~
+config/nvim/bundle
+config/nvim/.netrwhist
