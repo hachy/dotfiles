@@ -388,10 +388,8 @@ nmap <silent> <Leader>r <Plug>(quickrun)
 "}}}
 
 " fugitive"{{{
-nnoremap <Space>gd :<C-u>Gvdiff<Enter>
-nnoremap <Space>gs :<C-u>Gstatus<Enter>
-nnoremap <Space>gl :<C-u>Glog<Enter>
-nnoremap <Space>gb :<C-u>Gblame<Enter>
+nnoremap <Space>gd :<C-u>Gvdiffsplit<Enter>
+nnoremap <Space>gs :<C-u>Git<Enter>
 "}}}
 
 " vim-gitgutter{{{
