@@ -46,6 +46,7 @@ set imdisable
 set ruler
 set title
 set number
+set cursorline
 set tabstop=4
 set shiftwidth=2
 set softtabstop=2
@@ -101,7 +102,7 @@ autocmd MyAutoCmd InsertLeave * set nopaste
 " Color"{{{
 set background=dark
 set termguicolors
-colorscheme eva01-LCL
+colorscheme eva01
 "}}}
 
 " Tabline"{{{
