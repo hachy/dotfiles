@@ -1,0 +1,40 @@
+snippet p
+abbr    print()
+options head
+	print(${0})
+
+snippet for
+abbr    for ... in ...: ...
+options head
+	for ${1:#:value} in ${2:#:list}:
+		${0:pass}
+
+snippet if
+abbr    if ...: ...
+options head
+	if ${1:#:condition}:
+		${0:return}
+
+snippet elif
+abbr    elif ...: ...
+options head
+	elif ${1:#:condition}:
+		${0:pass}
+
+snippet else
+abbr    else: ...
+options head
+	else:
+		${0:pass}
+
+snippet func
+abbr    func func_name(): ...
+options head
+	func ${1:#:func_name}(${2}):
+		${0:pass}
+
+snippet match
+options head
+	match ${1:#:expression}:
+		${2:#:pattern}:
+			${0:#:block}
