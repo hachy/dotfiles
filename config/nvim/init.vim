@@ -1,3 +1,5 @@
+set encoding=utf-8
+scriptencoding utf-8
 set runtimepath+=$XDG_CONFIG_HOME/nvim/,$XDG_CONFIG_HOME/nvim/after
 
 augroup MyAutoCmd
