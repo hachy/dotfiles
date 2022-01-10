@@ -17,10 +17,18 @@ Plug 'junegunn/vim-plug',
 Plug 'hachy/eva01.vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'Shougo/ddc.vim'
+Plug 'vim-denops/denops.vim'
+Plug 'shun/ddc-vim-lsp'
+Plug 'tani/ddc-fuzzy'
+Plug 'Shougo/ddc-around'
+Plug 'Shougo/ddc-converter_remove_overlap'
+Plug 'LumaKernel/ddc-file'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'thinca/vim-quickrun'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'glidenote/memolist.vim'
@@ -266,6 +274,107 @@ nnoremap <silent> <SPACE>b :Buffers<CR>
 nnoremap <silent> <SPACE>h :History<CR>
 "}}}
 
+" vim-lsp{{{
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_float_cursor = 0
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_signature_help_enabled = 0
+let g:lsp_diagnostics_virtual_text_prefix = ' ‣ '
+let g:lsp_diagnostics_signs_error       = {'text': '✘'}
+let g:lsp_diagnostics_signs_warning     = {'text': '⚠'}
+let g:lsp_diagnostics_signs_information = {'text': '✔'}
+let g:lsp_diagnostics_signs_hint        = {'text': '●'}
+
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+
+  let g:lsp_format_sync_timeout = 1000
+  autocmd! MyAutoCmd BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> K <plug>(lsp-hover)
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+if executable('rust-analyzer')
+  au MyAutoCmd User lsp_setup call lsp#register_server({
+        \   'name': 'Rust Language Server',
+        \   'cmd': {server_info->['rust-analyzer']},
+        \   'whitelist': ['rust'],
+        \ })
+endif
+"}}}
+
+" ddc{{{
+call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'file'])
+
+call ddc#custom#patch_global('sourceOptions', {
+      \ '_': {
+        \  'matchers': ['matcher_fuzzy'],
+        \  'sorters': ['sorter_fuzzy'],
+        \  'converters': ['converter_fuzzy']
+        \ }})
+
+" ddc-vim-lsp
+call ddc#custom#patch_global('sourceOptions', {
+      \ 'vim-lsp': {
+        \   'mark': 'LSP', 
+        \   'matchers': ['matcher_fuzzy'],
+        \   'forceCompletionPattern': '\.|:|->|"\w+/*'
+        \ }})
+
+" ddc-around
+call ddc#custom#patch_global('sourceOptions', {
+      \ 'around': {'mark': 'A'},
+      \ })
+call ddc#custom#patch_global('sourceParams', {
+      \ 'around': {'maxSize': 500},
+      \ })
+
+" ddc-file
+call ddc#custom#patch_global('sourceOptions', {
+    \ 'file': {
+    \   'mark': 'F',
+    \   'isVolatile': v:true,
+    \   'forceCompletionPattern': '\S/\S*',
+    \ }})
+call ddc#custom#patch_filetype(
+    \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
+    \ 'sourceOptions': {
+    \   'file': {
+    \     'forceCompletionPattern': '\S\\\S*',
+    \   },
+    \ },
+    \ 'sourceParams': {
+    \   'file': {
+    \     'mode': 'win32',
+    \   },
+    \ }})
+
+" Customize settings on a filetype
+call ddc#custom#patch_filetype('markdown', 'sourceParams', {
+      \ 'around': {'maxSize': 100},
+      \ })
+
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? '<C-n>' :
+      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+      \ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+
+" Use ddc.
+call ddc#enable()
+"}}}
+
 " defx.nvim{{{
 autocmd MyAutoCmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
@@ -358,23 +467,6 @@ let g:neosnippet#snippets_directory = $HOME.'/dotfiles/config/nvim/snippets'
 let g:neosnippet#disable_runtime_snippets = {
       \   'c' : 1
       \ }
-"}}}
-
-" coc.nvim{{{
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <silent> gd <Plug>(coc-definition)
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 "}}}
 
 " vim-quickrun"{{{
