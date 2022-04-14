@@ -17,11 +17,11 @@ Plug 'junegunn/vim-plug',
 Plug 'hachy/eva01.vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
-Plug 'shun/ddc-vim-lsp'
+Plug 'Shougo/ddc-nvim-lsp'
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/ddc-around'
 Plug 'Shougo/ddc-converter_remove_overlap'
@@ -269,60 +269,95 @@ nnoremap <silent> <SPACE>b :Buffers<CR>
 nnoremap <silent> <SPACE>h :History<CR>
 "}}}
 
-" vim-lsp{{{
-let g:lsp_diagnostics_virtual_text_enabled = 0
-let g:lsp_diagnostics_float_cursor = 0
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_signature_help_enabled = 0
-let g:lsp_diagnostics_virtual_text_prefix = ' ‣ '
-let g:lsp_diagnostics_signs_error       = {'text': '✘'}
-let g:lsp_diagnostics_signs_warning     = {'text': '⚠'}
-let g:lsp_diagnostics_signs_information = {'text': '✔'}
-let g:lsp_diagnostics_signs_hint        = {'text': '●'}
+" nvim-lspconfig{{{
+lua << EOF
+local nvim_lsp = require('lspconfig')
 
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+local opts = { noremap=true, silent=true }
+local on_attach = function(client, bufnr)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+end
 
-  let g:lsp_format_sync_timeout = 1000
-  autocmd! MyAutoCmd BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+nvim_lsp.gdscript.setup{}
 
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> K <plug>(lsp-hover)
-endfunction
+local servers = { 'solargraph' }
 
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    flags = {
+      debounce_text_changes = 150,
+      },
+  }
+end
 
-if executable('rust-analyzer')
-  au MyAutoCmd User lsp_setup call lsp#register_server({
-        \   'name': 'Rust Language Server',
-        \   'cmd': {server_info->['rust-analyzer']},
-        \   'whitelist': ['rust'],
-        \ })
-endif
+local signs = { Error = "✘", Warn = "⚠", Hint = "✔", Info = "●" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
+
+local hl_tbl = {
+   [vim.diagnostic.severity.ERROR] = "DiagnosticError",
+   [vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+   [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+   [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+}
+
+function PrintDiagnostics(opts, bufnr, line_nr, client_id)
+  bufnr = bufnr or 0
+  line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
+  opts = opts or {['lnum'] = line_nr}
+
+  local line_diagnostics = vim.diagnostic.get(bufnr, opts)
+  if vim.tbl_isempty(line_diagnostics) then return end
+
+  local diagnostic_message = ""
+  local hl = "Normal"
+  for i, diagnostic in ipairs(line_diagnostics) do
+    diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
+    if i ~= #line_diagnostics then
+      diagnostic_message = diagnostic_message .. "\n"
+    end
+    hl=hl_tbl[diagnostic.severity]
+  end
+  vim.api.nvim_echo({{diagnostic_message, hl}}, false, {})
+end
+
+vim.cmd [[ autocmd! CursorHold * lua PrintDiagnostics() ]]
+EOF
 "}}}
 
 " ddc{{{
-call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'file'])
+call ddc#custom#patch_global('sources', ['nvim-lsp', 'neosnippet', 'around', 'file'])
 
 call ddc#custom#patch_global('sourceOptions', {
       \ '_': {
         \  'matchers': ['matcher_fuzzy'],
         \  'sorters': ['sorter_fuzzy'],
         \  'converters': ['converter_fuzzy']
-        \ }})
+        \ },
+      \ 'neosnippet': {'mark': 'snip'}
+      \})
 
-" ddc-vim-lsp
+" ddc-nvim-lsp
 call ddc#custom#patch_global('sourceOptions', {
-      \ 'vim-lsp': {
-        \   'mark': 'LSP', 
-        \   'matchers': ['matcher_fuzzy'],
-        \   'forceCompletionPattern': '\.|:|->|"\w+/*'
-        \ }})
+      \ '_': { 'matchers': ['matcher_fuzzy'] },
+      \ 'nvim-lsp': {
+      \   'mark': 'lsp',
+      \   'forceCompletionPattern': '\.\w*|:\w*|->\w*' },
+      \ })
 
 " ddc-around
 call ddc#custom#patch_global('sourceOptions', {
