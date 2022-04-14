@@ -40,6 +40,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'mattn/vim-goimports'
+Plug 'habamax/vim-godot'
 Plug 'rust-lang/rust.vim'
 Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
 call plug#end()
@@ -566,6 +567,18 @@ command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_sav
 let g:prettier#autoformat = 0
 autocmd MyAutoCmd BufWritePre *.css,*.scss,*.graphql,*.vue,*.yaml,*.html,*json PrettierAsync
 "}}}
+
+" vim-godot{{{
+let g:godot_executable = '/Applications/Godot.app'
+func! GodotSettings() abort
+  setl noexpandtab
+  setl tabstop=4
+  setl softtabstop=4
+  setl shiftwidth=4
+endfunc
+augroup godot | au!
+  au FileType gdscript call GodotSettings()
+augroup end
 "}}}
 
 autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
