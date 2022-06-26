@@ -281,20 +281,20 @@ call ddc#custom#patch_global('sourceOptions', {
         \  'sorters': ['sorter_fuzzy'],
         \  'converters': ['converter_fuzzy']
         \ },
-      \ 'neosnippet': {'mark': 'snip'}
+      \ 'neosnippet': {'mark': '[snip]'}
       \})
 
 " ddc-nvim-lsp
 call ddc#custom#patch_global('sourceOptions', {
       \ '_': { 'matchers': ['matcher_fuzzy'] },
       \ 'nvim-lsp': {
-      \   'mark': 'lsp',
+      \   'mark': '[lsp]',
       \   'forceCompletionPattern': '\.\w*|:\w*|->\w*' },
       \ })
 
 " ddc-around
 call ddc#custom#patch_global('sourceOptions', {
-      \ 'around': {'mark': 'A'},
+      \ 'around': {'mark': '[A]'},
       \ })
 call ddc#custom#patch_global('sourceParams', {
       \ 'around': {'maxSize': 500},
@@ -303,7 +303,7 @@ call ddc#custom#patch_global('sourceParams', {
 " ddc-file
 call ddc#custom#patch_global('sourceOptions', {
     \ 'file': {
-    \   'mark': 'F',
+    \   'mark': '[F]',
     \   'isVolatile': v:true,
     \   'forceCompletionPattern': '\S/\S*',
     \ }})
