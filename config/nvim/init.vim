@@ -19,6 +19,7 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
+Plug 'mhartington/formatter.nvim'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
 Plug 'Shougo/ddc-nvim-lsp'
@@ -270,6 +271,7 @@ nnoremap <silent> <SPACE>h :History<CR>
 "}}}
 
 lua require "nvim-lspconfig"
+lua require "format"
 
 " ddc{{{
 call ddc#custom#patch_global('sources', ['nvim-lsp', 'neosnippet', 'around', 'file'])
