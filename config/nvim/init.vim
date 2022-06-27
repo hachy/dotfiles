@@ -32,7 +32,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'thinca/vim-quickrun'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'glidenote/memolist.vim'
-Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -470,29 +469,6 @@ let g:memolist_template_dir_path = '~/config/nvim/template'
 map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
-"}}}
-
-" ale{{{
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint', 'tsserver'],
-      \ 'vim': ['vint'],
-      \}
-let g:ale_fixers = {
-      \ 'css': ['stylelint'],
-      \ 'scss': ['stylelint'],
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint'],
-      \ 'ruby': ['rubocop'],
-      \ 'python': ['black'],
-      \}
-let g:ale_disable_lsp = 1
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-command! ALEToggleFixer execute "let g:ale_fix_on_save = get(g:, 'ale_fix_on_save', 0) ? 0 : 1"
 "}}}
 
 " vim-prettier{{{
