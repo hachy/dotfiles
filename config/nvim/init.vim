@@ -38,7 +38,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'mattn/vim-goimports'
 Plug 'habamax/vim-godot'
 Plug 'rust-lang/rust.vim'
@@ -465,11 +464,6 @@ let g:memolist_template_dir_path = '~/config/nvim/template'
 map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
-"}}}
-
-" vim-prettier{{{
-let g:prettier#autoformat = 0
-autocmd MyAutoCmd BufWritePre *.css,*.scss,*.graphql,*.vue,*.yaml,*.html,*json PrettierAsync
 "}}}
 
 " vim-godot{{{
