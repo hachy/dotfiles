@@ -455,12 +455,6 @@ nnoremap <Space>gs :<C-u>Git<Enter>
 autocmd MyAutoCmd BufWritePost * GitGutter
 "}}}
 
-" matchit.vim"{{{
-if !exists('g:loaded_matchit')
-  runtime macros/matchit.vim
-endif
-"}}}
-
 " memolist.vim "{{{
 let g:memolist_fzf = 1
 let g:memolist_memo_date = '%Y-%m-%d'
