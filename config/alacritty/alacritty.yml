@@ -46,8 +46,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-   x: 6
-   y: 6
+   x: 0
+   y: 0
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -63,7 +63,7 @@ window:
   #     - buttonless: Title bar, transparent background and no title bar buttons
   decorations: buttonless
 
-  opacity: .85
+  opacity: .9
   # Startup Mode (changes require restart)
   #
   # Values for `startup_mode`:
@@ -180,7 +180,7 @@ font:
 colors:
   # Default colors
   primary:
-   background: '#000000'
+   background: '#242629'
    foreground: '#d7d1dc'
 
     # Bright and dim foreground colors
