@@ -11,7 +11,7 @@ end
 
 nvim_lsp.gdscript.setup({})
 
-local servers = { "solargraph" }
+local servers = { "solargraph", "pylsp" }
 
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
