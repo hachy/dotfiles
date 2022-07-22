@@ -485,13 +485,6 @@ augroup godot | au!
 augroup end
 "}}}
 
-autocmd MyAutoCmd BufNewFile,BufRead *_spec.rb set filetype=ruby.rspec
-autocmd MyAutoCmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-autocmd MyAutoCmd BufNewFile,BufRead *.{ruby,jbuilder} set filetype=ruby
-autocmd MyAutoCmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
-
-let g:markdown_fenced_languages = ['ruby']
-
 " Edit init.vim"{{{
 nnoremap <silent> <Space>ev  :<C-u>edit $HOME/dotfiles/config/nvim/init.vim<CR>
 nnoremap <silent> <F5> :<C-u>source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif <CR>
