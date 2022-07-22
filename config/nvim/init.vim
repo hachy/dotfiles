@@ -503,5 +503,3 @@ autocmd MyAutoCmd CmdwinLeave * unabbrev h
 " Close help by pressing q.
 autocmd MyAutoCmd FileType help nnoremap <buffer> q <C-w>c
 "}}}
-
-let g:netrw_localcopycmd = ''
