@@ -18,7 +18,6 @@ Plug 'hachy/eva01.vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
 Plug 'mhartington/formatter.nvim'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
