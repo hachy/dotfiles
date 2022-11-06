@@ -21,6 +21,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'mhartington/formatter.nvim'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
+Plug 'Shougo/ddc-ui-native'
 Plug 'Shougo/ddc-nvim-lsp'
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/ddc-around'
@@ -272,6 +273,8 @@ lua require "nvim-lspconfig"
 lua require "format"
 
 " ddc{{{
+call ddc#custom#patch_global('ui', 'native')
+
 call ddc#custom#patch_global('sources', ['nvim-lsp', 'neosnippet', 'around', 'file'])
 
 call ddc#custom#patch_global('sourceOptions', {
