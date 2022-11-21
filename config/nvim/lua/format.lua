@@ -20,6 +20,12 @@ require("formatter").setup({
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},
+		html = {
+			require("formatter.filetypes.html").prettier,
+		},
+		css = {
+			require("formatter.filetypes.css").prettier,
+		},
 		json = {
 			require("formatter.filetypes.json").prettier,
 		},
