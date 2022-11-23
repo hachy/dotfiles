@@ -24,10 +24,25 @@ require("formatter").setup({
 			require("formatter.filetypes.html").prettier,
 		},
 		css = {
-			require("formatter.filetypes.css").prettier,
+			function()
+				return {
+					exe = "stylelint",
+					args = {
+						"--fix",
+						"--stdin",
+						"--stdin-filename",
+						util.escape_path(util.get_current_buffer_file_path()),
+					},
+					stdin = true,
+					try_node_modules = true,
+				}
+			end,
 		},
 		json = {
 			require("formatter.filetypes.json").prettier,
+		},
+		["*"] = {
+			require("formatter.filetypes.any").remove_trailing_whitespace,
 		},
 	},
 })
