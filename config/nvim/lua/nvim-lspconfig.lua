@@ -19,11 +19,23 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 end
 
-local servers = { "solargraph", "pylsp", "gdscript", "jsonls" }
+local servers = { "solargraph", "pylsp", "gdscript" }
 
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		on_attach = on_attach,
+	})
+end
+
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local servers_2 = { "cssls", "jsonls" }
+for _, lsp in ipairs(servers_2) do
+	nvim_lsp.cssls.setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
 	})
 end
 
