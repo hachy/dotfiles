@@ -269,8 +269,8 @@ nnoremap <silent> <SPACE>b :Buffers<CR>
 nnoremap <silent> <SPACE>h :History<CR>
 "}}}
 
-lua require "nvim-lspconfig"
-lua require "format"
+lua require "plugins.nvim-lspconfig"
+lua require "plugins.formatter"
 
 " ddc{{{
 call ddc#custom#patch_global('ui', 'native')
