@@ -41,7 +41,6 @@ Plug 'tomtom/tcomment_vim'
 Plug 'mattn/vim-goimports'
 Plug 'habamax/vim-godot'
 Plug 'rust-lang/rust.vim'
-Plug 'vim-jp/vimdoc-ja', { 'for': 'help' }
 call plug#end()
 "}}}
 
@@ -222,23 +221,6 @@ autocmd MyAutoCmd BufEnter * if &buftype ==# 'terminal' | startinsert! | endif
 autocmd MyAutoCmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
 tnoremap <C-w> <C-\><C-n><C-w>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-"}}}
-
-" 全角スペースを強調表示"{{{
-function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    " ZenkakuSpaceをカラーファイルで設定するなら次の行は削除
-    autocmd ColorScheme       * call ZenkakuSpace()
-    " 全角スペースのハイライト指定
-    autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-  augroup END
-  call ZenkakuSpace()
-endif
 "}}}
 
 " Command line"{{{
