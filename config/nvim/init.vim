@@ -30,6 +30,7 @@ Plug 'LumaKernel/ddc-file'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'thinca/vim-quickrun'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'glidenote/memolist.vim'
