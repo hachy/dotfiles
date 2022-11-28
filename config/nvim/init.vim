@@ -181,8 +181,6 @@ cnoremap <C-f> <Right>
 cnoremap <C-n> <Down>
 cnoremap <C-p> <Up>
 
-" Yank the characters under the cursor until the end of the line
-nnoremap Y y$
 " Enter == o
 nnoremap <CR> o<Esc>
 " C-c == ESC
