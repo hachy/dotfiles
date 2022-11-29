@@ -18,6 +18,7 @@ Plug 'hachy/eva01.vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mhartington/formatter.nvim'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
@@ -241,9 +242,6 @@ nnoremap <silent> <SPACE>b :Buffers<CR>
 nnoremap <silent> <SPACE>h :History<CR>
 "}}}
 
-lua require "plugins.nvim-lspconfig"
-lua require "plugins.formatter"
-
 " ddc{{{
 call ddc#custom#patch_global('ui', 'native')
 
@@ -464,3 +462,9 @@ autocmd MyAutoCmd CmdwinLeave * unabbrev h
 " Close help by pressing q.
 autocmd MyAutoCmd FileType help nnoremap <buffer> q <C-w>c
 "}}}
+
+lua <<EOF
+  require("plugins.nvim-lspconfig")
+  require("plugins.treesitter")
+  require("plugins.formatter")
+EOF
