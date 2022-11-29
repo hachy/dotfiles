@@ -15,7 +15,7 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'junegunn/vim-plug',
       \ {'dir': '~/.config/nvim/bundle/vim-plug/autoload'}
 Plug 'hachy/eva01.vim'
-Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -36,13 +36,11 @@ Plug 'thinca/vim-quickrun'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'haml', 'eruby'] }
 Plug 'glidenote/memolist.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround'
+Plug 'kylechui/nvim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'tomtom/tcomment_vim'
-Plug 'mattn/vim-goimports'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'numToStr/Comment.nvim'
 Plug 'habamax/vim-godot'
-Plug 'rust-lang/rust.vim'
 call plug#end()
 "}}}
 
@@ -422,10 +420,6 @@ nnoremap <Space>gd :<C-u>Gvdiffsplit<Enter>
 nnoremap <Space>gs :<C-u>Git<Enter>
 "}}}
 
-" vim-gitgutter{{{
-autocmd MyAutoCmd BufWritePost * GitGutter
-"}}}
-
 " memolist.vim "{{{
 let g:memolist_fzf = 1
 let g:memolist_memo_date = '%Y-%m-%d'
@@ -467,4 +461,7 @@ lua <<EOF
   require("plugins.nvim-lspconfig")
   require("plugins.treesitter")
   require("plugins.formatter")
+  require("nvim-surround").setup({})
+  require("Comment").setup({})
+  require('gitsigns').setup()
 EOF
