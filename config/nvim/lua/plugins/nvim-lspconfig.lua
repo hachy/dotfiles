@@ -19,7 +19,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 end
 
-local servers = { "solargraph", "pylsp", "gdscript" }
+local servers = { "solargraph", "pylsp", "gdscript", "tsserver" }
 
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
