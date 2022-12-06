@@ -20,6 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mhartington/formatter.nvim'
+Plug 'mfussenegger/nvim-lint'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
 Plug 'Shougo/ddc-ui-native'
@@ -461,6 +462,7 @@ lua <<EOF
   require("plugins.nvim-lspconfig")
   require("plugins.treesitter")
   require("plugins.formatter")
+  require("plugins.nvim-lint")
   require("nvim-surround").setup({})
   require("Comment").setup({})
   require('gitsigns').setup()
