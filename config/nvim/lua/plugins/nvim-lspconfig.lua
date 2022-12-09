@@ -33,7 +33,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local servers_2 = { "cssls", "jsonls" }
 for _, lsp in ipairs(servers_2) do
-  nvim_lsp.cssls.setup {
+  nvim_lsp[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
