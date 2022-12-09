@@ -39,6 +39,20 @@ for _, lsp in ipairs(servers_2) do
   }
 end
 
+nvim_lsp.sumneko_lua.setup {
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+}
+
 local signs = { Error = "✘", Warn = "⚠", Hint = "✔", Info = "●" }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
