@@ -17,6 +17,7 @@ Plug 'junegunn/vim-plug',
 Plug 'hachy/eva01.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mhartington/formatter.nvim'
@@ -234,11 +235,16 @@ endfunction
 " fzf{{{
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
 let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+let g:fzf_preview_window = ['down,50%', 'ctrl-/']
 
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <SPACE>b :Buffers<CR>
-nnoremap <silent> <SPACE>h :History<CR>
+nnoremap <silent> <SPACE>G :Rg<CR>
+"}}}
+
+" fzf-mru{{{
+nnoremap <silent> <SPACE>h :FZFMru<CR>
 "}}}
 
 " ddc{{{
