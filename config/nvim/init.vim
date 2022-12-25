@@ -156,6 +156,9 @@ set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&e
 "}}}
 
 " Keymappings"{{{
+nnoremap [b :bnext<cr>
+nnoremap ]b :bprev<cr>
+
 nnoremap <C-h> <Home>
 vnoremap <C-h> <Home>
 nnoremap <C-l> <End>
