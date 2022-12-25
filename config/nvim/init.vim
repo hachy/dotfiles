@@ -68,11 +68,12 @@ set smartindent
 set breakindent
 set showmatch
 set showcmd
-set cmdheight=2
+set cmdheight=1
 set cmdwinheight=8
 set pumheight=15
 set pumblend=20
-set history=200
+set winblend=20
+set history=500
 set list
 set listchars=tab:»·,trail:·,extends:→,precedes:←
 set backspace=indent,eol,start
@@ -84,7 +85,6 @@ set nrformats=alpha,octal,hex
 set foldenable
 set foldmethod=marker
 set foldcolumn=0
-autocmd MyAutoCmd FileType vim setlocal foldcolumn=2
 " No backups
 set nobackup
 set nowritebackup
@@ -96,7 +96,7 @@ set scrolloff=5
 set splitright
 set splitbelow
 set updatetime=300
-set signcolumn=yes
+set signcolumn=auto
 
 if has('unnamedplus')
   set clipboard& clipboard+=unnamedplus
@@ -113,7 +113,7 @@ autocmd MyAutoCmd InsertLeave * set nopaste
 " Color"{{{
 set background=dark
 set termguicolors
-colorscheme eva01
+colorscheme eva01-LCL
 "}}}
 
 " Tabline"{{{
@@ -151,7 +151,7 @@ nmap ,c :%s///gn<CR>
 "}}}
 
 " Statusline"{{{
-set laststatus=2
+set laststatus=3
 set statusline=%<\%F\ %y%m%r%=%{fugitive#statusline()}\ %{''.(&fenc!=''?&fenc:&enc).''}\%{(&bomb?\",BOM\":\"\")}\ %{&ff}\ %3p%%\ [%4l:%3c]
 "}}}
 
@@ -422,6 +422,7 @@ let g:quickrun_config._['outputter/buffer/opener'] ='%{winwidth(0) >= 100 ? "vne
 let g:quickrun_config.ruby = {'command' : 'ruby'}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
 let g:quickrun_config.cpp = { 'cmdopt': '-std=c++11' }
+let g:quickrun_config.rust = {'exec' : 'cargo run'}
 
 nnoremap <silent> <Leader>q :<C-u>bw! quickrun://output<CR>
 autocmd MyAutoCmd FileType quickrun nnoremap <silent><buffer>q :quit<CR>
