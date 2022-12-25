@@ -231,6 +231,9 @@ function! s:init_cmdwin()
   inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
   setl nonumber
   setl signcolumn=no
+  g/^qa\?!\?$/d
+  g/^wq\?a\?!\?$/d
+  normal! G
   startinsert!
 endfunction
 "}}}
