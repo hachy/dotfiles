@@ -472,11 +472,11 @@ autocmd MyAutoCmd FileType help nnoremap <buffer> q <C-w>c
 "}}}
 
 lua <<EOF
-  require("plugins.nvim-lspconfig")
-  require("plugins.treesitter")
-  require("plugins.formatter")
-  require("plugins.nvim-lint")
-  require("nvim-surround").setup({})
-  require("Comment").setup({})
-  require('gitsigns').setup()
+require "plugins.nvim-lspconfig"
+require "plugins.treesitter"
+require "plugins.formatter"
+require "plugins.nvim-lint"
+require("nvim-surround").setup {}
+require("Comment").setup {}
+require("gitsigns").setup {}
 EOF
