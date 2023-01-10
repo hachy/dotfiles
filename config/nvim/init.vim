@@ -30,6 +30,7 @@ Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/ddc-around'
 Plug 'Shougo/ddc-converter_remove_overlap'
 Plug 'LumaKernel/ddc-file'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -459,5 +460,7 @@ require "plugins.nvim-lint"
 require("nvim-surround").setup {}
 require("Comment").setup {}
 require("gitsigns").setup {}
+require("lsp_signature").setup {}
+require("lsp_signature").on_attach()
 require("colorizer").setup {}
 EOF
