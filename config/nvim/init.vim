@@ -23,14 +23,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mhartington/formatter.nvim'
 Plug 'mfussenegger/nvim-lint'
-Plug 'Shougo/ddc.vim'
-Plug 'vim-denops/denops.vim'
-Plug 'Shougo/ddc-ui-native'
-Plug 'Shougo/ddc-nvim-lsp'
-Plug 'tani/ddc-fuzzy'
-Plug 'Shougo/ddc-around'
-Plug 'Shougo/ddc-converter_remove_overlap'
-Plug 'LumaKernel/ddc-file'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
@@ -233,74 +225,6 @@ nnoremap <silent> <SPACE>G :Rg<CR>
 
 " fzf-mru{{{
 nnoremap <silent> <SPACE>h :FZFMru<CR>
-"}}}
-
-" ddc{{{
-call ddc#custom#patch_global('ui', 'native')
-
-call ddc#custom#patch_global('sources', ['nvim-lsp', 'neosnippet', 'around', 'file'])
-
-call ddc#custom#patch_global('sourceOptions', {
-      \ '_': {
-        \  'matchers': ['matcher_fuzzy'],
-        \  'sorters': ['sorter_fuzzy'],
-        \  'converters': ['converter_fuzzy']
-        \ },
-      \ 'neosnippet': {'mark': '[snip]'}
-      \})
-
-" ddc-nvim-lsp
-call ddc#custom#patch_global('sourceOptions', {
-      \ '_': { 'matchers': ['matcher_fuzzy'] },
-      \ 'nvim-lsp': {
-      \   'mark': '[lsp]',
-      \   'forceCompletionPattern': '\.\w*|:\w*|->\w*' },
-      \ })
-
-" ddc-around
-call ddc#custom#patch_global('sourceOptions', {
-      \ 'around': {'mark': '[A]'},
-      \ })
-call ddc#custom#patch_global('sourceParams', {
-      \ 'around': {'maxSize': 500},
-      \ })
-
-" ddc-file
-call ddc#custom#patch_global('sourceOptions', {
-    \ 'file': {
-    \   'mark': '[F]',
-    \   'isVolatile': v:true,
-    \   'forceCompletionPattern': '\S/\S*',
-    \ }})
-call ddc#custom#patch_filetype(
-    \ ['ps1', 'dosbatch', 'autohotkey', 'registry'], {
-    \ 'sourceOptions': {
-    \   'file': {
-    \     'forceCompletionPattern': '\S\\\S*',
-    \   },
-    \ },
-    \ 'sourceParams': {
-    \   'file': {
-    \     'mode': 'win32',
-    \   },
-    \ }})
-
-" Customize settings on a filetype
-call ddc#custom#patch_filetype('markdown', 'sourceParams', {
-      \ 'around': {'maxSize': 100},
-      \ })
-
-" <TAB>: completion.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? '<C-n>' :
-      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-      \ '<TAB>' : ddc#map#manual_complete()
-
-" <S-TAB>: completion back.
-inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
-
-" Use ddc.
-call ddc#enable()
 "}}}
 
 " defx.nvim{{{
