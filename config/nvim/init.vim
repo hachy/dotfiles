@@ -15,6 +15,7 @@ call plug#begin('~/.config/nvim/bundle')
 Plug 'junegunn/vim-plug',
       \ {'dir': '~/.config/nvim/bundle/vim-plug/autoload'}
 Plug 'hachy/eva01.vim'
+Plug 'hachy/cmdpalette.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
@@ -457,6 +458,7 @@ require "plugins.nvim-lspconfig"
 require "plugins.treesitter"
 require "plugins.formatter"
 require "plugins.nvim-lint"
+require "plugins.cmdpalette"
 require("nvim-surround").setup {}
 require("Comment").setup {}
 require("gitsigns").setup {}
