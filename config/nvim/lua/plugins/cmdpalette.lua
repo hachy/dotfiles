@@ -12,6 +12,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "cmdpalette" },
   callback = function()
     vim.cmd [[noreabbrev h tab help]]
+    vim.api.nvim_buf_set_keymap(
+      0,
+      "i",
+      "<Tab>",
+      "<Cmd>lua require('cmp').complete()<CR>",
+      { nowait = true, noremap = true, silent = true }
+    )
   end,
 })
 

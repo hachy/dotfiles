@@ -35,19 +35,9 @@ local on_attach = function(client, bufnr)
 end
 
 local servers = { "solargraph", "pylsp", "gdscript", "tsserver" }
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-  }
-end
-
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local servers_2 = { "cssls", "jsonls" }
-for _, lsp in ipairs(servers_2) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -72,6 +62,18 @@ nvim_lsp.sumneko_lua.setup {
     },
   },
 }
+
+--Enable (broadcasting) snippet capability for completion
+local capabilities_2 = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local servers_2 = { "cssls", "jsonls" }
+for _, lsp in ipairs(servers_2) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities_2,
+  }
+end
 
 local signs = { Error = "✘", Warn = "⚠", Hint = "✔", Info = "●" }
 for type, icon in pairs(signs) do

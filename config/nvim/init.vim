@@ -23,6 +23,12 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mhartington/formatter.nvim'
 Plug 'mfussenegger/nvim-lint'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'notomo/cmp-neosnippet'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
@@ -382,6 +388,7 @@ require "plugins.nvim-lspconfig"
 require "plugins.treesitter"
 require "plugins.formatter"
 require "plugins.nvim-lint"
+require "plugins.nvim-cmp"
 require "plugins.cmdpalette"
 require("nvim-surround").setup {}
 require("Comment").setup {}
