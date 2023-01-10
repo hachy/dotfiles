@@ -218,27 +218,6 @@ inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "}}}
 
-" Command line"{{{
-nnoremap <SID>(command-line-enter) q:
-xnoremap <SID>(command-line-enter) q:
-nnoremap <SID>(command-line-norange) q:<C-u>
-
-nmap :  <SID>(command-line-enter)
-xmap :  <SID>(command-line-enter)
-
-autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
-function! s:init_cmdwin()
-  nnoremap <buffer> q :<C-u>quit<CR>
-  inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-  setl nonumber
-  setl signcolumn=no
-  g/^qa\?!\?$/d
-  g/^wq\?a\?!\?$/d
-  normal! G
-  startinsert!
-endfunction
-"}}}
-
 " fzf{{{
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
 let g:fzf_buffers_jump = 1
