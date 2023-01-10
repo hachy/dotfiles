@@ -43,6 +43,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'habamax/vim-godot'
+Plug 'NvChad/nvim-colorizer.lua'
 call plug#end()
 "}}}
 
@@ -479,4 +480,5 @@ require "plugins.nvim-lint"
 require("nvim-surround").setup {}
 require("Comment").setup {}
 require("gitsigns").setup {}
+require("colorizer").setup {}
 EOF
