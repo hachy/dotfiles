@@ -47,6 +47,12 @@ require("formatter").setup {
     json = {
       require("formatter.filetypes.json").prettier,
     },
+    yaml = {
+      require("formatter.filetypes.yaml").prettier,
+    },
+    yml = {
+      require("formatter.filetypes.yaml").prettier,
+    },
     ["*"] = {
       require("formatter.filetypes.any").remove_trailing_whitespace,
     },
