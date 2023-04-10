@@ -42,7 +42,6 @@ Plug 'kylechui/nvim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'numToStr/Comment.nvim'
-Plug 'habamax/vim-godot'
 Plug 'NvChad/nvim-colorizer.lua'
 call plug#end()
 "}}}
@@ -356,19 +355,6 @@ let g:memolist_template_dir_path = '~/config/nvim/template'
 map ,mn  :MemoNew<CR>
 map ,ml  :MemoList<CR>
 map ,mg  :MemoGrep<CR>
-"}}}
-
-" vim-godot{{{
-let g:godot_executable = '/Applications/Godot.app'
-func! GodotSettings() abort
-  setl noexpandtab
-  setl tabstop=4
-  setl softtabstop=4
-  setl shiftwidth=4
-endfunc
-augroup godot | au!
-  au FileType gdscript call GodotSettings()
-augroup end
 "}}}
 
 " Edit init.vim"{{{
