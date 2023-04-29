@@ -139,6 +139,8 @@ export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+
 # github access token
 export HOMEBREW_GITHUB_API_TOKEN=$HOME/.homebrew_github_api_token
 
