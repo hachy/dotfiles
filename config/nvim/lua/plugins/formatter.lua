@@ -23,6 +23,9 @@ require("formatter").setup {
     html = {
       require("formatter.filetypes.html").prettier,
     },
+    cpp = {
+      require("formatter.filetypes.cpp").clangformat,
+    },
     css = {
       function()
         return {
