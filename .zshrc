@@ -80,6 +80,11 @@ man() {
     man "$@"
 }
 
+# exa
+if [ -x "$(command -v exa)" ]; then
+  alias ls='exa --group-directories-first'
+fi
+
 # ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
