@@ -49,8 +49,7 @@ nvim_lsp.rust_analyzer.setup {
   cmd = { "rustup", "run", "stable", "rust-analyzer" },
 }
 
-nvim_lsp.sumneko_lua.setup {
-  on_attach = on_attach,
+nvim_lsp.lua_ls.setup {
   settings = {
     Lua = {
       runtime = {
@@ -58,6 +57,13 @@ nvim_lsp.sumneko_lua.setup {
       },
       diagnostics = {
         globals = { "vim" },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
       },
     },
   },
