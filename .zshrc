@@ -41,7 +41,7 @@ function +vi-git-stash() {
 # prompt
 autoload -Uz colors
 colors
-ICON=$'➤ '
+ICON=$'\uf061 '
 PROMPT='%B%F{119}${ICON}%b%f%B%F{209}${vcs_info_msg_0_}%b%f '
 RPROMPT='[%F{119}%~%f]'
 
@@ -82,7 +82,7 @@ man() {
 
 # exa
 if [ -x "$(command -v exa)" ]; then
-  alias ls='exa --group-directories-first'
+  alias ls='exa --icons --group-directories-first'
 fi
 
 # ruby
