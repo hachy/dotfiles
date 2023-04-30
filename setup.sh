@@ -1,31 +1,28 @@
 #!/bin/bash
 
-DOT_FILES=( .gitconfig .gitignore .gitignore_global .zshrc .gemrc .tmux.conf .pryrc )
+DOT_FILES=( .gitconfig .gitignore .gitignore_global .zshrc .gemrc .pryrc )
+DIRS=(nvim alacritty tmux)
 
-reset="\033[0m"
-magenta="\033[1;35m"
-cyan="\033[1;36m"
+NC='\033[0m'
+BWhite='\033[1;37m'
+BGreen='\033[1;32m'
 
 for file in ${DOT_FILES[@]}
 do
   if [ -L $HOME/$file ]; then
-    echo -e "${magenta}$file${reset} already exists."
+    echo -e "${BWhite}$file${NC} already exists."
   else
     ln -s $HOME/dotfiles/$file $HOME/$file
-    echo -e "Create symlink for ${cyan}$file${reset}"
+    echo -e "Create symlink for ${BGreen}$file${NC}"
   fi
 done
 
-if [ -L $HOME/.config/nvim ]; then
-  echo -e "${magenta}.config/nvim${reset} already exists."
-else
-  ln -s $PWD/config/nvim $HOME/.config/nvim
-  echo -e "Create symlink for ${cyan}.config/nvim${reset}"
-fi
-
-if [ -L $HOME/.config/alacritty ]; then
-  echo -e "${magenta}.config/alacritty${reset} already exists."
-else
-  ln -s $PWD/config/alacritty $HOME/.config/alacritty
-  echo -e "Create symlink for ${cyan}.config/alacritty${reset}"
-fi
+for dir in ${DIRS[@]}
+do
+  if [ -L $HOME/.config/$dir ]; then
+    echo -e "${BWhite}.config/$dir${NC} already exists."
+  else
+    ln -s $PWD/config/$dir $HOME/.config/$dir
+    echo -e "Create symlink for ${BGreen}.config/$dir${NC}"
+  fi
+done
