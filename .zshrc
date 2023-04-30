@@ -85,6 +85,9 @@ if [ -x "$(command -v exa)" ]; then
   alias ls='exa --icons --group-directories-first'
 fi
 
+# z.lua
+eval "$(lua /usr/local/share/z.lua/z.lua --init zsh)"
+
 # ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -93,9 +96,6 @@ alias be="bundle exec"
 
 # postgresql
 export PGDATA="/usr/local/var/postgres"
-
-# z
-. `brew --prefix`/etc/profile.d/z.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/bin/heroku:$PATH"
