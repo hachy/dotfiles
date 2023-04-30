@@ -26,7 +26,6 @@
 [core]
   editor = nvim
   autocrlf = input
-  excludesfile = ~/.gitignore_global
   pager = delta
 [credential]
   helper = osxkeychain
