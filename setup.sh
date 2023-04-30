@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DOT_FILES=( .gitconfig .gitignore .gitignore_global .zshrc .gemrc .pryrc )
-DIRS=(nvim alacritty tmux)
+DOT_FILES=(.zshrc .gemrc .pryrc )
+DIRS=(nvim git alacritty tmux)
 
 NC='\033[0m'
 BWhite='\033[1;37m'
