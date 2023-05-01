@@ -28,6 +28,9 @@ local on_attach = function(client, bufnr)
         source = "always",
         prefix = " ",
         scope = "cursor",
+        header = "",
+        title = "Diagnostics",
+        title_pos = "left",
       }
       vim.diagnostic.open_float(nil, opts)
     end,
@@ -50,6 +53,7 @@ nvim_lsp.rust_analyzer.setup {
 }
 
 nvim_lsp.lua_ls.setup {
+  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -81,7 +85,7 @@ for _, lsp in ipairs(servers_2) do
   }
 end
 
-local signs = { Error = "✘", Warn = "⚠", Hint = "✔", Info = "●" }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
