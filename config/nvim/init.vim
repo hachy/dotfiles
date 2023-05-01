@@ -376,6 +376,7 @@ require "plugins.formatter"
 require "plugins.nvim-lint"
 require "plugins.nvim-cmp"
 require "plugins.cmdpalette"
+require "plugins.indent-blankline"
 require("nvim-surround").setup {}
 require("Comment").setup {}
 require("gitsigns").setup {}
