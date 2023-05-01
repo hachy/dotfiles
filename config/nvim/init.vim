@@ -16,11 +16,13 @@ Plug 'junegunn/vim-plug',
       \ {'dir': '~/.config/nvim/bundle/vim-plug/autoload'}
 Plug 'hachy/eva01.vim'
 Plug 'hachy/cmdpalette.nvim'
+Plug 'folke/neodev.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 Plug 'mhartington/formatter.nvim'
 Plug 'mfussenegger/nvim-lint'
 Plug 'hrsh7th/cmp-nvim-lsp'

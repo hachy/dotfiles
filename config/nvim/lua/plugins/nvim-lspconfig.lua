@@ -1,3 +1,5 @@
+require("neodev").setup {}
+
 local nvim_lsp = require "lspconfig"
 
 require("lspconfig.ui.windows").default_options.border = "single"
