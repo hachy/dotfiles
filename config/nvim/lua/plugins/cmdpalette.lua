@@ -4,8 +4,6 @@ require("cmdpalette").setup {
   },
 }
 
-vim.keymap.set("n", ":", "<Cmd>Cmdpalette<CR>")
-
 local cmdpalette = vim.api.nvim_create_augroup("cmdpalette", { clear = false })
 vim.api.nvim_create_autocmd("BufEnter", {
   group = cmdpalette,

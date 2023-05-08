@@ -40,7 +40,6 @@ require("lazy").setup {
     "hachy/nvf.nvim",
     config = function()
       require("nvf").setup {}
-      vim.keymap.set("n", "<Space>f", "<Cmd>Nvf<CR>")
     end,
   },
 
@@ -48,7 +47,6 @@ require("lazy").setup {
     "hachy/recmdwin.nvim",
     config = function()
       require("recmdwin").setup()
-      vim.keymap.set("n", ";", "q:")
     end,
   },
 
@@ -165,12 +163,7 @@ require("lazy").setup {
     build = "./install --all",
     dependencies = {
       "junegunn/fzf.vim",
-      {
-        "pbogut/fzf-mru.vim",
-        config = function()
-          vim.keymap.set("n", "<Space>h", "<Cmd>FZFMru<CR>", { silent = true })
-        end,
-      },
+      "pbogut/fzf-mru.vim",
     },
     laze = false,
     config = function()
@@ -180,9 +173,6 @@ require("lazy").setup {
         let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
         let g:fzf_preview_window = ['down,50%', 'ctrl-/']
         ]]
-      vim.keymap.set("n", "<C-p>", "<Cmd>Files<CR>", { silent = true })
-      vim.keymap.set("n", "<Space>b", "<Cmd>Buffers<CR>", { silent = true })
-      vim.keymap.set("n", "<Space>G", "<Cmd>Rg<CR>", { silent = true })
     end,
   },
 
@@ -199,7 +189,6 @@ require("lazy").setup {
         \   'c' : 1
         \ }
         ]]
-      vim.keymap.set({ "i", "s" }, "<C-o>", "<Plug>(neosnippet_expand_or_jump)", { remap = true })
     end,
   },
 
@@ -215,9 +204,6 @@ require("lazy").setup {
         let g:quickrun_config.cpp = { 'cmdopt': '-std=c++11' }
         let g:quickrun_config.rust = {'exec' : 'cargo run'}
         ]]
-
-      vim.keymap.set("n", "<Leader>q", "<Cmd>bw! quickrun://output<CR>", { silent = true })
-      vim.keymap.set("n", "<Leader>r", "<Plug>(quickrun)", { remap = true, silent = true })
 
       local id = vim.api.nvim_create_augroup("qr_augroup", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
@@ -241,19 +227,11 @@ require("lazy").setup {
         let g:memolist_path = $HOME.'/Dropbox/memo'
         let g:memolist_template_dir_path = '~/config/nvim/template'
         ]]
-      vim.keymap.set("n", ",mn", "<Cmd>:MemoNew<CR>")
-      vim.keymap.set("n", ",ml", "<Cmd>:MemoList<CR>")
-      vim.keymap.set("n", ",mg", "<Cmd>:MemoGrep<CR>")
     end,
   },
 
   {
     "tpope/vim-fugitive",
-    config = function()
-      vim.keymap.set("n", "<Space>gd", "<Cmd>Gvdiffsplit<CR>")
-      vim.keymap.set("n", "<Space>gs", "<Cmd>Git<CR>")
-    end,
   },
 }
 
-vim.keymap.set("n", "<Space>ev", "<Cmd>edit $HOME/dotfiles/config/nvim/init.lua<CR>", { silent = true })

@@ -49,3 +49,36 @@ vim.keymap.set("n", "q", "<Nop>")
 vim.keymap.set({ "n", "i", "v" }, "<C-z>", "<Nop>")
 
 vim.keymap.set("x", "p", "P")
+
+vim.keymap.set("n", "<Space>ev", "<Cmd>edit $MYVIMRC<CR>", { silent = true })
+
+-- cmdpalette
+vim.keymap.set("n", ":", "<Cmd>Cmdpalette<CR>")
+
+-- nvf
+vim.keymap.set("n", "<Space>f", "<Cmd>Nvf<CR>")
+
+-- recmdwin
+vim.keymap.set("n", ";", "q:")
+
+-- fzf
+vim.keymap.set("n", "<C-p>", "<Cmd>Files<CR>", { silent = true })
+vim.keymap.set("n", "<Space>b", "<Cmd>Buffers<CR>", { silent = true })
+vim.keymap.set("n", "<Space>G", "<Cmd>Rg<CR>", { silent = true })
+vim.keymap.set("n", "<Space>h", "<Cmd>FZFMru<CR>", { silent = true })
+
+-- neosnippet
+vim.keymap.set({ "i", "s" }, "<C-o>", "<Plug>(neosnippet_expand_or_jump)", { remap = true })
+
+-- quickrun
+vim.keymap.set("n", "<Leader>q", "<Cmd>bw! quickrun://output<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>r", "<Plug>(quickrun)", { remap = true, silent = true })
+
+-- memolist
+vim.keymap.set("n", ",mn", "<Cmd>:MemoNew<CR>")
+vim.keymap.set("n", ",ml", "<Cmd>:MemoList<CR>")
+vim.keymap.set("n", ",mg", "<Cmd>:MemoGrep<CR>")
+
+-- fugitive
+vim.keymap.set("n", "<Space>gd", "<Cmd>Gvdiffsplit<CR>")
+vim.keymap.set("n", "<Space>gs", "<Cmd>Git<CR>")
