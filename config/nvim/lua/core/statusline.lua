@@ -36,6 +36,40 @@ local function diagnostic_status()
   return string.format("%s%s%s%s", error, warn, hint, info) .. "%#Statusline#"
 end
 
+local function gitsigns()
+  ---@diagnostic disable: undefined-field
+  local head = ""
+  local status = ""
+
+  if vim.b.gitsigns_head then
+    head = " " .. vim.b.gitsigns_head .. space
+  end
+
+  local added = ""
+  local changed = ""
+  local removed = ""
+
+  local bg = vim.fn.synIDattr(vim.fn.hlID "Statusline", "bg")
+  vim.api.nvim_set_hl(0, "GitStatusAdd", { default = true, fg = "#9cda7c", bg = bg })
+  vim.api.nvim_set_hl(0, "GitStatusChange", { default = true, fg = "#e39e74", bg = bg })
+  vim.api.nvim_set_hl(0, "GitStatusDelete", { default = true, fg = "#db6088", bg = bg })
+
+  local d = vim.b.gitsigns_status_dict
+  if d then
+    if d.added > 0 then
+      added = "%#GitStatusAdd# " .. d.added .. space
+    end
+    if d.changed > 0 then
+      changed = "%#GitStatusChange# " .. d.changed .. space
+    end
+    if d.removed > 0 then
+      removed = "%#GitStatusDelete# " .. d.removed
+    end
+    status = added .. changed .. removed
+  end
+  return head .. status .. "%#Statusline#"
+end
+
 local function fileformat()
   local symbols = {
     unix = "",
@@ -50,7 +84,7 @@ function M.setup()
     "%<%F %y%m%r",
     diagnostic_status(),
     "%=",
-    "%{fugitive#statusline()}",
+    gitsigns(),
     "%{''.(&fenc!=''?&fenc:&enc).''}",
     fileformat(),
     "%3p%% %4l:%2c",
