@@ -31,6 +31,8 @@ require("lazy").setup {
 
   {
     "hachy/cmdpalette.nvim",
+    lazy = true,
+    cmd = "Cmdpalette",
     config = function()
       require "plugins.cmdpalette"
     end,
@@ -38,6 +40,8 @@ require("lazy").setup {
 
   {
     "hachy/nvf.nvim",
+    lazy = true,
+    cmd = { "Nvf", "NvfNew" },
     config = function()
       require("nvf").setup {}
     end,
@@ -45,6 +49,8 @@ require("lazy").setup {
 
   {
     "hachy/recmdwin.nvim",
+    lazy = true,
+    event = "CmdWinEnter",
     config = function()
       require("recmdwin").setup()
     end,
@@ -81,6 +87,7 @@ require("lazy").setup {
 
   {
     "mhartington/formatter.nvim",
+    event = "VeryLazy",
     config = function()
       require "plugins.formatter"
     end,
@@ -95,6 +102,7 @@ require("lazy").setup {
 
   {
     "hrsh7th/nvim-cmp",
+    lazy = true,
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -110,6 +118,7 @@ require("lazy").setup {
 
   {
     "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
     config = function()
       require("lsp_signature").setup {}
       require("lsp_signature").on_attach()
@@ -125,6 +134,8 @@ require("lazy").setup {
 
   {
     "windwp/nvim-autopairs",
+    lazy = true,
+    event = "InsertEnter",
     config = function()
       require("nvim-autopairs").setup {}
     end,
@@ -132,6 +143,7 @@ require("lazy").setup {
 
   {
     "kylechui/nvim-surround",
+    event = "VeryLazy",
     config = function()
       require("nvim-surround").setup {}
     end,
@@ -146,6 +158,7 @@ require("lazy").setup {
 
   {
     "numToStr/Comment.nvim",
+    event = "VeryLazy",
     config = function()
       require("Comment").setup {}
     end,
@@ -153,6 +166,7 @@ require("lazy").setup {
 
   {
     "NvChad/nvim-colorizer.lua",
+    event = "VeryLazy",
     config = function()
       require("colorizer").setup {}
     end,
@@ -161,11 +175,12 @@ require("lazy").setup {
   {
     "junegunn/fzf",
     build = "./install --all",
+    lazy = true,
+    cmd = { "Files", "Buffers", "Rg", "FZFMru" },
     dependencies = {
       "junegunn/fzf.vim",
       "pbogut/fzf-mru.vim",
     },
-    laze = false,
     config = function()
       vim.cmd [[
         let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
@@ -178,6 +193,7 @@ require("lazy").setup {
 
   {
     "Shougo/neosnippet.vim",
+    lazy = true,
     event = "InsertEnter",
     dependencies = {
       "Shougo/neosnippet-snippets",
@@ -194,6 +210,7 @@ require("lazy").setup {
 
   {
     "thinca/vim-quickrun",
+    event = "VeryLazy",
     config = function()
       vim.cmd [[
         let g:quickrun_config = {}
@@ -219,6 +236,8 @@ require("lazy").setup {
 
   {
     "glidenote/memolist.vim",
+    lazy = true,
+    cmd = { "MemoNew", "MemoList", "MemoGrep" },
     config = function()
       vim.cmd [[
         let g:memolist_fzf = 1
@@ -232,6 +251,8 @@ require("lazy").setup {
 
   {
     "tpope/vim-fugitive",
+    lazy = true,
+    cmd = { "Gvdiffsplit", "Git" },
   },
 }
 
