@@ -18,7 +18,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup {
+local lazy_plugins = {
   {
     "hachy/eva01.vim",
     lazy = false,
@@ -27,6 +27,7 @@ require("lazy").setup {
       vim.cmd.colorscheme "eva01-LCL"
       vim.cmd [[hi! Normal ctermbg=NONE guibg=NONE]]
     end,
+    dev = true,
   },
 
   {
@@ -36,6 +37,7 @@ require("lazy").setup {
     config = function()
       require "plugins.cmdpalette"
     end,
+    dev = true,
   },
 
   {
@@ -45,6 +47,7 @@ require("lazy").setup {
     config = function()
       require("nvf").setup {}
     end,
+    dev = true,
   },
 
   {
@@ -54,6 +57,7 @@ require("lazy").setup {
     config = function()
       require("recmdwin").setup()
     end,
+    dev = true,
   },
 
   {
@@ -256,3 +260,12 @@ require("lazy").setup {
   },
 }
 
+local opts = {
+  dev = {
+    path = "~/ghq/github.com/hachy",
+    patterns = { "eva01.vim", "cmdpalette.nvim", "nvf.nvim", "recmdwin.nvim" },
+    fallback = false,
+  },
+}
+
+require("lazy").setup(lazy_plugins, opts)
