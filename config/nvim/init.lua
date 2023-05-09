@@ -113,10 +113,24 @@ local lazy_plugins = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
-      "notomo/cmp-neosnippet",
+      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       require "plugins.nvim-cmp"
+    end,
+  },
+
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    event = "VeryLazy",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load {
+        paths = "./my_snippets",
+        override_priority = 2000,
+      }
     end,
   },
 
@@ -191,23 +205,6 @@ local lazy_plugins = {
         let g:fzf_buffers_jump = 1
         let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
         let g:fzf_preview_window = ['down,50%', 'ctrl-/']
-        ]]
-    end,
-  },
-
-  {
-    "Shougo/neosnippet.vim",
-    lazy = true,
-    event = "InsertEnter",
-    dependencies = {
-      "Shougo/neosnippet-snippets",
-    },
-    config = function()
-      vim.cmd [[
-        let g:neosnippet#snippets_directory = $HOME.'/dotfiles/config/nvim/snippets'
-        let g:neosnippet#disable_runtime_snippets = {
-        \   'c' : 1
-        \ }
         ]]
     end,
   },

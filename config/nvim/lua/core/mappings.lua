@@ -67,9 +67,6 @@ vim.keymap.set("n", "<Space>b", "<Cmd>Buffers<CR>", { silent = true })
 vim.keymap.set("n", "<Space>G", "<Cmd>Rg<CR>", { silent = true })
 vim.keymap.set("n", "<Space>h", "<Cmd>FZFMru<CR>", { silent = true })
 
--- neosnippet
-vim.keymap.set({ "i", "s" }, "<C-o>", "<Plug>(neosnippet_expand_or_jump)", { remap = true })
-
 -- quickrun
 vim.keymap.set("n", "<Leader>q", "<Cmd>bw! quickrun://output<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>r", "<Plug>(quickrun)", { remap = true, silent = true })
