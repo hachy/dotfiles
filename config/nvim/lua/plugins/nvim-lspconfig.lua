@@ -62,10 +62,6 @@ nvim_lsp.lua_ls.setup {
       diagnostics = {
         globals = { "vim" },
       },
-      semantic = {
-        -- disable semantic colouring
-        enable = false,
-      },
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true),
         checkThirdParty = false,
