@@ -151,11 +151,15 @@ local lazy_plugins = {
   },
 
   {
-    "windwp/nvim-autopairs",
+    "m4xshen/autoclose.nvim",
     lazy = true,
     event = "InsertEnter",
     config = function()
-      require("nvim-autopairs").setup {}
+      require("autoclose").setup {
+        keys = {
+          ["`"] = { escape = false, close = true, pair = "``" },
+        },
+      }
     end,
   },
 
