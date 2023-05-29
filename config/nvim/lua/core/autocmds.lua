@@ -19,5 +19,5 @@ vim.api.nvim_create_autocmd("FileType", {
   group = myautocmd,
   pattern = "*",
   command = "setlocal formatoptions-=ro",
-  desc = "disable auto-commenting new lines after hitting Enteron commented line",
+  desc = "disable auto-commenting new lines after hitting Enter on commented line",
 })
