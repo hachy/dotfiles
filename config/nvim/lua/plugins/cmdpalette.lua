@@ -9,14 +9,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
   group = cmdpalette,
   pattern = { "cmdpalette" },
   callback = function()
-    vim.cmd [[noreabbrev h tab help]]
-    vim.api.nvim_buf_set_keymap(
-      0,
-      "i",
-      "<Tab>",
-      "<Cmd>lua require('cmp').complete()<CR>",
-      { nowait = true, noremap = true, silent = true }
-    )
+    vim.cmd.inoreabbrev("h", "tab help")
+    vim.keymap.set("i", "<Tab>", function()
+      require("cmp").complete()
+    end, { buffer = true })
   end,
 })
 
@@ -24,6 +20,6 @@ vim.api.nvim_create_autocmd("BufLeave", {
   group = cmdpalette,
   pattern = "cmdpalette",
   callback = function()
-    vim.cmd [[unabbrev h]]
+    vim.cmd.iunabbrev "h"
   end,
 })
