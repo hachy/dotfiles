@@ -52,6 +52,19 @@ vim.keymap.set("x", "p", "P")
 
 vim.keymap.set("n", "<Space>ev", "<Cmd>edit $MYVIMRC<CR>", { silent = true })
 
+vim.keymap.set("i", "<", function()
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  if line:sub(col, col) == "<" then
+    if line:sub(col + 1, col + 1) == ">" then
+      return "<<Del>"
+    else
+      return "<"
+    end
+  end
+  return "<>" .. "<C-G>U<Left>"
+end, { noremap = true, expr = true })
+
 -- cmdpalette
 vim.keymap.set("n", ":", "<Cmd>Cmdpalette<CR>")
 
