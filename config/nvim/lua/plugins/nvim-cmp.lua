@@ -1,5 +1,6 @@
 local cmp = require "cmp"
 local luasnip = require "luasnip"
+local lspkind = require "lspkind"
 
 local has_words_before = function()
   unpack = unpack or table.unpack
@@ -57,14 +58,16 @@ cmp.setup {
     { name = "path" },
   },
   formatting = {
-    format = function(entry, vim_item)
-      vim_item.menu = ({
+    format = lspkind.cmp_format {
+      mode = "symbol_text",
+      maxwidth = 40,
+      ellipsis_char = "...",
+      menu = {
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
-      })[entry.source.name]
-      return vim_item
-    end,
+      },
+    },
   },
 }
 
@@ -77,3 +80,6 @@ cmp.setup.filetype("cmdpalette", {
     { name = "path" },
   },
 })
+
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#808080", strikethrough = true })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { link = "Character" })
