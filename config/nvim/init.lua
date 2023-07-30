@@ -198,8 +198,7 @@ local lazy_plugins = {
   {
     "junegunn/fzf",
     build = "./install --all",
-    lazy = true,
-    cmd = { "Files", "Buffers", "Rg", "FZFMru" },
+    event = "VeryLazy",
     dependencies = {
       "junegunn/fzf.vim",
       "pbogut/fzf-mru.vim",
