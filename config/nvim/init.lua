@@ -248,6 +248,15 @@ local lazy_plugins = {
     lazy = true,
     cmd = { "Gvdiffsplit", "Git" },
   },
+
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#434a59" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#434a59" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#434a59" })
+    end,
+  },
 }
 
 local opts = {
