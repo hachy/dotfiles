@@ -1,4 +1,8 @@
-require("indent_blankline").setup {
-  show_current_context = true,
+require("ibl").setup {
+  scope = {
+    enabled = true,
+    highlight = { "SpecialComment" },
+    show_start = false,
+    show_end = false,
+  },
 }
-vim.g.indent_blankline_context_highlight_list = { "SpecialComment" }
