@@ -169,7 +169,7 @@ local lazy_plugins = {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup {}
+      require("nvim-surround").setup()
     end,
   },
 
@@ -184,7 +184,7 @@ local lazy_plugins = {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
     config = function()
-      require("Comment").setup {}
+      require("Comment").setup()
     end,
   },
 
@@ -205,12 +205,10 @@ local lazy_plugins = {
       "pbogut/fzf-mru.vim",
     },
     config = function()
-      vim.cmd [[
-        let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
-        let g:fzf_buffers_jump = 1
-        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-        let g:fzf_preview_window = ['down,50%', 'ctrl-/']
-        ]]
+      vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
+      vim.g.fzf_buffers_jump = 1
+      vim.g.fzf_layout = { window = { width = 0.9, height = 0.9 } }
+      vim.g.fzf_preview_window = { "down,50%", "ctrl-/" }
     end,
   },
 
@@ -218,15 +216,7 @@ local lazy_plugins = {
     "thinca/vim-quickrun",
     event = "VeryLazy",
     config = function()
-      vim.cmd [[
-        let g:quickrun_config = {}
-        let g:quickrun_config._ = {}
-        let g:quickrun_config._['outputter/buffer/opener'] ='%{winwidth(0) >= 100 ? "vnew" : "15new"}'
-        let g:quickrun_config.ruby = {'command' : 'ruby'}
-        let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'exec': 'bundle exec %c %o', 'cmdopt': '-f d --color'}
-        let g:quickrun_config.cpp = { 'cmdopt': '-std=c++11' }
-        let g:quickrun_config.rust = {'exec' : 'cargo run'}
-        ]]
+      vim.g.quickrun_config = { _ = { ["outputter/buffer/opener"] = '%{winwidth(0) >= 100 ? "vnew" : "15new"}' } }
 
       local id = vim.api.nvim_create_augroup("qr_augroup", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
@@ -245,13 +235,11 @@ local lazy_plugins = {
     lazy = true,
     cmd = { "MemoNew", "MemoList", "MemoGrep" },
     config = function()
-      vim.cmd [[
-        let g:memolist_fzf = 1
-        let g:memolist_memo_date = '%Y-%m-%d'
-        let g:memolist_memo_suffix = 'markdown'
-        let g:memolist_path = $HOME.'/Dropbox/memo'
-        let g:memolist_template_dir_path = '~/config/nvim/template'
-        ]]
+      vim.g.memolist_fzf = 1
+      vim.g.memolist_memo_date = "%Y-%m-%d"
+      vim.g.memolist_memo_suffix = "markdown"
+      vim.g.memolist_path = vim.env.HOME .. "/Dropbox/memo"
+      vim.g.memolist_template_dir_path = "~/config/nvim/template"
     end,
   },
 
