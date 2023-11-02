@@ -108,6 +108,7 @@ export PATH=$PATH:$GOPATH/bin
 source $HOME/.cargo/env
 
 # fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--layout=reverse --height 60% --inline-info"
 
 function fzf-select-history() {
