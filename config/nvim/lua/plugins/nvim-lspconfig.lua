@@ -61,6 +61,7 @@ nvim_lsp.lua_ls.setup {
       },
       diagnostics = {
         globals = { "vim" },
+        disable = { "missing-fields", "incomplete-signature-doc" },
       },
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true),
