@@ -28,7 +28,8 @@
   autocrlf = input
   pager = delta
 [credential]
-  helper = osxkeychain
+	helper = store
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [alias]
   co = checkout
   s = status
@@ -62,3 +63,5 @@
   plus-style = "#76ff03"
   plus-emph-style = "black #aeea00"
   plus-empty-line-marker-style = "black #aeea00"
+[credential "https://dev.azure.com"]
+	useHttpPath = true
