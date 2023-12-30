@@ -1,0 +1,96 @@
+[colors.bright]
+black = "#6D7070"
+blue = "#1BA6FA"
+cyan = "#73FBF1"
+green = "#B8E466"
+magenta = "#A578EA"
+red = "#FF4352"
+white = "#FEFEF8"
+yellow = "#FFD750"
+
+[colors.cursor]
+cursor = "#76FF03"
+text = "#000000"
+
+[colors.dim]
+black = "#232323"
+blue = "#556b79"
+cyan = "#5c8482"
+green = "#5e6547"
+magenta = "#6e4962"
+red = "#74423f"
+white = "#828282"
+yellow = "#8b7653"
+
+[colors.normal]
+black = "#0d0d0d"
+blue = "#1BA6FA"
+cyan = "#21DEEF"
+green = "#A0E521"
+magenta = "#8763B8"
+red = "#FF301B"
+white = "#EBEBEB"
+yellow = "#FFC620"
+
+[colors.primary]
+background = "#242629"
+foreground = "#d7d1dc"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 13.0
+
+[font.bold]
+family = "FiraCode Nerd Font Mono"
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.normal]
+family = "FiraCode Nerd Font Mono"
+style = "Retina"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;9~"
+key = "Tab"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;6;9~"
+key = "Tab"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Semicolon"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B"
+key = "LBracket"
+mods = "Control"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[window]
+decorations = "buttonless"
+opacity = 0.9
+
+[window.dimensions]
+columns = 140
+lines = 50
