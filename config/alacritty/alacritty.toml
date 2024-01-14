@@ -83,6 +83,9 @@ chars = "\u001B"
 key = "LBracket"
 mods = "Control"
 
+[mouse]
+hide_when_typing = true
+
 [scrolling]
 history = 10000
 multiplier = 3
