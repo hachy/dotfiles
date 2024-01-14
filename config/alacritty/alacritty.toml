@@ -37,7 +37,7 @@ background = "#242629"
 foreground = "#d7d1dc"
 
 [env]
-TERM = "xterm-256color"
+TERM = "tmux-256color"
 
 [font]
 size = 13.0
