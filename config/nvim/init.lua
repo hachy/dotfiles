@@ -32,8 +32,6 @@ local lazy_plugins = {
 
   {
     "hachy/cmdpalette.nvim",
-    lazy = true,
-    cmd = "Cmdpalette",
     config = function()
       require "plugins.cmdpalette"
     end,

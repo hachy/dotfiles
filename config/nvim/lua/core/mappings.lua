@@ -66,7 +66,7 @@ vim.keymap.set("i", "<", function()
 end, { noremap = true, expr = true })
 
 -- cmdpalette
-vim.keymap.set("n", ":", "<Cmd>Cmdpalette<CR>")
+vim.keymap.set("n", ":", "<Plug>(cmdpalette)")
 
 -- nvf
 vim.keymap.set("n", "<Space>f", "<Cmd>Nvf<CR>")
