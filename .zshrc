@@ -80,9 +80,10 @@ man() {
     man "$@"
 }
 
-# exa
-if [ -x "$(command -v exa)" ]; then
-  alias ls='exa --icons --group-directories-first'
+# eza
+export FPATH="${HOME}/.cargo/bin/eza/completions/zsh:$FPATH"
+if [ -x "$(command -v eza)" ]; then
+  alias ls='eza --icons --group-directories-first'
 fi
 
 # z.lua
