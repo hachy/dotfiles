@@ -76,12 +76,6 @@ local lazy_plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    dependencies = {
-      {
-        "nvim-treesitter/playground",
-        cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
-      },
-    },
     config = function()
       require "plugins.treesitter"
     end,
