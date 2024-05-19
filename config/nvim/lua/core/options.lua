@@ -10,7 +10,6 @@ vim.opt.formatoptions:append "mM"
 vim.opt.helpheight = 30
 vim.opt.hidden = true
 vim.opt.history = 500
-vim.opt.imdisable = true
 vim.opt.mouse = "a"
 vim.opt.nrformats = "alpha,octal,hex"
 vim.opt.number = true

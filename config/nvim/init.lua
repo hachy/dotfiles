@@ -173,14 +173,6 @@ local lazy_plugins = {
   },
 
   {
-    "numToStr/Comment.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("Comment").setup()
-    end,
-  },
-
-  {
     "NvChad/nvim-colorizer.lua",
     event = "VeryLazy",
     config = function()
