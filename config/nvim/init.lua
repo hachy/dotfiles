@@ -6,7 +6,7 @@ require "core/mappings"
 require "core/statusline"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system {
     "git",
     "clone",
@@ -25,7 +25,7 @@ local lazy_plugins = {
     priority = 1000,
     config = function()
       vim.cmd.colorscheme "eva01-LCL"
-      vim.cmd [[hi! Normal ctermbg=NONE guibg=NONE]]
+      vim.cmd.hi "Normal ctermbg=NONE guibg=NONE"
     end,
     dev = true,
   },
