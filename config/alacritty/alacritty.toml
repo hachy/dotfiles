@@ -1,3 +1,6 @@
+[colors]
+transparent_background_colors = true
+
 [colors.bright]
 black = "#6D7070"
 blue = "#1BA6FA"

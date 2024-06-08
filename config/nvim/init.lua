@@ -25,7 +25,6 @@ local lazy_plugins = {
     priority = 1000,
     config = function()
       vim.cmd.colorscheme "eva01-LCL"
-      vim.cmd.hi "Normal ctermbg=NONE guibg=NONE"
     end,
     dev = true,
   },
