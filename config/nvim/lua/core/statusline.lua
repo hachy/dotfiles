@@ -56,13 +56,13 @@ local function gitsigns()
 
   local d = vim.b.gitsigns_status_dict
   if d then
-    if d.added > 0 then
+    if d.added ~= nil then
       added = "%#GitStatusAdd# " .. d.added .. space
     end
-    if d.changed > 0 then
+    if d.changed ~= nil then
       changed = "%#GitStatusChange# " .. d.changed .. space
     end
-    if d.removed > 0 then
+    if d.removed ~= nil then
       removed = "%#GitStatusDelete# " .. d.removed
     end
     status = added .. changed .. removed
