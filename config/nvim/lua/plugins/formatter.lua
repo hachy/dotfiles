@@ -47,6 +47,12 @@ require("formatter").setup {
     rust = {
       require("formatter.filetypes.rust").rustfmt,
     },
+    toml = {
+      require("formatter.filetypes.toml").taplo,
+    },
+    go = {
+      require("formatter.filetypes.go").gofmt,
+    },
     json = {
       require("formatter.filetypes.json").prettier,
     },
