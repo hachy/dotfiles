@@ -1,10 +1,11 @@
+vim.g.mapleader = "¥"
+
 -- Tab page
 vim.keymap.set("n", "<C-Tab>", "<Cmd>tabnext<CR>")
 vim.keymap.set("i", "<C-Tab>", "<Esc><Cmd>tabnext<CR>")
 vim.keymap.set("n", "<C-S-Tab>", "<Cmd>tabprevious<CR>")
 vim.keymap.set("i", "<C-S-Tab>", "<Esc>:tabprevious<CR>")
 vim.keymap.set("n", "<C-t>", "<Cmd>tabnew<CR>")
-vim.keymap.set("i", "<C-t>", "<Esc><Cmd>tabnew<CR>")
 
 -- Search
 vim.keymap.set("n", "<Esc><Esc>", "<Cmd>set nohlsearch<CR>")
