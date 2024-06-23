@@ -20,6 +20,10 @@ require("utils").on_attach(function(client, buffer)
   vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, { buffer = buffer })
   vim.keymap.set({ "n", "v" }, "<Leader>a", vim.lsp.buf.code_action, { buffer = buffer })
   vim.keymap.set("n", "<Leader>gr", vim.lsp.buf.references, { buffer = buffer })
+
+  vim.api.nvim_create_user_command("ToggleInlayHints", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+  end, { desc = "Toggle inlay hints" })
 end)
 
 local servers = { "solargraph", "pylsp", "gdscript", "tsserver" }
