@@ -1,8 +1,9 @@
 vim.loader.enable()
 
 require "core/autocmds"
-require "core/options"
+require "core/diagnostics"
 require "core/mappings"
+require "core/options"
 require "core/statusline"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
