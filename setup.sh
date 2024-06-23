@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOT_FILES=(.zshrc .pryrc )
+DOT_FILES=(.zshrc)
 DIRS=(nvim git alacritty tmux)
 
 NC='\033[0m'
