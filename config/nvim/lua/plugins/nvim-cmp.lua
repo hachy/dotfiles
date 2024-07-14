@@ -31,6 +31,8 @@ cmp.setup {
             select = true,
           }
         end
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
