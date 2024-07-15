@@ -38,7 +38,7 @@
   br = branch -av
   d = diff
   dc = diff --cached
-  l = log --graph --date=short --pretty='format:%C(60)%h%C(169)%d%Creset %s %C(74)%an %C(60)%cd(%ar)%Creset'
+  l = log --pretty='%C(auto)%h %C(auto)%d %Creset%s %C(green dim)%aN %C(magenta dim)%cd' --graph --date=relative --all
   ls = log --stat
   lp = log --oneline -p
   ignore = update-index --assume-unchanged
