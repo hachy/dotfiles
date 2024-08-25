@@ -80,6 +80,9 @@ man() {
     man "$@"
 }
 
+# zellij
+eval "$(zellij setup --generate-auto-start zsh)"
+
 # eza
 export FPATH="${HOME}/.cargo/bin/eza/completions/zsh:$FPATH"
 if [ -x "$(command -v eza)" ]; then

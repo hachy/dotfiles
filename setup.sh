@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOT_FILES=(.zshrc)
-DIRS=(nvim git alacritty tmux)
+DIRS=(nvim git alacritty tmux zellij)
 
 NC='\033[0m'
 BWhite='\033[1;37m'
