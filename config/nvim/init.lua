@@ -137,10 +137,23 @@ local lazy_plugins = {
   },
 
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require "plugins.indent-blankline"
+      require("hlchunk").setup {
+        chunk = {
+          enable = true,
+          style = {
+            { fg = "#b67e5d" },
+          },
+        },
+        indent = {
+          enable = true,
+        },
+        blank = {
+          enable = true,
+        },
+      }
     end,
   },
 
