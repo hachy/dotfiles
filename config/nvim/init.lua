@@ -137,6 +137,14 @@ local lazy_plugins = {
   },
 
   {
+    "hedyhli/outline.nvim",
+    config = function()
+      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+      require("outline").setup {}
+    end,
+  },
+
+  {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
@@ -206,6 +214,14 @@ local lazy_plugins = {
       vim.g.fzf_buffers_jump = 1
       vim.g.fzf_layout = { window = { width = 0.9, height = 0.9 } }
       vim.g.fzf_preview_window = { "down,50%", "ctrl-/" }
+    end,
+  },
+
+  {
+    "numToStr/Comment.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("Comment").setup()
     end,
   },
 
