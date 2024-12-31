@@ -89,9 +89,9 @@ vim.keymap.set("n", "<Leader>q", "<Cmd>bw! quickrun://output<CR>", { silent = tr
 vim.keymap.set("n", "<Leader>r", "<Plug>(quickrun)", { remap = true, silent = true })
 
 -- memolist
-vim.keymap.set("n", ",mn", "<Cmd>MemoNew<CR>")
-vim.keymap.set("n", ",ml", "<Cmd>MemoList<CR>")
-vim.keymap.set("n", ",mg", "<Cmd>MemoGrep<CR>")
+vim.keymap.set("n", "<Space>mn", "<Cmd>MemoNew<CR>")
+vim.keymap.set("n", "<Space>ml", "<Cmd>MemoList<CR>")
+vim.keymap.set("n", "<Space>mg", "<Cmd>MemoGrep<CR>")
 
 -- fugitive
 vim.keymap.set("n", "<Space>gd", "<Cmd>Gvdiffsplit<CR>")
