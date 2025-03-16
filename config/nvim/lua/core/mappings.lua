@@ -70,27 +70,3 @@ vim.keymap.set("i", "<", function()
   end
   return "<>" .. "<C-G>U<Left>"
 end, { noremap = true, expr = true })
-
--- cmdpalette
-vim.keymap.set("n", ":", "<Plug>(cmdpalette)")
-
--- nvf
-vim.keymap.set("n", "<Space>f", "<Cmd>Nvf<CR>")
-
--- recmdwin
-vim.keymap.set("n", ";", "q:")
-
--- fzf
-vim.keymap.set("n", "<C-p>", "<Cmd>Files<CR>", { silent = true })
-vim.keymap.set("n", "<Space>b", "<Cmd>Buffers<CR>", { silent = true })
-vim.keymap.set("n", "<Space>G", "<Cmd>Rg<CR>", { silent = true })
-vim.keymap.set("n", "<Space>h", "<Cmd>FZFMru<CR>", { silent = true })
-
--- memolist
-vim.keymap.set("n", "<Space>mn", "<Cmd>MemoNew<CR>")
-vim.keymap.set("n", "<Space>ml", "<Cmd>MemoList<CR>")
-vim.keymap.set("n", "<Space>mg", "<Cmd>MemoGrep<CR>")
-
--- fugitive
-vim.keymap.set("n", "<Space>gd", "<Cmd>Gvdiffsplit<CR>")
-vim.keymap.set("n", "<Space>gs", "<Cmd>Git<CR>")

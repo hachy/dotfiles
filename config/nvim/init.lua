@@ -45,6 +45,7 @@ local lazy_plugins = {
     "hachy/nvf.nvim",
     lazy = true,
     cmd = { "Nvf", "NvfNew" },
+    keys = { { "<Space>f", "<Cmd>Nvf<CR>" } },
     opts = {},
     dev = true,
   },
@@ -53,6 +54,7 @@ local lazy_plugins = {
     "hachy/recmdwin.nvim",
     lazy = true,
     event = "CmdWinEnter",
+    keys = { { ";", "q:" } },
     opts = {},
     dev = true,
   },
@@ -191,9 +193,16 @@ local lazy_plugins = {
   {
     "junegunn/fzf",
     build = "./install --all",
+    lazy = false,
     dependencies = {
       "junegunn/fzf.vim",
       "pbogut/fzf-mru.vim",
+    },
+    keys = {
+      { "<C-p>", "<Cmd>Files<CR>", silent = true },
+      { "<Space>b", "<Cmd>Buffers<CR>", silent = true },
+      { "<Space>G", "<Cmd>Rg<CR>", silent = true },
+      { "<Space>h", "<Cmd>FZFMru<CR>", silent = true },
     },
     init = function()
       vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
@@ -232,8 +241,12 @@ local lazy_plugins = {
 
   {
     "glidenote/memolist.vim",
-    lazy = true,
     cmd = { "MemoNew", "MemoList", "MemoGrep" },
+    keys = {
+      { "<Space>mn", "<Cmd>MemoNew<CR>" },
+      { "<Space>ml", "<Cmd>MemoList<CR>" },
+      { "<Space>mg", "<Cmd>MemoGrep<CR>" },
+    },
     init = function()
       vim.g.memolist_fzf = 1
       vim.g.memolist_memo_date = "%Y-%m-%d"
@@ -245,7 +258,10 @@ local lazy_plugins = {
 
   {
     "tpope/vim-fugitive",
-    lazy = true,
+    keys = {
+      { "<Space>gd", "<Cmd>Gvdiffsplit<CR>" },
+      { "<Space>gs", "<Cmd>Git<CR>" },
+    },
     cmd = { "Gvdiffsplit", "Git" },
   },
 
