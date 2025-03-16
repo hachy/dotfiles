@@ -43,7 +43,6 @@ local lazy_plugins = {
 
   {
     "hachy/nvf.nvim",
-    lazy = true,
     cmd = { "Nvf", "NvfNew" },
     keys = { { "<Space>f", "<Cmd>Nvf<CR>" } },
     opts = {},
@@ -52,7 +51,6 @@ local lazy_plugins = {
 
   {
     "hachy/recmdwin.nvim",
-    lazy = true,
     event = "CmdWinEnter",
     keys = { { ";", "q:" } },
     opts = {},
@@ -99,7 +97,6 @@ local lazy_plugins = {
 
   {
     "hrsh7th/nvim-cmp",
-    lazy = true,
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -164,7 +161,6 @@ local lazy_plugins = {
 
   {
     "m4xshen/autoclose.nvim",
-    lazy = true,
     event = "InsertEnter",
     opts = {
       keys = {
@@ -220,15 +216,10 @@ local lazy_plugins = {
 
   {
     "hachy/instarun.nvim",
-    lazy = true,
     cmd = "Instarun",
     keys = {
       { "<Leader>r", "<Plug>(instarun)" },
-      {
-        "<Leader>q",
-        "<Cmd>bw! instarun://output<CR>",
-        { silent = true },
-      },
+      { "<Leader>q", "<Cmd>bw! instarun://output<CR>", silent = true },
     },
     opts = {
       defaults = {
