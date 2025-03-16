@@ -147,16 +147,10 @@ local lazy_plugins = {
     opts = {
       chunk = {
         enable = true,
-        style = {
-          { fg = "#b67e5d" },
-        },
+        style = { { fg = "#b67e5d" } },
       },
-      indent = {
-        enable = true,
-      },
-      blank = {
-        enable = true,
-      },
+      indent = { enable = true },
+      blank = { enable = true },
     },
   },
 
