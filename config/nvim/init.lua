@@ -8,14 +8,17 @@ require "core/statusline"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  }
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system { "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath }
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -42,9 +45,7 @@ local lazy_plugins = {
     "hachy/nvf.nvim",
     lazy = true,
     cmd = { "Nvf", "NvfNew" },
-    config = function()
-      require("nvf").setup {}
-    end,
+    opts = {},
     dev = true,
   },
 
@@ -52,9 +53,7 @@ local lazy_plugins = {
     "hachy/recmdwin.nvim",
     lazy = true,
     event = "CmdWinEnter",
-    config = function()
-      require("recmdwin").setup()
-    end,
+    opts = {},
     dev = true,
   },
 
@@ -138,78 +137,65 @@ local lazy_plugins = {
 
   {
     "hedyhli/outline.nvim",
-    config = function()
-      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
-      require("outline").setup {}
-    end,
+    keys = { { "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" } } },
+    opts = {},
   },
 
   {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("hlchunk").setup {
-        chunk = {
-          enable = true,
-          style = {
-            { fg = "#b67e5d" },
-          },
+    opts = {
+      chunk = {
+        enable = true,
+        style = {
+          { fg = "#b67e5d" },
         },
-        indent = {
-          enable = true,
-        },
-        blank = {
-          enable = true,
-        },
-      }
-    end,
+      },
+      indent = {
+        enable = true,
+      },
+      blank = {
+        enable = true,
+      },
+    },
   },
 
   {
     "m4xshen/autoclose.nvim",
     lazy = true,
     event = "InsertEnter",
-    config = function()
-      require("autoclose").setup {
-        keys = {
-          ["`"] = { escape = false, close = true, pair = "``" },
-        },
-      }
-    end,
+    opts = {
+      keys = {
+        ["`"] = { escape = false, close = true, pair = "``" },
+      },
+    },
   },
 
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup()
-    end,
+    opts = {},
   },
 
   {
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup {}
-    end,
+    opts = {},
   },
 
   {
     "NvChad/nvim-colorizer.lua",
     event = "VeryLazy",
-    config = function()
-      require("colorizer").setup {}
-    end,
+    opts = {},
   },
 
   {
     "junegunn/fzf",
     build = "./install --all",
-    event = "VeryLazy",
     dependencies = {
       "junegunn/fzf.vim",
       "pbogut/fzf-mru.vim",
     },
-    config = function()
+    init = function()
       vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
       vim.g.fzf_buffers_jump = 1
       vim.g.fzf_layout = { window = { width = 0.9, height = 0.9 } }
@@ -220,9 +206,7 @@ local lazy_plugins = {
   {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
-    config = function()
-      require("Comment").setup()
-    end,
+    opts = {},
   },
 
   {
@@ -250,7 +234,7 @@ local lazy_plugins = {
     "glidenote/memolist.vim",
     lazy = true,
     cmd = { "MemoNew", "MemoList", "MemoGrep" },
-    config = function()
+    init = function()
       vim.g.memolist_fzf = 1
       vim.g.memolist_memo_date = "%Y-%m-%d"
       vim.g.memolist_memo_suffix = "markdown"
@@ -267,11 +251,6 @@ local lazy_plugins = {
 
   {
     "RRethy/vim-illuminate",
-    config = function()
-      vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#434a59" })
-      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#434a59" })
-      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#434a59" })
-    end,
   },
 }
 
@@ -280,6 +259,9 @@ local opts = {
     path = "~/ghq/github.com/hachy",
     patterns = { "eva01.vim", "cmdpalette.nvim", "nvf.nvim", "recmdwin.nvim", "instarun.nvim" },
     fallback = false,
+  },
+  install = {
+    colorscheme = { "eva01-LCL" },
   },
 }
 
