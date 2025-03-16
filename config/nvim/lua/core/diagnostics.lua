@@ -9,7 +9,7 @@ vim.diagnostic.config {
   signs = true,
   underline = true,
   update_in_insert = false,
-  severity_sort = false,
+  severity_sort = true,
 }
 
 require("utils").on_attach(function(client, buffer)
@@ -20,7 +20,7 @@ require("utils").on_attach(function(client, buffer)
         focusable = false,
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
         border = "rounded",
-        source = "always",
+        source = true,
         prefix = " ",
         scope = "line",
         header = "",
