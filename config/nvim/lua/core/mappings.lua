@@ -86,10 +86,6 @@ vim.keymap.set("n", "<Space>b", "<Cmd>Buffers<CR>", { silent = true })
 vim.keymap.set("n", "<Space>G", "<Cmd>Rg<CR>", { silent = true })
 vim.keymap.set("n", "<Space>h", "<Cmd>FZFMru<CR>", { silent = true })
 
--- quickrun
-vim.keymap.set("n", "<Leader>q", "<Cmd>bw! quickrun://output<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>r", "<Plug>(quickrun)", { remap = true, silent = true })
-
 -- memolist
 vim.keymap.set("n", "<Space>mn", "<Cmd>MemoNew<CR>")
 vim.keymap.set("n", "<Space>ml", "<Cmd>MemoList<CR>")

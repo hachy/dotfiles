@@ -226,21 +226,24 @@ local lazy_plugins = {
   },
 
   {
-    "thinca/vim-quickrun",
-    event = "VeryLazy",
-    config = function()
-      vim.g.quickrun_config = { _ = { ["outputter/buffer/opener"] = '%{winwidth(0) >= 100 ? "vnew" : "15new"}' } }
-
-      local id = vim.api.nvim_create_augroup("qr_augroup", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
-        group = id,
-        pattern = "quickrun",
-        callback = function()
-          vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = true, silent = true })
-        end,
-        desc = " Close help by pressing q.",
-      })
-    end,
+    "hachy/instarun.nvim",
+    lazy = true,
+    cmd = "Instarun",
+    keys = {
+      { "<Leader>r", "<Plug>(instarun)" },
+      {
+        "<Leader>q",
+        "<Cmd>bw! instarun://output<CR>",
+        { silent = true },
+      },
+    },
+    opts = {
+      defaults = {
+        term_name = "instarun://output",
+        cursor_jump = false,
+      },
+    },
+    dev = true,
   },
 
   {
@@ -275,7 +278,7 @@ local lazy_plugins = {
 local opts = {
   dev = {
     path = "~/ghq/github.com/hachy",
-    patterns = { "eva01.vim", "cmdpalette.nvim", "nvf.nvim", "recmdwin.nvim" },
+    patterns = { "eva01.vim", "cmdpalette.nvim", "nvf.nvim", "recmdwin.nvim", "instarun.nvim" },
     fallback = false,
   },
 }
