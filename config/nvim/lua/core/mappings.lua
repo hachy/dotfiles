@@ -14,6 +14,8 @@ vim.keymap.set("n", "?", "<Cmd>set hlsearch<CR>?")
 vim.keymap.set("n", "*", "<Cmd>set hlsearch<CR>*")
 vim.keymap.set("n", "#", "<Cmd>set hlsearch<CR>#")
 vim.keymap.set("n", "#", "*", { remap = true })
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
 
 vim.keymap.set({ "n", "v" }, "<C-h>", "<Home>")
 vim.keymap.set({ "n", "v" }, "<C-l>", "<End>")
