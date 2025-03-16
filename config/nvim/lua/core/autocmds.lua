@@ -21,3 +21,22 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal formatoptions-=ro",
   desc = "disable auto-commenting new lines after hitting Enter on commented line",
 })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = myautocmd,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank { higroup = "Visual", timeout = 300 }
+  end,
+  desc = "Highlight text after yank",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = myautocmd,
+  pattern = "gdscript",
+  callback = function()
+    vim.keymap.set("n", "<F5>", function()
+      vim.fn.system { "godot", "-d" }
+    end, {})
+  end,
+})
