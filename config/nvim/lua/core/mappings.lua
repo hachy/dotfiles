@@ -55,9 +55,6 @@ vim.keymap.set("x", "p", "P")
 
 vim.keymap.set("n", "<Space>ev", "<Cmd>edit $MYVIMRC<CR>", { silent = true })
 
-vim.keymap.set("n", "[b", vim.cmd.bprevious)
-vim.keymap.set("n", "]b", vim.cmd.bnext)
-
 vim.keymap.set("i", "<", function()
   local line = vim.api.nvim_get_current_line()
   local col = vim.api.nvim_win_get_cursor(0)[2]
