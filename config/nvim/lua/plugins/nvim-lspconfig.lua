@@ -1,15 +1,5 @@
 local nvim_lsp = require "lspconfig"
 
-require("lspconfig.ui.windows").default_options.border = "single"
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "single",
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "single",
-})
-
 require("utils").on_attach(function(client, buffer)
   vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, { buffer = buffer })
   vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, { buffer = buffer })

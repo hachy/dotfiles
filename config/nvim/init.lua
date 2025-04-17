@@ -198,7 +198,7 @@ local lazy_plugins = {
     init = function()
       vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
       vim.g.fzf_buffers_jump = 1
-      vim.g.fzf_layout = { window = { width = 0.9, height = 0.9 } }
+      vim.g.fzf_layout = { window = { width = 0.9, height = 0.9, border = "no" } }
       vim.g.fzf_preview_window = { "down,50%", "ctrl-/" }
     end,
   },

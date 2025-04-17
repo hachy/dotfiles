@@ -32,6 +32,7 @@ vim.opt.title = true
 vim.opt.updatetime = 300
 vim.opt.virtualedit = "block"
 vim.opt.winblend = 20
+vim.opt.winborder = "rounded"
 vim.opt.writebackup = false
 
 -- Tab, indent
