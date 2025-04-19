@@ -11,6 +11,7 @@ vim.opt.helpheight = 30
 vim.opt.hidden = true
 vim.opt.history = 500
 vim.opt.mouse = "a"
+vim.opt.mousemodel = "popup"
 vim.opt.nrformats = "alpha,octal,hex"
 vim.opt.number = true
 vim.opt.pumblend = 20
