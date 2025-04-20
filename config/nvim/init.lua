@@ -4,6 +4,7 @@ require "core/autocmds"
 require "core/mappings"
 require "core/options"
 require "core/statusline"
+require "core/lsp"
 
 vim.diagnostic.config { virtual_text = { current_line = true } }
 
@@ -60,17 +61,6 @@ local lazy_plugins = {
 
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "folke/neodev.nvim",
-        config = function()
-          require("neodev").setup {}
-        end,
-      },
-    },
-    config = function()
-      require "plugins.nvim-lspconfig"
-    end,
   },
 
   {
