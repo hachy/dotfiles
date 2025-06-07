@@ -167,8 +167,8 @@ local lazy_plugins = {
   },
 
   {
-    "NvChad/nvim-colorizer.lua",
-    event = "VeryLazy",
+    "catgoose/nvim-colorizer.lua",
+    event = "BufReadPre",
     opts = {},
   },
 
