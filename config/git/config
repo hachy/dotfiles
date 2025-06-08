@@ -28,7 +28,6 @@
   autocrlf = input
   pager = delta
 [credential]
-	helper = store
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [alias]
   co = checkout
