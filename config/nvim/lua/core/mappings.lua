@@ -67,3 +67,27 @@ vim.keymap.set("i", "<", function()
   end
   return "<>" .. "<C-G>U<Left>"
 end, { noremap = true, expr = true })
+
+local function toggle_boolean()
+  local word = vim.fn.expand "<cword>"
+  local toggles = {
+    ["true"] = "false",
+    ["True"] = "False",
+  }
+  local replacement = toggles[word]
+    or (function()
+      for k, v in pairs(toggles) do
+        if word == v then
+          return k
+        end
+      end
+    end)()
+
+  if replacement then
+    vim.cmd('normal! "_ciw' .. replacement)
+  else
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-a>", true, false, true), "n", true)
+  end
+end
+
+vim.keymap.set("n", "<C-a>", toggle_boolean, { noremap = true })
