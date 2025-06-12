@@ -1,27 +1,34 @@
+# ────── General ──────
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export XDG_CONFIG_HOME="$HOME/.config"
 bindkey -e
-# 補完
+
+# ────── Autoload ──────
 autoload -Uz compinit
+autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
+autoload -Uz colors
 compinit
-# 大小文字を区別しない
+colors
+
+# ────── Completion ──────
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;36' 'cd=43;36'
 
-# ディレクトリ名だけでcdする。
+# ────── Options ──────
 setopt auto_cd
-# ディレクトリが変わったらディレクトリスタックを表示。
-chpwd_functions=($chpwd_functions dirs)
-# '#' 以降をコメントとして扱う
 setopt interactive_comments
-
 setopt correct
 setopt nolistbeep
 
-# git
+# ────── Prompt ──────
 setopt prompt_subst
-autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
+ICON=$'\uf061 '
+
+# Git
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' formats '(%b)%m'
 zstyle ':vcs_info:*' actionformats '(%b|%a)'
@@ -31,28 +38,16 @@ add-zsh-hook precmd () { vcs_info }
 
 function +vi-git-stash() {
   local -a stashes
-
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
     stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
     hook_com[misc]+="%F{197}[${stashes} stashed]%f"
   fi
 }
 
-# prompt
-autoload -Uz colors
-colors
-ICON=$'\uf061 '
 PROMPT='%B%F{119}${ICON}%b%f%B%F{209}${vcs_info_msg_0_}%b%f '
 RPROMPT='[%F{119}%~%f]'
 
-# apt-getとかdpkgコマンドをキャッシュを使って速くする
-zstyle ':completion:*' use-cache true
-# 補完候補をハイライト
-zstyle ':completion:*:default' menu select=1
-# colors
-zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;36' 'cd=43;36'
-
-# history
+# ────── History ──────
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -68,10 +63,11 @@ setopt SHARE_HISTORY
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
+# ────── Aliases ──────
 alias vi=nvim
 alias -g G='| grep'
 
-# man
+# ────── Man ──────
 export MANPAGER='less -R'
 man() {
   env \
@@ -85,6 +81,13 @@ man() {
     man "$@"
 }
 
+# ────── Path ──────
+# android sdk
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH"
+
+# ────── CLI Tools ──────
 # zellij
 eval "$(zellij setup --generate-auto-start zsh)"
 
@@ -126,10 +129,6 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 bindkey '^]' ghq-fzf
-
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export ANDROID_SDK_ROOT=$ANDROID_HOME
-export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 
 # mise
 eval "$(mise activate zsh)"
