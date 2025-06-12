@@ -97,25 +97,6 @@ fi
 # z.lua
 eval "$(lua /usr/local/share/z.lua/z.lua --init zsh)"
 
-# ruby
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-alias be="bundle exec"
-
-# postgresql
-export PGDATA="/usr/local/var/postgres"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/bin/heroku:$PATH"
-
-# go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-# rust
-source $HOME/.cargo/env
-
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--layout=reverse --height 60% --inline-info"
@@ -146,17 +127,9 @@ function ghq-fzf() {
 zle -N ghq-fzf
 bindkey '^]' ghq-fzf
 
-export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
-
 export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 
-export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-
-# github access token
-export HOMEBREW_GITHUB_API_TOKEN=$HOME/.homebrew_github_api_token
-
-# python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+# mise
+eval "$(mise activate zsh)"
