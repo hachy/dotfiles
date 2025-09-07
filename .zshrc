@@ -66,6 +66,7 @@ bindkey '^N' history-beginning-search-forward
 # ────── Aliases ──────
 alias vi=nvim
 alias -g G='| grep'
+alias lg='lazygit'
 
 # ────── Man ──────
 export MANPAGER='less -R'
