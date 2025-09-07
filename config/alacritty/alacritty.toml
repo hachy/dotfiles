@@ -43,10 +43,10 @@ foreground = "#d7d1dc"
 TERM = "alacritty"
 
 [font]
-size = 13.0
+size = 14.5
 
 [font.bold]
-family = "FiraCode Nerd Font Mono"
+family = "FiraMono Nerd Font Mono"
 style = "Bold"
 
 [font.glyph_offset]
@@ -54,12 +54,16 @@ x = 0
 y = 0
 
 [font.normal]
-family = "FiraCode Nerd Font Mono"
-style = "Retina"
+family = "FiraMono Nerd Font Mono"
+style = "Regular"
 
 [font.offset]
 x = 0
 y = 0
+
+[font.italic]
+family = "JetBrainsMonoNL Nerd Font Mono"
+style = "ExtraLight Italic"
 
 [[keyboard.bindings]]
 chars = "\u001B[27;5;9~"
