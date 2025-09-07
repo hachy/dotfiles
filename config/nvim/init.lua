@@ -72,6 +72,10 @@ local lazy_plugins = {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+
+  {
     "mhartington/formatter.nvim",
     event = "VeryLazy",
     config = function()
