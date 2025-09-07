@@ -72,7 +72,7 @@ keybinds clear-defaults=true {
     renametab {
         bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
     }
-    shared_among "renametab" "renamepane" {
+    shared_among "tmux" "renametab" "renamepane" {
         bind "Ctrl c" { SwitchToMode "normal"; }
     }
     renamepane {
@@ -93,7 +93,7 @@ keybinds clear-defaults=true {
         bind "K" { Resize "Increase up"; }
         bind "L" { Resize "Increase right"; }
         bind "[" { SwitchToMode "scroll"; }
-        bind "c" { NewTab; SwitchToMode "normal"; }
+        bind "c" { NewTab { cwd "~"; }; SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
         bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
         bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
