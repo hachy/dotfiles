@@ -26,3 +26,5 @@ do
     echo -e "Create symlink for ${BGreen}.config/$dir${NC}"
   fi
 done
+
+ln -s $PWD/config/starship.toml $HOME/.config/starship.toml

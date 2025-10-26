@@ -1,0 +1,17 @@
+add_newline = false
+
+format = """
+[┌─ ](green)\
+$directory\
+$git_branch\
+$git_status\
+$git_metrics
+[└─](green)\
+$character"""
+
+[git_metrics]
+disabled = false
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[x](bold red)"

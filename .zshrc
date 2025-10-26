@@ -24,29 +24,6 @@ setopt interactive_comments
 setopt correct
 setopt nolistbeep
 
-# ────── Prompt ──────
-setopt prompt_subst
-ICON=$'\uf061 '
-
-# Git
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' formats '(%b)%m'
-zstyle ':vcs_info:*' actionformats '(%b|%a)'
-zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
-zstyle ':vcs_info:git*+set-message:*' hooks git-stash
-add-zsh-hook precmd () { vcs_info }
-
-function +vi-git-stash() {
-  local -a stashes
-  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
-    stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
-    hook_com[misc]+="%F{197}[${stashes} stashed]%f"
-  fi
-}
-
-PROMPT='%B%F{119}${ICON}%b%f%B%F{209}${vcs_info_msg_0_}%b%f '
-RPROMPT='[%F{119}%~%f]'
-
 # ────── History ──────
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -89,6 +66,11 @@ export ANDROID_SDK_ROOT=$ANDROID_HOME
 export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH"
 
 # ────── CLI Tools ──────
+# starship
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
 # zellij
 eval "$(zellij setup --generate-auto-start zsh)"
 
