@@ -1,20 +1,21 @@
 [color]
   ui = true
 [color "status"]
-  changed = 74
-  added = 121
-  untracked = 169
-  branch = 169
+  added = green
+  changed = yellow
+  untracked = red
+  branch = blue
+  header = white
 [color "branch"]
   current = white bold
   local = white
-  remote = 169
+  remote = magenta
 [color "diff"]
-  meta = 140
-  frag = 125 bold
-  old = 169 reverse
-  new = 121 reverse
-  commit = 74
+  meta = dim cyan
+  frag = magenta bold
+  old = red
+  new = green
+  commit = dim cyan
   whitespace = white reverse
 [user]
   name = hachy
@@ -50,17 +51,17 @@
 [diff]
   compactionHeuristic = true
 [delta]
-  commit-style = "#90b1fd"
-  commit-decoration-style = "ol bold #90b1fd"
-  file-style = "bold #bc74fa"
-  file-decoration-style = "bold box #bc74fa"
+  commit-style = blue
+  commit-decoration-style = ol bold blue
+  file-style = bold magenta
+  file-decoration-style = bold box magenta
   hunk-header-style = "omit"
-  minus-style = "#ef5350"
-  minus-emph-style = "black #D787AF"
-  minus-empty-line-marker-style = "black #D787AF"
-  zero-style = "#d7d1dc"
-  plus-style = "#76ff03"
-  plus-emph-style = "black #aeea00"
-  plus-empty-line-marker-style = "black #aeea00"
+  minus-style = red
+  minus-emph-style = black red
+  minus-empty-line-marker-style = black red
+  zero-style = white
+  plus-style = green
+  plus-emph-style = black green
+  plus-empty-line-marker-style = black green
 [credential "https://dev.azure.com"]
 	useHttpPath = true
