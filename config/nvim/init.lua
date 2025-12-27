@@ -111,13 +111,9 @@ local lazy_plugins = {
     version = "v2.*",
     build = "make install_jsregexp",
     event = "VeryLazy",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = { "honza/vim-snippets" },
     config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_vscode").lazy_load {
-        paths = "./my_snippets",
-        override_priority = 2000,
-      }
+      require("luasnip.loaders.from_snipmate").lazy_load()
     end,
   },
 
