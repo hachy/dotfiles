@@ -28,6 +28,8 @@
   editor = nvim
   autocrlf = input
   pager = delta
+[interactive]
+    diffFilter = delta --color-only
 [credential]
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [alias]
@@ -37,8 +39,10 @@
   b = branch
   br = branch -av
   d = diff
+  ds = ! git diff | delta --side-by-side
   dc = diff --cached
-  l = log --pretty='%C(auto)%h %C(auto)%d %Creset%s %C(green dim)%aN %C(magenta dim)%cd' --graph --date=relative --all
+  dcs = ! git diff --cached | delta --side-by-side
+  l = ! git log --pretty='%C(auto)%h %C(auto)%d %Creset%s %C(green dim)%aN %C(magenta dim)%cd' --graph --date=relative --all -n $(( $(tput lines) - 4 ))
   ls = log --stat
   lp = log --oneline -p
   ignore = update-index --assume-unchanged
@@ -48,6 +52,7 @@
   default = simple
 [merge]
   ff = false
+  conflictStyle = zdiff3
 [diff]
   compactionHeuristic = true
 [delta]
