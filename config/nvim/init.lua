@@ -242,10 +242,6 @@ local lazy_plugins = {
     },
     cmd = { "Gvdiffsplit", "Git" },
   },
-
-  {
-    "RRethy/vim-illuminate",
-  },
 }
 
 local opts = {
