@@ -80,8 +80,8 @@ if [ -x "$(command -v eza)" ]; then
   alias ls='eza --icons --group-directories-first'
 fi
 
-# z.lua
-eval "$(lua /usr/local/share/z.lua/z.lua --init zsh)"
+# zoxide
+eval "$(zoxide init zsh)"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
