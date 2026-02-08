@@ -54,7 +54,7 @@ local lazy_plugins = {
   {
     "hachy/recmdwin.nvim",
     event = "CmdWinEnter",
-    keys = { { "q:", "q:" } },
+    keys = { { "Q:", "q:" } },
     opts = {},
     dev = true,
   },
