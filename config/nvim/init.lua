@@ -44,9 +44,10 @@ local lazy_plugins = {
   },
 
   {
-    "hachy/nvf.nvim",
-    cmd = { "Nvf", "NvfNew" },
-    keys = { { "<Space>f", "<Cmd>Nvf<CR>" } },
+    "hachy/felir.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Felir",
+    keys = { { "<Space>f", "<Plug>(felir)" } },
     opts = {},
     dev = true,
   },
@@ -247,7 +248,7 @@ local lazy_plugins = {
 local opts = {
   dev = {
     path = "~/ghq/github.com/hachy",
-    patterns = { "eva01.vim", "cmdpalette.nvim", "nvf.nvim", "recmdwin.nvim", "instarun.nvim" },
+    patterns = { "eva01.vim", "cmdpalette.nvim", "felir.nvim", "recmdwin.nvim", "instarun.nvim" },
     fallback = false,
   },
   install = {
