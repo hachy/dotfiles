@@ -175,25 +175,17 @@ local lazy_plugins = {
   },
 
   {
-    "junegunn/fzf",
-    build = "./install --all",
-    lazy = false,
-    dependencies = {
-      "junegunn/fzf.vim",
-      "pbogut/fzf-mru.vim",
-    },
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
+    opts = {},
     keys = {
-      { "<C-p>", "<Cmd>Files<CR>", silent = true },
-      { "<Space>b", "<Cmd>Buffers<CR>", silent = true },
-      { "<Space>G", "<Cmd>Rg<CR>", silent = true },
-      { "<Space>h", "<Cmd>FZFMru<CR>", silent = true },
+      { "<C-p>", "<Cmd>FzfLua files<CR>", silent = true },
+      { "<Space>b", "<Cmd>FzfLua buffers<CR>", silent = true },
+      { "<Space>G", "<Cmd>FzfLua live_grep<CR>", silent = true },
+      { "<Space>h", "<Cmd>FzfLua history<CR>", silent = true },
+      { "<Space>ml", "<Cmd>FzfLua files cwd='~/Dropbox/memo'<CR>", silent = true },
     },
-    init = function()
-      vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git'"
-      vim.g.fzf_buffers_jump = 1
-      vim.g.fzf_layout = { window = { width = 0.9, height = 0.9, border = "no" } }
-      vim.g.fzf_preview_window = { "down,50%", "ctrl-/" }
-    end,
   },
 
   {
@@ -220,14 +212,12 @@ local lazy_plugins = {
 
   {
     "glidenote/memolist.vim",
-    cmd = { "MemoNew", "MemoList", "MemoGrep" },
+    cmd = { "MemoNew", "MemoGrep" },
     keys = {
       { "<Space>mn", "<Cmd>MemoNew<CR>" },
-      { "<Space>ml", "<Cmd>MemoList<CR>" },
       { "<Space>mg", "<Cmd>MemoGrep<CR>" },
     },
     init = function()
-      vim.g.memolist_fzf = 1
       vim.g.memolist_memo_date = "%Y-%m-%d"
       vim.g.memolist_memo_suffix = "markdown"
       vim.g.memolist_path = vim.env.HOME .. "/Dropbox/memo"
