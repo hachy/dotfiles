@@ -7,9 +7,9 @@
   branch = blue
   header = white
 [color "branch"]
-  current = white bold
+  current = magenta bold
   local = white
-  remote = magenta
+  remote = yellow
 [color "diff"]
   meta = dim cyan
   frag = magenta bold
@@ -48,6 +48,8 @@
   ignore = update-index --assume-unchanged
   unignore = update-index --no-assume-unchanged
   ignored = !git ls-files -v | grep "^[a-z]"
+  wt = worktree
+  wtl = worktree list
 [push]
   default = simple
 [merge]
