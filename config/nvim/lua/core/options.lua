@@ -18,7 +18,7 @@ vim.opt.pumblend = 20
 vim.opt.pumheight = 15
 vim.opt.ruler = true
 vim.opt.scrolloff = 5
-vim.opt.shortmess = "aTI"
+vim.opt.shortmess = "aT"
 vim.opt.showcmd = true
 vim.opt.showmatch = true
 vim.opt.showmode = false
@@ -32,7 +32,8 @@ vim.opt.textwidth = 0
 vim.opt.title = true
 vim.opt.updatetime = 300
 vim.opt.virtualedit = "block"
-vim.opt.winblend = 20
+vim.opt.winbar = "%f"
+vim.opt.winblend = 0
 vim.opt.winborder = "rounded"
 vim.opt.writebackup = false
 
@@ -58,7 +59,7 @@ vim.opt.wrapscan = true
 
 -- Fold
 vim.opt.foldcolumn = "0"
-vim.opt.foldenable = true
+vim.opt.foldenable = false
 vim.opt.foldmethod = "marker"
 
 -- Statusline
