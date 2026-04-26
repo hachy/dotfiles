@@ -3,7 +3,6 @@ vim.loader.enable()
 require "core/autocmds"
 require "core/mappings"
 require "core/options"
-require "core/statusline"
 require "core/lsp"
 
 vim.diagnostic.config { virtual_text = { current_line = true } }
@@ -153,7 +152,7 @@ local lazy_plugins = {
   {
     "hedyhli/outline.nvim",
     cmd = "Outline",
-    keys = { { "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" } } },
+    keys = { { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle Outline" } },
     opts = {},
   },
 
@@ -221,8 +220,8 @@ local lazy_plugins = {
     "hachy/instarun.nvim",
     cmd = "Instarun",
     keys = {
-      { "<Leader>r", "<Plug>(instarun)" },
-      { "<Leader>q", "<Cmd>bw! instarun://output<CR>", silent = true },
+      { "<Leader>r", "<Plug>(instarun)", desc = "Instarun" },
+      { "<Leader>q", "<Cmd>bw! instarun://output<CR>", desc = "quit Instarun", silent = true },
     },
     opts = {
       defaults = {
