@@ -59,8 +59,9 @@ vim.opt.wrapscan = true
 
 -- Fold
 vim.opt.foldcolumn = "0"
-vim.opt.foldenable = false
-vim.opt.foldmethod = "marker"
+vim.opt.foldenable = true
+vim.opt.foldmethod = "manual"
+vim.opt.foldlevel = 99
 
 -- Statusline
 vim.opt.laststatus = 3
