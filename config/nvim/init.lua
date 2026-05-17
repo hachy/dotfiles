@@ -153,7 +153,14 @@ local lazy_plugins = {
     "hedyhli/outline.nvim",
     cmd = "Outline",
     keys = { { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle Outline" } },
-    opts = {},
+    opts = {
+      outline_items = {
+        show_symbol_details = false,
+      },
+      symbols = {
+        filter = { "Class", "Method", "Function" },
+      },
+    },
   },
 
   {
