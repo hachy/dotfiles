@@ -55,6 +55,7 @@ vim.keymap.set("x", "p", "P")
 
 vim.keymap.set("n", "<Space>ev", "<Cmd>edit $MYVIMRC<CR>", { silent = true })
 
+-- Auto-close angle brackets `<>` and handle deletion in insert mode
 vim.keymap.set("i", "<", function()
   local line = vim.api.nvim_get_current_line()
   local col = vim.api.nvim_win_get_cursor(0)[2]
@@ -68,6 +69,7 @@ vim.keymap.set("i", "<", function()
   return "<>" .. "<C-G>U<Left>"
 end, { noremap = true, expr = true })
 
+-- Toggle boolean values (true/false) or fallback to incrementing numbers
 local function toggle_boolean()
   local word = vim.fn.expand "<cword>"
   local toggles = {
@@ -91,3 +93,10 @@ local function toggle_boolean()
 end
 
 vim.keymap.set("n", "<C-a>", toggle_boolean, { noremap = true })
+
+-- Restart and restore the current session
+vim.keymap.set("n", "ZR", function()
+  local session = vim.fn.stdpath "state" .. "/restart_session.vim"
+  vim.cmd("mksession! " .. vim.fn.fnameescape(session))
+  vim.cmd("restart source " .. vim.fn.fnameescape(session))
+end, { desc = "Restart Neovim" })
