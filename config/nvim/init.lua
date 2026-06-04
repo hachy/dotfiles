@@ -99,6 +99,10 @@ local lazy_plugins = {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-context",
+  },
+
+  {
     "mhartington/formatter.nvim",
     event = "VeryLazy",
     config = function()
@@ -141,15 +145,6 @@ local lazy_plugins = {
   },
 
   {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("lsp_signature").setup {}
-      require("lsp_signature").on_attach()
-    end,
-  },
-
-  {
     "hedyhli/outline.nvim",
     cmd = "Outline",
     keys = { { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle Outline" } },
@@ -171,8 +166,8 @@ local lazy_plugins = {
         enable = true,
         style = { { fg = "#b67e5d" } },
       },
-      indent = { enable = true },
-      blank = { enable = true },
+      indent = { enable = true, chars = { "¦" } },
+      blank = { enable = false },
     },
   },
 
@@ -215,12 +210,6 @@ local lazy_plugins = {
       { "<Space>h", "<Cmd>FzfLua history<CR>", silent = true },
       { "<Space>ml", "<Cmd>FzfLua files cwd='~/Dropbox/memo'<CR>", silent = true },
     },
-  },
-
-  {
-    "numToStr/Comment.nvim",
-    event = "VeryLazy",
-    opts = {},
   },
 
   {
