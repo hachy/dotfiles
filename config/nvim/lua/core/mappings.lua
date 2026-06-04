@@ -100,3 +100,20 @@ vim.keymap.set("n", "ZR", function()
   vim.cmd("mksession! " .. vim.fn.fnameescape(session))
   vim.cmd("restart source " .. vim.fn.fnameescape(session))
 end, { desc = "Restart Neovim" })
+
+-- MemoNew command
+local memo_dir = vim.fn.expand "~/Dropbox/memo/"
+
+vim.api.nvim_create_user_command("MemoNew", function(opts)
+  local title = opts.args
+
+  if vim.fn.isdirectory(memo_dir) == 0 then
+    vim.notify("Directory does not exist: " .. memo_dir, vim.log.levels.WARN)
+    return
+  end
+
+  local file_path = memo_dir .. title .. ".md"
+  vim.cmd("edit " .. vim.fn.fnameescape(file_path))
+end, { nargs = 1 })
+
+vim.keymap.set("n", "<Space>mn", ":MemoNew ", { desc = "Create new memo" })

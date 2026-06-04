@@ -240,21 +240,6 @@ local lazy_plugins = {
   },
 
   {
-    "glidenote/memolist.vim",
-    cmd = { "MemoNew", "MemoGrep" },
-    keys = {
-      { "<Space>mn", "<Cmd>MemoNew<CR>" },
-      { "<Space>mg", "<Cmd>MemoGrep<CR>" },
-    },
-    init = function()
-      vim.g.memolist_memo_date = "%Y-%m-%d"
-      vim.g.memolist_memo_suffix = "markdown"
-      vim.g.memolist_path = vim.env.HOME .. "/Dropbox/memo"
-      vim.g.memolist_template_dir_path = "~/config/nvim/template"
-    end,
-  },
-
-  {
     "tpope/vim-fugitive",
     keys = {
       { "<Space>gd", "<Cmd>Gvdiffsplit<CR>" },
