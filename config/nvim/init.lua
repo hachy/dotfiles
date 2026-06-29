@@ -4,8 +4,7 @@ require "core/autocmds"
 require "core/mappings"
 require "core/options"
 require "core/lsp"
-
-vim.diagnostic.config { virtual_text = { current_line = true } }
+require "core/diagnostic"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
