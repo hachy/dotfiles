@@ -9,6 +9,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
     end, { desc = "Toggle inlay hints" })
 
+    vim.lsp.completion.enable(true, args.data.client_id, bufnr, {
+      autotrigger = true,
+    })
+
     if client and client.server_capabilities.documentHighlightProvider then
       local group = vim.api.nvim_create_augroup("LspDocumentHighlight" .. bufnr, { clear = true })
 
