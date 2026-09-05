@@ -117,22 +117,6 @@ local lazy_plugins = {
   },
 
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "saadparwaiz1/cmp_luasnip",
-      "onsails/lspkind.nvim",
-    },
-    config = function()
-      require "plugins.nvim-cmp"
-    end,
-  },
-
-  {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
     build = "make install_jsregexp",
@@ -140,6 +124,23 @@ local lazy_plugins = {
     dependencies = { "honza/vim-snippets" },
     config = function()
       require("luasnip.loaders.from_snipmate").lazy_load()
+      local ls = require "luasnip"
+
+      vim.keymap.set({ "i" }, "<C-K>", function()
+        ls.expand()
+      end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-L>", function()
+        ls.jump(1)
+      end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-J>", function()
+        ls.jump(-1)
+      end, { silent = true })
+
+      vim.keymap.set({ "i", "s" }, "<C-E>", function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end, { silent = true })
     end,
   },
 

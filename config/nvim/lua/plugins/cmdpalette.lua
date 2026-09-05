@@ -12,9 +12,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "cmdpalette" },
   callback = function()
     vim.cmd.inoreabbrev("h", "tab help")
-    vim.keymap.set("i", "<Tab>", function()
-      require("cmp").complete()
-    end, { buffer = true })
   end,
 })
 
@@ -23,5 +20,13 @@ vim.api.nvim_create_autocmd("BufLeave", {
   pattern = "cmdpalette",
   callback = function()
     vim.cmd.iunabbrev "h"
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = cmdpalette,
+  pattern = "cmdpalette",
+  callback = function(args)
+    vim.bo[args.buf].autocomplete = false
   end,
 })

@@ -3,7 +3,6 @@ vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 1
 vim.opt.cmdwinheight = 8
-vim.opt.completeopt = "menuone,noinsert,noselect"
 vim.opt.cursorline = true
 vim.opt.diffopt = "internal,algorithm:patience,indent-heuristic"
 vim.opt.formatoptions:append "mM"
@@ -14,7 +13,8 @@ vim.opt.mouse = "a"
 vim.opt.mousemodel = "popup"
 vim.opt.nrformats = "alpha,octal,hex"
 vim.opt.number = true
-vim.opt.pumblend = 20
+vim.opt.pumblend = 0
+vim.opt.pumborder = "rounded"
 vim.opt.pumheight = 15
 vim.opt.ruler = true
 vim.opt.scrolloff = 5
@@ -36,6 +36,11 @@ vim.opt.winbar = "%f"
 vim.opt.winblend = 0
 vim.opt.winborder = "rounded"
 vim.opt.writebackup = false
+
+-- Completion
+vim.o.autocomplete = true
+vim.o.complete = ".,o"
+vim.opt.completeopt = "menu,menuone,noinsert,noselect,popup,fuzzy"
 
 -- Tab, indent
 vim.opt.autoindent = true

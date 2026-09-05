@@ -1,5 +1,13 @@
 vim.g.mapleader = "¥"
 
+vim.keymap.set("i", "<Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+end, { expr = true, silent = true })
+
+vim.keymap.set("i", "<S-Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+end, { expr = true, silent = true })
+
 -- Tab page
 vim.keymap.set("n", "<C-Tab>", "<Cmd>tabnext<CR>")
 vim.keymap.set("i", "<C-Tab>", "<Esc><Cmd>tabnext<CR>")
@@ -39,8 +47,6 @@ vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>")
 vim.keymap.set({ "i", "c" }, "<C-d>", "<Del>")
 vim.keymap.set({ "i", "c" }, "<C-e>", "<End>")
 vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>")
-vim.keymap.set({ "i", "c" }, "<C-n>", "<Down>")
-vim.keymap.set({ "i", "c" }, "<C-p>", "<Up>")
 
 vim.keymap.set("n", "<CR>", "o<Esc>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
