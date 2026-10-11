@@ -130,10 +130,22 @@ local lazy_plugins = {
       end
 
       vim.keymap.set({ "i" }, "<C-k>", function()
-        if ls.expandable() then
-          ls.expand()
+        if vim.fn.pumvisible() == 1 then
+          feedkeys "<C-e>"
+
+          vim.schedule(function()
+            if ls.expandable() then
+              ls.expand()
+            else
+              feedkeys "<Up>"
+            end
+          end)
         else
-          feedkeys "<Up>"
+          if ls.expandable() then
+            ls.expand()
+          else
+            feedkeys "<Up>"
+          end
         end
       end, { silent = true })
       vim.keymap.set({ "i", "s" }, "<C-l>", function()
