@@ -182,12 +182,6 @@ local lazy_plugins = {
   },
 
   {
-    "kylechui/nvim-surround",
-    event = "VeryLazy",
-    opts = {},
-  },
-
-  {
     "lewis6991/gitsigns.nvim",
     opts = {},
   },
