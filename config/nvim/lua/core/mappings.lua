@@ -29,18 +29,41 @@ vim.keymap.set({ "n", "v" }, "<C-h>", "<Home>")
 vim.keymap.set({ "n", "v" }, "<C-l>", "<End>")
 
 -- hjkl in insert mode
+local function feedkeys(keys)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), "n", true)
+end
+
 vim.keymap.set("i", "<C-h>", function()
-  return vim.fn.pumvisible == 1 and "<Left>" or "<Left>"
-end, { expr = true, silent = true })
+  if vim.fn.pumvisible() == 1 then
+    feedkeys "<Left>"
+  else
+    feedkeys "<Left>"
+  end
+end, { silent = true })
+
 vim.keymap.set("i", "<C-j>", function()
-  return vim.fn.pumvisible == 1 and "<Down>" or "<Down>"
-end, { expr = true, silent = true })
+  if vim.fn.pumvisible() == 1 then
+    feedkeys "<Down>"
+  else
+    feedkeys "<Down>"
+  end
+end, { silent = true })
+
 vim.keymap.set("i", "<C-k>", function()
-  return vim.fn.pumvisible == 1 and "<C-y>" or "<Up>"
-end, { expr = true, silent = true })
+  if vim.fn.pumvisible() == 1 then
+    feedkeys "<C-y>"
+  else
+    feedkeys "<Up>"
+  end
+end, { silent = true })
+
 vim.keymap.set("i", "<C-l>", function()
-  return vim.fn.pumvisible == 1 and "<C-y>" or "<Right>"
-end, { expr = true, silent = true })
+  if vim.fn.pumvisible() == 1 then
+    feedkeys "<C-y>"
+  else
+    feedkeys "<Right>"
+  end
+end, { silent = true })
 
 vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>")
 vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>")

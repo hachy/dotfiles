@@ -125,20 +125,37 @@ local lazy_plugins = {
     config = function()
       require("luasnip.loaders.from_snipmate").lazy_load()
       local ls = require "luasnip"
+      local function feedkeys(keys)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "n", false)
+      end
 
-      vim.keymap.set({ "i" }, "<C-K>", function()
-        ls.expand()
+      vim.keymap.set({ "i" }, "<C-k>", function()
+        if ls.expandable() then
+          ls.expand()
+        else
+          feedkeys "<Up>"
+        end
       end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-L>", function()
-        ls.jump(1)
+      vim.keymap.set({ "i", "s" }, "<C-l>", function()
+        if ls.jumpable(1) then
+          ls.jump(1)
+        else
+          feedkeys "<Right>"
+        end
       end, { silent = true })
-      vim.keymap.set({ "i", "s" }, "<C-J>", function()
-        ls.jump(-1)
+      vim.keymap.set({ "i", "s" }, "<C-j>", function()
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        else
+          feedkeys "<Down>"
+        end
       end, { silent = true })
 
-      vim.keymap.set({ "i", "s" }, "<C-E>", function()
+      vim.keymap.set({ "i", "s" }, "<C-e>", function()
         if ls.choice_active() then
           ls.change_choice(1)
+        else
+          feedkeys "<C-e>"
         end
       end, { silent = true })
     end,
