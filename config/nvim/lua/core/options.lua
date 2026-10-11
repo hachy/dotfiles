@@ -54,7 +54,27 @@ vim.opt.softtabstop = 2
 vim.opt.tabstop = 4
 
 vim.opt.list = true
-vim.opt.listchars = "tab:»·,trail:·,extends:→,precedes:←"
+vim.opt.listchars = {
+  tab = "»·",
+  trail = "·",
+  extends = "→",
+  precedes = "←",
+}
+
+local function update_lead()
+  local tabstop = vim.bo.tabstop
+  local lead = "¦" .. string.rep(" ", tabstop - 1)
+  vim.opt_local.listchars:append { leadmultispace = lead }
+end
+
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = { "tabstop", "shiftwidth" },
+  callback = update_lead,
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  callback = update_lead,
+})
 
 -- Search
 vim.opt.hlsearch = true

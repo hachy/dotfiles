@@ -187,19 +187,6 @@ local lazy_plugins = {
   },
 
   {
-    "shellRaining/hlchunk.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      chunk = {
-        enable = true,
-        style = { { fg = "#b67e5d" } },
-      },
-      indent = { enable = true, chars = { "¦" } },
-      blank = { enable = false },
-    },
-  },
-
-  {
     "m4xshen/autoclose.nvim",
     event = "InsertEnter",
     opts = {
