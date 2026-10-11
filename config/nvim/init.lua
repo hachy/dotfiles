@@ -102,10 +102,9 @@ local lazy_plugins = {
   },
 
   {
-    "mhartington/formatter.nvim",
-    event = "VeryLazy",
+    "stevearc/conform.nvim",
     config = function()
-      require "plugins.formatter"
+      require "plugins.conform"
     end,
   },
 
