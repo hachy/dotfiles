@@ -38,6 +38,6 @@ vim.lsp.enable {
   "gopls",
   "jsonls",
   "lua_ls",
-  "ruby_lsp",
+  "ruby-lsp",
   "rust_analyzer",
 }
