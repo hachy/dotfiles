@@ -279,7 +279,7 @@ theme "eva01"
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-// default_shell "fish"
+default_shell "zsh"
 
 // Choose the path to override cwd that zellij will use for opening new panes
 //
@@ -349,7 +349,7 @@ pane_frames false
 // Examples:
 //
 // copy_command "xclip -selection clipboard" // x11
-// copy_command "wl-copy"                    // wayland
+copy_command "wl-copy"                    // wayland
 copy_command "pbcopy"                     // osx
 
 // Choose the destination for copied text
