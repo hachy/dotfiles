@@ -30,8 +30,6 @@
   pager = delta
 [interactive]
     diffFilter = delta --color-only
-[credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
 [alias]
   co = checkout
   s = status
@@ -70,5 +68,5 @@
   plus-style = green
   plus-emph-style = black green
   plus-empty-line-marker-style = black green
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+[credential]
+	helper = !gh auth git-credential
